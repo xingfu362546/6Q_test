@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>占位 · 6Q后台管理系统 v2.0.0</title>
+  <link rel="stylesheet" href="css/tokens.css?v=4" />
+  <link rel="stylesheet" href="css/shell.css?v=4" />
+  <link rel="stylesheet" href="css/pages.css?v=4" />
+</head>
+<body>
+  <div class="ex-app">
+    <header class="ex-header">
+      <a class="ex-brand" href="index.html"><span class="ex-brand__mark"></span>6Q后台管理系统<span class="ex-brand__ver">v2.0.0</span></a>
+      <nav class="ex-topnav"><a href="replica.html?p=template-list" class="is-current">测评管理</a></nav>
+      <div class="ex-header__user"><a class="ex-header__link" href="index.html">功能清单</a><span class="ex-avatar">余</span><span>余炜烽</span></div>
+    </header>
+    <aside class="ex-side">
+      <div class="ex-side__title">测评管理</div>
+      <nav class="ex-menu">
+        <a href="replica.html?p=template-list"><i class="ex-menu__dot"></i>测评模板管理</a>
+        <a href="replica.html?p=goods-list"><i class="ex-menu__dot"></i>测评商品管理</a>
+        <a href="replica.html?p=overall"><i class="ex-menu__dot"></i>测评介绍</a>
+        <a href="replica.html?p=appraise"><i class="ex-menu__dot"></i>测评反馈</a>
+        <a href="replica.html?p=mental"><i class="ex-menu__dot"></i>预约老师留言</a>
+        <a href="replica.html?p=data"><i class="ex-menu__dot"></i>测评数据</a>
+        <a href="replica.html?p=subject"><i class="ex-menu__dot"></i>测评主题</a>
+        <a href="replica.html?p=dimension"><i class="ex-menu__dot"></i>维度管理</a>
+        <a href="replica.html?p=category"><i class="ex-menu__dot"></i>分类管理</a>
+      </nav>
+    </aside>
+    <main class="ex-main">
+      <div class="ex-crumb"><a href="index.html">原型导航</a><span>/</span><strong>占位页</strong></div>
+      <div class="ex-page">
+        <section class="ex-panel ex-placeholder">
+          <div class="ex-placeholder__mark">6Q</div>
+          <h2 id="ph-title">占位页</h2>
+          <p>该业务线在本次 v2.0.0 中只保留整体后台框架与入口，不展开复刻。测评管理是本次唯一全量复刻的范围。</p>
+          <a class="ex-btn ex-btn--primary" href="replica.html?p=template-list">返回测评模板</a>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script>
+    var q = new URLSearchParams(location.search);
+    var label = q.get("label") || "占位页";
+    document.getElementById("ph-title").textContent = label;
+    document.title = label + " · 占位 · 6Q后台管理系统 v2.0.0";
+  </script>
+</body>
+</html>

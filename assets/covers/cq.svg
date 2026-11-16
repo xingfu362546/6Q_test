@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="672" height="426" viewBox="0 0 672 426" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#713f12"/><stop offset=".55" stop-color="#d97706"/><stop offset="1" stop-color="#fde047"/>
+    </linearGradient>
+  </defs>
+  <rect width="672" height="426" rx="28" fill="url(#g)"/>
+  <circle cx="590" cy="52" r="160" fill="#fff" opacity=".12"/>
+  <circle cx="96" cy="402" r="128" fill="#fff" opacity=".08"/>
+  <path d="M500 250l28 44 50 12-36 38 8 50-50-24-44 24 8-50-36-38 50-12 22-44z" fill="#fff" opacity=".12"/>
+  <text x="44" y="82" fill="#fff" opacity=".74" font-size="24" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif" letter-spacing="4">6Q ????</text>
+  <text x="34" y="272" fill="#fff" font-size="132" font-weight="800" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif">CQ</text>
+  <text x="44" y="330" fill="#fff" font-size="34" font-weight="700" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif">????????</text>
+  <text x="44" y="378" fill="#fff" opacity=".7" font-size="20" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="2">CREATIVITY QUOTIENT</text>
+</svg>

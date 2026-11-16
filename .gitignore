@@ -1,0 +1,10 @@
+# 只读源码对照，不提交
+_ref/
+
+# 临时编码测试文件
+_encoding_test*.txt
+
+# 系统/编辑器
+.DS_Store
+Thumbs.db
+.vscode/

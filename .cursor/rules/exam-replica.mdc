@@ -1,0 +1,38 @@
+---
+description: 6Q 测评复刻项目规范（v3.0.0）
+alwaysApply: true
+---
+
+# 6Q 测评复刻项目规则
+
+## 范围
+
+- 后台只复刻「测评管理」9 个模块：模板、商品、介绍、反馈、预约、数据、主题、维度、分类。
+- H5 复刻测评主链路：首页、列表、详情、介绍、答题、结果、海报、我的测评、反馈、预约、我的、登录。
+- 其余后台业务线保留占位，不扩展。
+
+## 统一框架
+
+- 后台复用领袖营复刻 Shell：`6Q_exam_battalion/replica.html` + `js/shell.js` + `js/engine.js`。
+- 新页面优先加 `pages-catalog.js` 配置；复杂页在 `engine.js` 加特殊渲染器。
+- H5 共用 `js/core.js`、`js/pages.js`、`css/h5.css`，不要另起样式体系。
+
+## 功能清单与注释
+
+- 功能编号：后台 `EX-001` 起，H5 `EX-101` 起。
+- 功能清单唯一入口：`6Q_exam_battalion/index.html`。
+- 页面红点使用 `data-note-key`，key 必须存在于 `js/notes.js`。
+- 注释固定五段：现网逻辑 / 复刻说明 / 元素表 / 接口 / 数据流。
+- 无源码依据的内容标「待源码校对」，不要写成事实。
+
+## 数据与版本
+
+- 版本统一 `v3.0.0`。
+- 数据全部 mock；H5 个人链路用 `localStorage`。
+- 不提交 `_ref/` 源码对照目录。
+- 不出现真实手机号、身份证、银行卡。
+
+## 交付
+
+- 每次版本更新 `specs/001-exam-replica/` 的 spec/plan/tasks/data-model/contracts/research/quickstart/checklist。
+- 交付前用浏览器逐页验收，确保无 404、无 JS 报错、无横向滚动。

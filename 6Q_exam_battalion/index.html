@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>测评管理 · 功能清单 v2.1.0</title>
+  <style>
+    :root {
+      --ink: #0f172a; --ink2: #334155; --muted: #64748b; --line: rgba(15,23,42,.08);
+      --blue: #1677ff; --deep: #0b2b5c; --bg: #f1f5f9;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .nav-page { max-width: 1480px; margin: 26px auto 64px; padding: 0 16px; }
+    .nav-hero { background: linear-gradient(135deg, #071e3d, #0b4a8f 55%, #1677ff); color: #fff; border-radius: 14px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 18px 46px rgba(11,43,92,.22); }
+    .nav-hero__eye { margin: 0 0 8px; font-size: 11px; letter-spacing: .12em; opacity: .75; }
+    .nav-hero h1 { margin: 0 0 8px; font-size: 23px; }
+    .nav-hero p { margin: 0; max-width: 980px; font-size: 13px; line-height: 1.75; opacity: .92; }
+    .nav-hero a { display: inline-block; margin-top: 14px; margin-right: 8px; padding: 6px 12px; border-radius: 999px; color: #fff; text-decoration: none; font-size: 12px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.24); }
+    .nav-hero a:hover { background: rgba(255,255,255,.22); }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+    .meta span { padding: 5px 10px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink2); font-size: 12px; }
+    .sheet { background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: auto; box-shadow: 0 10px 30px rgba(15,23,42,.05); }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #f0f1f3; text-align: left; vertical-align: top; line-height: 1.65; }
+    th { position: sticky; top: 0; z-index: 2; background: #f8fafc; color: #0f172a; font-weight: 600; white-space: nowrap; }
+    tr:hover td { background: #fafcff; }
+    tr.group td { background: #f1f5f9; color: var(--deep); font-weight: 700; font-size: 13px; }
+    tr.group.h5 td { background: #fff7ed; color: #9a3412; }
+    .no { width: 76px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .mod { width: 150px; white-space: nowrap; color: var(--ink2); }
+    .feat { width: 190px; font-weight: 600; color: var(--ink); }
+    .status { width: 86px; white-space: nowrap; }
+    .st { display: inline-block; padding: 2px 7px; border-radius: 999px; font-size: 11px; }
+    .st--done { color: #15803d; background: #e8f9ee; }
+    .st--partial { color: #b45309; background: #fff4e5; }
+    .proto { width: 220px; }
+    .proto a { color: var(--blue); text-decoration: none; display: block; line-height: 1.8; }
+    .proto a:hover { text-decoration: underline; }
+    .note { color: var(--ink2); min-width: 300px; }
+    /* v2.1.0 需求区（沿用领袖营清单列结构） */
+    .zone-head { display: flex; align-items: baseline; gap: 10px; margin: 22px 0 10px; }
+    .zone-head h2 { margin: 0; font-size: 17px; color: var(--ink); }
+    .zone-head span { font-size: 12px; color: var(--muted); }
+    .sheet.req table { font-size: 12.5px; }
+    .sheet.req .col-no { width: 62px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .sheet.req .col-scope { width: 92px; white-space: nowrap; font-weight: 600; }
+    .col-scope--do { color: #0958d9; }
+    .col-scope--eval { color: #d48806; }
+    .sheet.req .col-status { width: 116px; white-space: nowrap; color: #389e0d; }
+    .col-status--partial { color: #b45309; }
+    .col-status--todo { color: #8c8c8c; }
+    .sheet.req .col-team, .sheet.req .col-who, .sheet.req .col-mod { width: 108px; white-space: nowrap; }
+    .sheet.req .col-mod { color: var(--ink); font-weight: 600; }
+    .sheet.req .col-text { min-width: 300px; }
+    .sheet.req .col-plan { min-width: 380px; }
+    .sheet.req .col-ui { width: 150px; font-size: 12px; }
+    .sheet.req .col-ui a { display: block; color: var(--blue); text-decoration: none; line-height: 1.7; }
+    .sheet.req .col-ui a:hover { text-decoration: underline; }
+    .sheet.req .ui-tag { display: inline-block; margin-bottom: 4px; padding: 0 6px; border-radius: 4px; background: #fff1f0; color: #cf1322; font-weight: 600; font-size: 11px; }
+    .req-jump { color: var(--blue); font-weight: 600; text-decoration: none; }
+    .req-jump:hover { text-decoration: underline; }
+    .foot { margin-top: 12px; color: #94a3b8; font-size: 12px; line-height: 1.8; }
+    .code { padding: 1px 5px; border-radius: 4px; background: #f0f7ff; color: #0e63df; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11px; }
+  </style>
+</head>
+<body>
+  <div class="nav-page">
+    <header class="nav-hero">
+      <p class="nav-hero__eye">EXAM ADMIN · v2.1.0 · 功能清单（双区）</p>
+      <h1>测评管理 · 后台复刻清单</h1>
+      <p>
+        <b>基线区 v2.0.0</b>：后台范围来自 <b>sixQEducation-platform</b> 的 <span class="code">src/views/exam</span> 与 <span class="code">src/config/routers/exam.js</span>，共 9 个模块、18 条功能。
+        H5 范围来自 <b>exam2.0</b> 的 10 个路由页面，共 17 条。编号即注释编号，点原型链接会直接打开页面并展开对应注释。
+        <br />
+        <b>新增区 v2.1.0</b>：亲子养育报告改版，共 8 条。列结构沿用领袖营清单（本期范围 / 设计是否实现 / 所属团队 / 提出人 / 模块 / 需求详细描述 / 实现方案 / UI）。
+        单价、人天、税费不在清单内。字段、接口、数据流都写在各页红点注释里。
+      </p>
+      <a href="replica.html?p=template-list">打开后台复刻</a>
+      <a href="../6Q_exam_h5/index.html">打开 H5 复刻</a>
+      <a href="../docs/CONVENTIONS.md">注释规范</a>
+      <a href="../specs/001-exam-replica/spec.md">Spec 交付</a>
+    </header>
+
+    <div class="meta">
+      <span>基线上台 9 个模块 / 18 条</span><span>基线 H5 10 页 / 17 条</span><span>v2.1.0 新增 8 条</span><span>注释五段式</span><span>数据全部为模拟</span><span>静态无依赖</span>
+    </div>
+
+    <div class="zone-head"><h2>一、基线区 · v2.0.0</h2><span>沿用复刻列：编号 / 模块 / 功能 / 状态 / 原型 / 说明</span></div>
+
+    <div class="sheet">
+      <table>
+        <thead>
+          <tr><th>编号</th><th>模块</th><th>功能</th><th>状态</th><th>原型</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr class="group"><td colspan="6">一、后台 · 测评模板管理</td></tr>
+          <tr><td class="no">EX-001</td><td class="mod">测评模板管理</td><td class="feat">模板列表与筛选</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=template-list&note=EX-001">模板列表</a></td><td class="note">分类、测评名称、状态、创建时间筛选；列含题目数、结果数、总分、创建人。分页为前端模拟。</td></tr>
+          <tr><td class="no">EX-002</td><td class="mod">测评模板管理</td><td class="feat">启用 / 禁用 / 导入分数</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=template-list&note=EX-002">模板列表 · 行操作</a><a href="replica.html?p=template-list&note=EX-007">导入分数弹窗</a></td><td class="note">禁用会二次确认并级联下架关联商品；修改只在禁用态出现；导入分数只做弹窗演示。</td></tr>
+          <tr><td class="no">EX-003</td><td class="mod">测评模板管理</td><td class="feat">① 测评基础信息</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=template-form&note=EX-003">新增模板</a></td><td class="note">标题、副标题、虚拟人数、分类、是否填年龄、总分、时长、维度模板、四张图、测评详情、结果页介绍。</td></tr>
+          <tr><td class="no">EX-004</td><td class="mod">测评模板管理</td><td class="feat">② 测评题目信息</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=template-form&tab=2&note=EX-004">新增模板 · 题目</a></td><td class="note">单选题、关联维度、题干、选项与分值；实时计算总分；至少 1 题 1 选项。</td></tr>
+          <tr><td class="no">EX-005</td><td class="mod">测评模板管理</td><td class="feat">③ 报告结果设置</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=template-form&tab=3&note=EX-005">新增模板 · 结果</a></td><td class="note">四个展示开关；指数区间表；各维度解读与建议；可增删结果与改区间。</td></tr>
+          <tr><td class="no">EX-006</td><td class="mod">测评模板管理</td><td class="feat">模板详情</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=template-detail&note=EX-006">模板详情</a></td><td class="note">左侧三段：基础信息 / 题目信息 / 报告结果，只读。</td></tr>
+          <tr><td class="no">EX-007</td><td class="mod">测评模板管理</td><td class="feat">导入分数弹窗</td><td class="status"><span class="st st--partial">partial</span></td><td class="proto"><a href="replica.html?p=template-list&note=EX-007">打开弹窗</a></td><td class="note">下载模板、选择文件、导入提示；不上传真实文件。</td></tr>
+
+          <tr class="group"><td colspan="6">二、后台 · 测评商品管理</td></tr>
+          <tr><td class="no">EX-008</td><td class="mod">测评商品管理</td><td class="feat">商品列表</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=goods-list&note=EX-008">商品列表</a></td><td class="note">分类、商品ID、名称、上下架、时间筛选；列含封面、模板、二维码、双端价、展示到心画。</td></tr>
+          <tr><td class="no">EX-009</td><td class="mod">测评商品管理</td><td class="feat">商品新增 / 编辑</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=goods-form&note=EX-009">新增商品</a></td><td class="note">编号、名称、双端价格、排序、OA产品、关联模板、封面、第三方展示。</td></tr>
+          <tr><td class="no">EX-010</td><td class="mod">测评商品管理</td><td class="feat">商品详情 / 二维码</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=goods-detail&note=EX-010">商品详情</a></td><td class="note">商品信息、关联模板表、封面；二维码弹窗与下载。</td></tr>
+
+          <tr class="group"><td colspan="6">三、后台 · 介绍 / 反馈 / 预约</td></tr>
+          <tr><td class="no">EX-011</td><td class="mod">测评介绍</td><td class="feat">测评整体介绍</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=overall&note=EX-011">测评介绍</a></td><td class="note">总介绍只读，测评介绍可改；保存后更新编辑时间。</td></tr>
+          <tr><td class="no">EX-012</td><td class="mod">测评反馈</td><td class="feat">反馈列表</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=appraise&note=EX-012">测评反馈</a></td><td class="note">会员信息、评分、反馈内容、提交时间；只读。</td></tr>
+          <tr><td class="no">EX-013</td><td class="mod">预约老师留言</td><td class="feat">预约留言与跟进</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=mental&note=EX-013">预约留言</a></td><td class="note">昵称、类型、来源、跟进状态筛选；跟进弹窗改状态与备注。</td></tr>
+
+          <tr class="group"><td colspan="6">四、后台 · 数据 / 主题 / 维度 / 分类</td></tr>
+          <tr><td class="no">EX-014</td><td class="mod">测评数据</td><td class="feat">填写情况明细</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=data&note=EX-014">测评数据 · 明细</a></td><td class="note">模板、填写人、会员类型、6Q身份、时间筛选；16 列明细。</td></tr>
+          <tr><td class="no">EX-015</td><td class="mod">测评数据</td><td class="feat">填写情况汇总</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=data&note=EX-015">测评数据 · 汇总</a></td><td class="note">收藏/查看/分享/测试人数；可下载答题数据。</td></tr>
+          <tr><td class="no">EX-016</td><td class="mod">测评主题</td><td class="feat">主题与关联商品</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=subject&note=EX-016">测评主题</a></td><td class="note">封面、名称、排序、描述、关联商品；启用/禁用/删除。</td></tr>
+          <tr><td class="no">EX-017</td><td class="mod">维度管理</td><td class="feat">维度模板与指标</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=dimension&note=EX-017">维度管理</a></td><td class="note">指标行增删、上下移；至少一行；启用/禁用。</td></tr>
+          <tr><td class="no">EX-018</td><td class="mod">分类管理</td><td class="feat">分类与金刚区</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="replica.html?p=category&note=EX-018">分类管理</a></td><td class="note">图标、名称、排序、金刚区；禁用级联下架模板与商品。</td></tr>
+
+          <tr class="group h5"><td colspan="6">五、H5 · 测评浏览</td></tr>
+          <tr><td class="no">EX-101</td><td class="mod">首页</td><td class="feat">首页结构与分类</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/index.html?note=EX-101">6Q测评首页</a></td><td class="note">左侧分类纵向 Tab、右侧测评列表、顶部「我的测评」。</td></tr>
+          <tr><td class="no">EX-102</td><td class="mod">首页</td><td class="feat">分类切换与排序</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/index.html?note=EX-102">首页 · 排序</a></td><td class="note">最新 / 热门 / 价格；分类切换与空态。</td></tr>
+          <tr><td class="no">EX-103</td><td class="mod">首页</td><td class="feat">测评卡片</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/index.html?note=EX-103">首页 · 卡片</a></td><td class="note">标题、副标题、价格、人数、封面、立即测试。</td></tr>
+          <tr><td class="no">EX-104</td><td class="mod">测评详情</td><td class="feat">详情头图与购买</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/detail.html?goodsId=g-aq&note=EX-104">AQ 详情</a></td><td class="note">头图、价格、人数、副标题、详情、收藏、立即测试。</td></tr>
+          <tr><td class="no">EX-105</td><td class="mod">测评须知</td><td class="feat">须知与开始答题</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/notice.html?goodsId=g-aq&note=EX-105">测评须知</a></td><td class="note">answerSummary；agedTag 分支年龄页/答题页。</td></tr>
+          <tr><td class="no">EX-106</td><td class="mod">测评页</td><td class="feat">年龄必填</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/pre-exam.html?goodsId=g-aq&note=EX-106">年龄页</a></td><td class="note">年龄大于 0 才可进入答题。</td></tr>
+
+          <tr class="group h5"><td colspan="6">六、H5 · 答题与结果</td></tr>
+          <tr><td class="no">EX-107</td><td class="mod">答题</td><td class="feat">答题与自动下一题</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/quiz.html?goodsId=g-aq&note=EX-107">AQ 答题</a></td><td class="note">题号、题干、选项、自动下一题、累计用时。</td></tr>
+          <tr><td class="no">EX-108</td><td class="mod">答题</td><td class="feat">提交与退出确认</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/quiz.html?goodsId=g-aq&note=EX-108">答题 · 提交</a></td><td class="note">最后一题上一题/提交；退出二次确认。</td></tr>
+          <tr><td class="no">EX-109</td><td class="mod">结果</td><td class="feat">结果头部与总分</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/result.html?record=demo&note=EX-109">结果示例</a></td><td class="note">头像、姓名、总分、图表切换。</td></tr>
+          <tr><td class="no">EX-110</td><td class="mod">结果</td><td class="feat">雷达图 / 正态分布</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/result.html?record=demo&note=EX-110">结果 · 图表</a></td><td class="note">维度雷达、柱线分布、6Q 和谐指数。</td></tr>
+          <tr><td class="no">EX-111</td><td class="mod">结果</td><td class="feat">解读 / 建议 / 历史</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/result.html?record=demo&note=EX-111">结果 · 解读</a></td><td class="note">resultDemo、整体解读、各类详解、建议、历史入口。</td></tr>
+          <tr><td class="no">EX-112</td><td class="mod">结果</td><td class="feat">结果页反馈</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/result.html?record=demo&note=EX-112">结果 · 反馈</a></td><td class="note">1-5 星 + 文字反馈，提交后锁定。</td></tr>
+
+          <tr class="group h5"><td colspan="6">七、H5 · 记录 / 订单 / 登录</td></tr>
+          <tr><td class="no">EX-113</td><td class="mod">我的测评</td><td class="feat">记录与 6Q 雷达</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/history.html?note=EX-113">我的测评</a></td><td class="note">6Q 雷达、未完成/已完成、查看报告、再测一次。</td></tr>
+          <tr><td class="no">EX-114</td><td class="mod">订单</td><td class="feat">确认订单</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/order-confirm.html?goodsId=g-aq&note=EX-114">确认订单</a></td><td class="note">商品行、价格明细、总价、提交订单。</td></tr>
+          <tr><td class="no">EX-115</td><td class="mod">订单</td><td class="feat">选择支付方式</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/order-pay.html?goodsId=g-aq&note=EX-115">选择支付方式</a></td><td class="note">余额抵扣、支付金额、农行支付、提交。</td></tr>
+          <tr><td class="no">EX-116</td><td class="mod">登录</td><td class="feat">账号密码登录</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/login.html?note=EX-116">登录</a></td><td class="note">账号/密码，空值时填测试账号，登录写本地会员。</td></tr>
+          <tr><td class="no">EX-117</td><td class="mod">分享</td><td class="feat">详情海报分享</td><td class="status"><span class="st st--done">done</span></td><td class="proto"><a href="../6Q_exam_h5/detail.html?goodsId=g-aq&note=EX-117">详情 · 分享</a></td><td class="note">海报弹窗、canvas 下载 PNG。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="foot">状态：done 原型已完成 / partial 只做展示或占位 / todo 待源码校对。H5 已按 exam2.0 源码的 10 个路由页与 SCSS 复刻；真实 SDK 与后端接口仍为占位。</p>
+
+    <div class="zone-head"><h2>二、新增区 · v2.1.0 亲子养育报告改版</h2><span>沿用领袖营清单列：序号 / 本期范围 / 设计是否实现 / 所属团队 / 提出人 / 模块 / 需求详细描述 / 实现方案 / UI</span></div>
+    <div class="sheet req">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-no">序号</th>
+            <th class="col-scope">本期范围</th>
+            <th class="col-status">设计是否实现</th>
+            <th class="col-team">所属团队</th>
+            <th class="col-who">提出人</th>
+            <th class="col-mod">模块</th>
+            <th class="col-text">需求详细描述</th>
+            <th class="col-plan">实现方案</th>
+            <th class="col-ui">UI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-no">EX-051</td>
+            <td class="col-scope col-scope--do">要做</td>
+            <td class="col-status">设计已实现</td>
+            <td class="col-team">测评项目组</td>
+            <td class="col-who">需求方</td>
+            <td class="col-mod">测评模板</td>
+            <td class="col-text">结果页要有两种呈现方式，按测评模板配置区分。报告改版不能影响已经在跑的旧测评商品。</td>
+            <td class="col-plan">模板基础信息新增「报告版式」单选：1 旧版 / 2 新版，默认 1。<br />1、版式挂在模板上，模板赋给商品后由 H5 读取，不在商品上重复配置。<br />2、新版式忽略正态分布与 6Q 和谐指数两个开关。<br />3、旧模板不填即按 1 处理，零改动零回归。<br />4、切换版式不改历史记录，历史报告按当前模板版式渲染。</td>
+            <td class="col-ui"><span class="ui-tag">需 UI</span><a href="replica.html?p=template-form&note=EX-051">模板表单 · 基础信息</a></td>
+          </tr>
+          <tr>
+            <td class="col-no">EX-052</td>
+            <td class="col-scope col-scope--do">要做</td>
+            <td class="col-status">设计已实现</td>
+            <td class="col-team">测评项目组</td>
+            <td class="col-who">需求方</td>
+            <td class="col-mod">测评模板</td>
+            <td class="col-text">报告里的风险预警、转化文案、班主任二维码要能运营自己改，不能每次改文案都发版。</td>
+            <td class="col-plan">报告结果页新增四个模板字段：riskTip、ctaText、ctaSubText、ctaQrCode。<br />1、四个字段只在新版结果页渲染，旧版忽略。<br />2、留空时前端整块隐藏，不出现空卡片。<br />3、档位表复用现有「测评模板结果」区间，新增 badge / quote / percentile 三列，不新建表。<br />4、保存校验：档位从 0 起、连续不重叠、最高档覆盖总分；每维分值必须均衡。</td>
+            <td class="col-ui"><span class="ui-tag">需 UI</span><a href="replica.html?p=template-form&tab=3&note=EX-052">模板表单 · 报告结果</a></td>
+          </tr>
+          <tr>
+            <td class="col-no">EX-201</td>
+            <td class="col-scope col-scope--do">要做</td>
+            <td class="col-status">设计已实现</td>
+            <td class="col-team">测评项目组</td>
+            <td class="col-who">需求方</td>
+            <td class="col-mod">H5 结果页</td>
+            <td class="col-text">报告要像一份正式的测评报告，有抬头和测评日期，能看出是这一次的报告。</td>
+            <td class="col-plan">顶部新增报告头：大标题「测评报告」+ 测评日期（取记录 createTime，格式 YYYY-MM-DD HH:mm:ss）。<br />1、「计分规则」按钮本轮隐藏，位置与类名预留。<br />2、分享入口保留在报告头右侧，打开觉醒海报。</td>
+            <td class="col-ui"><span class="ui-tag">需 UI</span><a href="../6Q_exam_h5/quiz.html?goodsId=g-parent&note=EX-201">做完 20 题看结果</a></td>
+          </tr>
+          <tr>
+            <td class="col-no">EX-202</td>
+            <td class="col-scope col-scope--do">要做</td>
+            <td class="col-status">设计已实现</td>
+            <td class="col-team">测评项目组</td>
+            <td class="col-who">需求方</td>
+            <td class="col-mod">H5 结果页</td>
+            <td class="col-text">家长看不懂五个分数，需要直接告诉他处在哪一档、超过了多少家长，并给一个正向称号。</td>
+            <td class="col-plan">按总分命中三档：0-23 / 24-47 / 48-60。每档唯一勋章、金句、超越百分比。<br />1、百分比按档位固定 15% / 45% / 95%，报告与海报同口径，后台可改。<br />2、勋章只取一个，不并列、不显示两个特质标签。<br />3、五维雷达在维度名下方直接标该维得分，每维上限 12。</td>
+            <td class="col-ui"><span class="ui-tag">需 UI</span><a href="../6Q_exam_h5/quiz.html?goodsId=g-parent&note=EX-202">结果 · 档位结论</a></td>
+          </tr>
+          <tr>
+            <td class="col-no">EX-203</td>
+            <td class="col-scope col-scope--do">要做</td>
+            <td class="col-status">设计已实现</td>
+            <td class="col-team">测评项目组</td>
+            <td class="col-who">需求方</td>
+            <td class="col-mod">H5 结果页</td>
+            <td class="col-text">五个维度并列展示，家长不知道先改哪一个，需要明确点出「核心卡点」。</td>
+            <td class="col-plan">新增核心卡点卡（粉红渐变），取五维最低分维度。<br />1、并列最低时按固定优先序取首个：情感链接力 → 走心沟通力 → 边界松弛力 → 赋能托底力 → 自我觉察力。<br />2、不随机、不落库，同一份答卷反复打开结果一致。<br />3、卡点文案取该维 detail，留空则整块隐藏。</td>
+            <td class="col-ui"><span class="ui-tag">需 UI</span><a href="../6Q_exam_h5/quiz.html?goodsId=g-parent&note=EX-203">结果 · 核心卡点</a></td>
+          </tr>
+          <tr>
+            <td class="col-no">EX-204</td>
+            <td class="col-scope col-scope--do">要做</td>
+            <td class="col-status">设计已实现</td>
+            <td class="col-team">测评项目组</td>
+            <td class="col-who">需求方</td>
+            <td class="col-mod">H5 结果页</td>
+            <td class="col-text">报告要有一块「您的孩子正在经历什么」，让家长意识到问题不解决的后果。</td>
+            <td class="col-plan">新增风险提示卡，文案取模板 riskTip。<br />1、riskTip 为空时回退到卡点文案里的 risk。<br />2、两者都为空则整块不渲染，不出现空卡片。<br />3、卡片标题固定「您的孩子正在经历什么？」。</td>
+            <td class="col-ui"><span class="ui-tag">需 UI</span><a href="../6Q_exam_h5/quiz.html?goodsId=g-parent&note=EX-204">结果 · 风险提示</a></td>
+          </tr>
+          <tr>
+            <td class="col-no">EX-205</td>
+            <td class="col-scope col-scope--do">要做</td>
+            <td class="col-status">设计已实现</td>
+            <td class="col-team">测评项目组</td>
+            <td class="col-who">需求方</td>
+            <td class="col-mod">H5 结果页</td>
+            <td class="col-text">报告底部要固定一个能弹出班主任二维码的入口，最好带动画吸引点击；同时保留历史与再答。</td>
+            <td class="col-plan">底部改三层：呼吸动画主 CTA「预约班主任 1 对 1 解读」→ 弹二维码抽屉；下方保留「查看历史测试记录 / 再答一次」。<br />1、动画只用 CSS：呼吸缩放 + 光晕 + 箭头位移，prefers-reduced-motion 下关闭。<br />2、二维码抽屉点遮罩或关闭可收起，不跳页。<br />3、课程商城并入「深度了解」卡，不再单开 Tab。<br />4、深度了解文案取 ctaText，为空整卡隐藏。</td>
+            <td class="col-ui"><span class="ui-tag">需 UI</span><a href="../6Q_exam_h5/quiz.html?goodsId=g-parent&note=EX-205">结果 · 底部 CTA</a></td>
+          </tr>
+          <tr>
+            <td class="col-no">EX-206</td>
+            <td class="col-scope col-scope--do">要做</td>
+            <td class="col-status">设计已实现</td>
+            <td class="col-team">测评项目组</td>
+            <td class="col-who">需求方</td>
+            <td class="col-mod">H5 海报</td>
+            <td class="col-text">海报要换成深绿金的高级感风格，能直接发朋友圈，要有称号和金句。</td>
+            <td class="col-plan">海报改深绿金 9:16（导出 810×1440）。<br />1、元素：勋章称号（唯一）、觉醒金句、金色五维雷达、超越百分比、参与人数背书、带参二维码。<br />2、头像取本地用户，推荐人用昵称，「打卡第 X 天」本轮隐藏。<br />3、旧版式商品仍用旧海报，互不影响。<br />4、真实环境二维码走 createShare，不新增接口。</td>
+            <td class="col-ui"><span class="ui-tag">需 UI</span><a href="../6Q_exam_h5/quiz.html?goodsId=g-parent&note=EX-206">结果 · 分享海报</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="foot">v2.1.0 口径：维度与计分以《6Q亲子养育能力测评_开发交付规格书_v2.4》为准（5 力 / 20 题 / 每维 12 分 / 总分 60）。图 1 的 13 分、图 5 的 78.5%、图 4 的两个特质标签均不采纳。五维卡点与风险文案为起草稿，待需求方确认。</p>
+  </div>
+</body>
+</html>

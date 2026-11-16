@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6Q 测评复刻 · v2.0.0</title>
+  <style>
+    :root {
+      --ink: #0f172a;
+      --ink-2: #334155;
+      --muted: #64748b;
+      --line: rgba(15, 23, 42, 0.08);
+      --blue: #1677ff;
+      --deep: #0b2b5c;
+      --card: #ffffff;
+      --bg: #eef3f9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(1100px 500px at 10% -10%, #dbeafe 0, transparent 60%),
+        radial-gradient(900px 500px at 100% 0, #fef3c7 0, transparent 55%),
+        var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 48px 22px 64px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 26px;
+      padding: 38px 40px;
+      color: #fff;
+      background: linear-gradient(135deg, #071e3d 0%, #0b3b78 48%, #1677ff 100%);
+      box-shadow: 0 30px 70px rgba(11, 43, 92, 0.28);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px; top: -120px;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,.24), transparent 62%);
+    }
+    .eye { margin: 0 0 12px; font-size: 12px; letter-spacing: .16em; opacity: .72; }
+    .hero h1 { margin: 0 0 14px; font-size: 42px; line-height: 1.15; letter-spacing: -.02em; }
+    .hero p { margin: 0; max-width: 720px; font-size: 15px; line-height: 1.8; opacity: .9; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .tag {
+      padding: 6px 12px; border-radius: 999px; font-size: 12px;
+      background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.22);
+    }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, .07);
+      display: flex; flex-direction: column;
+    }
+    .card__top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .badge {
+      width: 42px; height: 42px; border-radius: 13px;
+      display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 15px;
+      background: linear-gradient(135deg, #1677ff, #6aa8ff);
+      box-shadow: 0 8px 18px rgba(22, 119, 255, .28);
+    }
+    .badge--h5 { background: linear-gradient(135deg, #f97316, #fbbf24); box-shadow: 0 8px 18px rgba(249, 115, 22, .28); }
+    .card h2 { margin: 0; font-size: 20px; }
+    .card__sub { margin: 0 0 16px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .list { margin: 0 0 20px; padding: 0; list-style: none; display: grid; gap: 9px; }
+    .list li { display: flex; gap: 9px; font-size: 13px; color: var(--ink-2); line-height: 1.55; }
+    .list li::before { content: ""; width: 6px; height: 6px; margin-top: 7px; border-radius: 50%; background: #93c5fd; flex: 0 0 auto; }
+    .card--h5 .list li::before { background: #fdba74; }
+    .links { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 14px; border-radius: 10px; font-size: 13px; font-weight: 600;
+      text-decoration: none; color: #0b4bb3; background: #eaf2ff; border: 1px solid #d6e4ff;
+    }
+    .btn:hover { background: #dfeaff; }
+    .btn--primary { color: #fff; background: #1677ff; border-color: #1677ff; }
+    .btn--primary:hover { background: #0e63df; }
+    .btn--h5 { color: #9a3412; background: #fff3e8; border-color: #ffe0c7; }
+    .btn--h5.btn--primary { color: #fff; background: #f97316; border-color: #f97316; }
+    .foot {
+      margin-top: 26px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
+    }
+    .mini {
+      background: rgba(255,255,255,.7); border: 1px solid var(--line); border-radius: 16px;
+      padding: 16px; text-decoration: none; color: var(--ink);
+    }
+    .mini b { display: block; font-size: 14px; margin-bottom: 4px; }
+    .mini span { color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .ver { margin-top: 26px; text-align: center; color: #94a3b8; font-size: 12px; }
+    @media (max-width: 860px) {
+      .wrap { padding: 24px 14px 40px; }
+      .hero { padding: 28px 22px; }
+      .hero h1 { font-size: 30px; }
+      .cards { grid-template-columns: 1fr; }
+      .foot { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <p class="eye">6Q EXAM REPLICA · v2.0.0</p>
+      <h1>测评管理后台 + 心画测评 H5</h1>
+      <p>
+        从 <b>sixQEducation-platform</b> 后台抽出「测评管理」9 个模块，从 <b>exam2.0</b> 抽出测评 H5 主链路，
+        按领袖营复刻同一套框架重做。每个页面都有红色序号注释，写清现网逻辑、复刻边界、字段、接口与数据流。
+      </p>
+      <div class="tags">
+        <span class="tag">9 个后台模块</span>
+        <span class="tag">10 个 H5 页面</span>
+        <span class="tag">功能清单 EX-001 起</span>
+        <span class="tag">静态无依赖</span>
+        <span class="tag">Spec 交付统一</span>
+      </div>
+    </header>
+
+    <section class="cards">
+      <article class="card">
+        <div class="card__top">
+          <div class="badge">后台</div>
+          <h2>测评管理后台复刻</h2>
+        </div>
+        <p class="card__sub">复用领袖营后台 Shell：顶栏 + 侧栏 + 面包屑 + 筛选 + 表格 + 右侧抽屉 + 注释面板。</p>
+        <ul class="list">
+          <li>测评模板 / 商品 / 主题 / 分类 / 维度 / 介绍</li>
+          <li>测评反馈 / 预约老师留言 / 测评数据</li>
+          <li>模板三段式编辑：基础信息、题目、报告结果</li>
+          <li>H5 与后台共用同一份模拟数据口径</li>
+        </ul>
+        <div class="links">
+          <a class="btn btn--primary" href="6Q_exam_battalion/index.html">功能清单</a>
+          <a class="btn" href="6Q_exam_battalion/replica.html?p=template-list">打开后台复刻</a>
+          <a class="btn" href="docs/CONVENTIONS.md">注释规范</a>
+        </div>
+      </article>
+
+      <article class="card card--h5">
+        <div class="card__top">
+          <div class="badge badge--h5">H5</div>
+          <h2>6Q 测评 H5 全量复刻</h2>
+        </div>
+        <p class="card__sub">手机尺寸预览，完整跑通「选测评 → 答题 → 结果 → 海报」与个人中心链路。</p>
+        <ul class="list">
+          <li>首页分类 / 排序 / 测评卡片 / 我的测评</li>
+          <li>测评详情 / 测评须知 / 年龄 / 答题</li>
+          <li>测评结果 / 雷达与分布 / 反馈 / 海报</li>
+          <li>我的测评 / 确认订单 / 支付 / 登录</li>
+        </ul>
+        <div class="links">
+          <a class="btn btn--h5 btn--primary" href="6Q_exam_h5/index.html">打开 H5</a>
+          <a class="btn btn--h5" href="6Q_exam_h5/detail.html?goodsId=g-aq">AQ 详情</a>
+          <a class="btn btn--h5" href="6Q_exam_h5/quiz.html?goodsId=g-aq">直接答题</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="foot">
+      <a class="mini" href="docs/FEATURES.md"><b>功能清单</b><span>按模块列功能编号、状态与原型入口</span></a>
+      <a class="mini" href="docs/CONVENTIONS.md"><b>注释规范</b><span>五段式注释与红点标记约定</span></a>
+      <a class="mini" href="docs/REFERENCE.md"><b>源码对照</b><span>后台 / H5 源码位置与接口清单</span></a>
+      <a class="mini" href="specs/001-exam-replica/spec.md"><b>Spec 交付</b><span>需求、方案、任务、数据模型、契约</span></a>
+    </section>
+
+    <p class="ver">6Q 测评复刻 · v2.0.0 · 仅用于需求与实现对齐，不含真实用户数据</p>
+  </div>
+</body>
+</html>

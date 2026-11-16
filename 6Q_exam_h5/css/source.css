@@ -1,0 +1,228 @@
+/* 6Q 测评 H5 · 按 exam2.0 源码复刻 */
+#h5-page { padding-bottom: 0; }
+body { background: #e8edf6; }
+.h5-app { background: #fff; }
+
+.src-page { position: relative; width: 100%; min-height: 100vh; background: #fff; overflow-x: hidden; }
+.src-header { box-sizing: border-box; padding: 40px 6px 0 0; display: flex; justify-content: space-between; position: sticky; top: 0; z-index: 100; width: 100%; height: 80px; background: #fff; }
+.src-back { width: 40px; height: 40px; background: url('../assets/source/icon/backIcon.png') center / 40% no-repeat; }
+.src-header-title { width: 200px; height: 40px; font-size: 16px; font-weight: 500; color: #392D2B; line-height: 40px; text-align: center; }
+.src-header-other { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+.src-share-icon { width: 24px; height: 24px; background: url('../assets/source/icon/shareIcon.png') center / 100% no-repeat; }
+.src-header-history { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 54px; color: #555152; font-size: 10px; }
+.src-header-history i { width: 24px; height: 24px; background: url('../assets/source/icon/headerOtherIcon.png') center / 100% no-repeat; }
+
+/* 首页 */
+.menu-page { height: 100vh; overflow: hidden; background: #F8F8F8; }
+.menu-page-back { position: absolute; top: 0; left: 0; width: 100%; height: 182px; background: url('../assets/source/image/examMenuWX.png') top / 100% no-repeat; }
+.menu-header-content { position: relative; z-index: 90; box-sizing: border-box; padding: 40px 16px 0; height: 110px; }
+.menu-header-content-title { height: 28px; font-size: 18px; font-weight: 500; color: #392D2B; line-height: 28px; }
+.menu-header-content-subtitle { display: block; margin-top: 2px; width: 185px; font-size: 11px; color: #696566; line-height: 18px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.menu-block { width: 100%; height: calc(100% - 110px); display: flex; }
+.menu-tab { position: relative; width: 90px; height: 100%; background: linear-gradient(rgba(248,248,248,.1), #F8F8F8, #F8F8F8); overflow-x: hidden; overflow-y: auto; }
+.menu-tab::-webkit-scrollbar { display: none; }
+.menu-tab__icon { position: absolute; left: 0; width: 4px; height: 20px; background: #FFA682; border-radius: 2px; transition: all .4s; z-index: 20; }
+.menu-tab-item { position: relative; width: 100%; height: 60px; font-size: 13px; color: #847C7E; line-height: 60px; text-align: center; background: rgba(248,248,248,.5); }
+.menu-tab-item.is-on { color: #464142; font-weight: 500; background: #fff; }
+.menu-tab-item.is-on::before { content: ''; position: absolute; right: 0; bottom: -12px; width: 12px; height: 12px; background: #fff; }
+.menu-tab-item.is-on::after { content: ''; position: absolute; right: 0; bottom: -12px; width: 12px; height: 12px; border-radius: 0 12px 0 0; background: #F8F8F8; }
+.menu-tab-item.is-on .menu-tab-inner::before { content: ''; position: absolute; right: 0; top: -12px; width: 12px; height: 12px; background: #fff; }
+.menu-tab-item.is-on .menu-tab-inner::after { content: ''; position: absolute; right: 0; top: -12px; width: 12px; height: 12px; border-radius: 0 0 12px 0; background: #F8F8F8; }
+.menu-content { box-sizing: border-box; padding: 12px 0 12px 12px; width: calc(100% - 90px); height: 100%; background: #fff; }
+.menu-content-header { box-sizing: border-box; padding-right: 12px; width: 100%; height: 30px; display: flex; align-items: center; justify-content: space-between; }
+.menu-content-header-total { width: calc(100% - 120px); font-size: 11px; color: #2E2A2B; line-height: 40px; }
+.menu-sort { width: 40px; height: 30px; font-size: 11px; color: #696566; line-height: 30px; text-align: right; }
+.menu-sort.is-on { font-weight: 500; color: #FF915F; }
+.menu-content-body { box-sizing: border-box; padding-bottom: 40px; width: 100%; height: calc(100% - 30px); overflow-x: hidden; overflow-y: auto; }
+.menu-goods { box-sizing: border-box; margin: 12px 0; width: calc(100% - 12px); min-height: 94px; position: relative; display: flex; align-items: center; justify-content: space-between; }
+.menu-goods::after { content: ''; position: absolute; left: 0; bottom: -6px; width: 100%; height: 1px; background: #E6E1E2; }
+.menu-goods:last-child::after { display: none; }
+.menu-goods-info { width: calc(100% - 100px); min-height: 74px; }
+.menu-goods-title { width: 100%; font-size: 15px; font-weight: 500; color: #2E2A2B; line-height: 20px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.menu-goods-sub { width: 100%; margin-top: 4px; font-size: 11px; color: #696566; line-height: 20px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.menu-goods-footer { margin-top: 12px; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.menu-goods-price { font-size: 11px; color: #FF915F; white-space: nowrap; }
+.menu-goods-count { font-size: 11px; color: #A3A0A0; white-space: nowrap; }
+.menu-goods-view { position: relative; width: 89px; height: 74px; border-radius: 8px; overflow: hidden; background: #fcfcfc; }
+.menu-goods-img { width: 89px; height: 74px; background-size: cover; background-position: center; }
+.menu-goods-btn { position: absolute; bottom: 0; width: 89px; height: 22px; background: linear-gradient(133deg, #FFB097, #FF6D6D); border-radius: 8px 8px 0 0; font-size: 10px; color: #fff; line-height: 22px; text-align: center; letter-spacing: 1px; }
+.menu-empty { position: absolute; top: 40%; left: 50%; width: 220px; transform: translateX(-50%); text-align: center; }
+.menu-empty-img { width: 180px; height: 93px; margin: auto; background: url('../assets/source/image/defaultBack.png') center / 100% no-repeat; }
+.menu-empty-str { margin-top: 8px; font-size: 12px; color: #696566; }
+
+/* 详情 */
+.detail-page { height: 100vh; overflow: hidden; background: #f8f8f8; }
+.detail-scroll { height: calc(100vh - 164px); overflow-y: auto; }
+.detail-img { width: 100%; height: 211px; background-size: cover; background-position: center; background-color: #eaeaea; }
+.detail-info { box-sizing: border-box; position: relative; top: -11px; padding: 16px 12px; width: 100%; border-radius: 12px 12px 0 0; background: #fff; }
+.detail-price { width: 100%; font-size: 17px; font-weight: 500; color: #FF8855; line-height: 25px; }
+.detail-title-row { width: 100%; display: flex; align-items: flex-end; justify-content: space-between; }
+.detail-title { font-size: 16px; font-weight: 500; color: #2E2A2B; }
+.detail-count { font-size: 12px; color: #A3A0A0; }
+.detail-sub { margin-top: 8px; width: 100%; font-size: 13px; color: #696566; line-height: 18px; text-align: justify; }
+.detail-block { box-sizing: border-box; padding: 16px 12px 40px; width: 100%; min-height: calc(100% - 380px); background: #fff; }
+.detail-block-title { font-size: 16px; font-weight: 500; color: #2E2A2B; line-height: 30px; }
+.detail-html { margin-top: 4px; font-size: 13px; color: #696566; line-height: 20px; text-align: justify; }
+.detail-footer { box-sizing: border-box; padding: 10px 12px 20px; width: 100%; height: 84px; display: flex; justify-content: space-between; background: #fff; }
+.detail-collect { width: 40px; height: 40px; text-align: center; }
+.detail-collect-icon { width: 24px; height: 24px; margin: auto; background: url('../assets/source/icon/collectionIcon1.png') center / 100% no-repeat; }
+.detail-collect.is-on .detail-collect-icon { background-image: url('../assets/source/icon/collectionIcon2.png'); }
+.detail-collect span { display: block; font-size: 10px; color: #5A5050; letter-spacing: 1px; }
+.detail-collect.is-on span { color: #FF9E4D; }
+.detail-start { width: calc(100% - 50px); height: 40px; border-radius: 22px; background: #FF9E4D; color: #fff; font-size: 14px; font-weight: 500; line-height: 40px; text-align: center; letter-spacing: 1px; }
+
+/* 须知 */
+.notice-page { height: 100vh; overflow: hidden; background: #fff; }
+.notice-body { box-sizing: border-box; height: calc(100vh - 80px); }
+.notice-content { box-sizing: border-box; padding: 16px; height: calc(100% - 84px); background: #f8f8f8; }
+.notice-card { box-sizing: border-box; padding: 20px 16px; width: 100%; height: 100%; border-radius: 8px; background: #fff; font-size: 14px; color: #555152; line-height: 22px; text-align: justify; overflow-y: auto; }
+.notice-footer { box-sizing: border-box; padding: 10px 12px 20px; width: 100%; height: 84px; display: flex; background: #fff; }
+.notice-btn { width: 100%; height: 40px; border-radius: 22px; background: #FF9E4D; color: #fff; font-size: 14px; font-weight: 500; line-height: 40px; text-align: center; letter-spacing: 1px; }
+
+/* 年龄页 / 答题页 */
+.pre-page { height: 100vh; overflow: hidden; display: flex; flex-direction: column; background: #FFD6C1; }
+.pre-back { width: 100%; height: 226px; background: url('../assets/source/image/preExamBack.png') top / 100% auto no-repeat; }
+@media (max-width: 430px) { .pre-back { height: 52vw; } }
+.pre-content { flex: 1; padding: 0 12px; }
+.pre-card { width: 100%; height: 100%; border-radius: 12px; background: #fff; overflow: hidden; }
+.pre-question { box-sizing: border-box; padding: 20px 25px; width: 100%; height: calc(100% - 40px); overflow-y: auto; }
+.pre-title { width: 100%; font-size: 16px; font-weight: 500; color: #5A5050; line-height: 22px; text-align: justify; }
+.pre-age { display: block; margin: 30px auto 10px; width: 90%; height: 48px; border: 0; border-radius: 24px; background: #F8F8F8; text-align: center; color: #5A5050; font-size: 16px; outline: none; }
+.pre-footer-bar { width: 100%; height: 40px; background: #ffede5; }
+.pre-footer { box-sizing: border-box; padding: 10px 12px 30px; width: 100%; height: 112px; display: flex; align-items: flex-end; }
+.pre-btn { width: 100%; height: 48px; border-radius: 12px; background: #FFA87B; color: #fff; font-size: 14px; font-weight: 500; line-height: 48px; text-align: center; letter-spacing: 1px; }
+.quiz-content { box-sizing: border-box; padding: 0 16px; width: 100%; height: calc(100% - 40px); overflow-y: auto; }
+.quiz-num { position: sticky; top: 0; box-sizing: border-box; padding-top: 14px; margin-bottom: 15px; width: 100%; height: 44px; background: #fff; text-align: center; font-size: 14px; color: #5A5050; }
+.quiz-num b { font-size: 23px; font-weight: 500; color: #FF846E; letter-spacing: 2px; }
+.quiz-question { width: 100%; font-size: 16px; font-weight: 500; color: #5A5050; line-height: 22px; text-align: justify; margin-bottom: 24px; }
+.quiz-option { width: 90%; margin: 0 auto 16px; padding: 13px 10px; border-radius: 24px; background: #F8F8F8; color: #555152; font-size: 14px; line-height: 22px; text-align: center; box-sizing: border-box; cursor: pointer; }
+.quiz-option.is-on { background: #FFEDE5; color: #FE763A; font-weight: 500; }
+.quiz-footer { position: relative; flex: 1; min-height: 82px; box-sizing: border-box; padding: 10px 12px 30px; width: 100%; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-end; }
+.quiz-footer > .h5-dot { position: absolute; top: 8px; right: 16px; z-index: 2; }
+.quiz-footer-inner { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.quiz-hint:not(:empty) { margin-bottom: 8px; padding: 4px 12px; border-radius: 999px; background: #fff; color: #e85d4c; font-size: 13px; font-weight: 600; line-height: 20px; }
+.quiz-btn { width: 100%; height: 40px; border: 0; border-radius: 12px; background: #FFA87B; color: #fff; font-size: 14px; font-weight: 500; line-height: 40px; text-align: center; letter-spacing: 1px; cursor: pointer; }
+.quiz-btn-row { width: 100%; height: 40px; display: flex; align-items: center; justify-content: space-between; }
+.quiz-btn-row .quiz-btn { width: 48%; }
+
+/* 结果 */
+.result-page { min-height: 100vh; padding-bottom: 140px; background: #F8F8F8; overflow-x: hidden; }
+.result-back { position: relative; height: 200px; margin-bottom: -200px; background: url('../assets/source/image/examResultBackWX.png') top / 100% no-repeat; }
+.result-block { position: relative; z-index: 50; }
+.result-user { box-sizing: border-box; padding: 0 16px; width: 100%; height: 90px; display: flex; align-items: center; }
+.result-avatar { width: 43px; height: 43px; border-radius: 50%; background: rgba(255,255,255,.5); overflow: hidden; }
+.result-avatar img { width: 100%; height: 100%; }
+.result-name { margin-left: 12px; font-size: 14px; color: #2E2A2B; display: flex; align-items: center; }
+.result-name b { margin: 0 6px; padding-bottom: 2px; font-size: 20px; color: #FF8E79; }
+.result-card { box-sizing: border-box; width: 92%; margin: 10px auto 0; padding: 16px 20px; border-radius: 12px; background: #fff; }
+.result-chart-tabs { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.result-chart-tab { width: 50%; height: 40px; font-size: 14px; line-height: 40px; text-align: center; }
+.result-chart-tab.is-on { font-weight: 500; color: #2E2A2B; background: url('../assets/source/image/chartLeft2.png') center / 100% no-repeat; }
+.result-chart-tab:not(.is-on) { color: #847C7E; }
+.result-chart-tab.right.is-on { background-image: url('../assets/source/image/chartRight2.png'); }
+.result-chart-tab.right:not(.is-on) { background: url('../assets/source/image/chartRight1.png') center / 100% no-repeat; }
+.result-chart-tab:not(.right):not(.is-on) { background: url('../assets/source/image/chartLeft1.png') center / 100% no-repeat; }
+.result-chart-body { margin: 20px auto 0; height: 220px; }
+.result-chart-body .h5-chart, .result-harmony-chart .h5-chart, .history-all-chart .h5-chart { width: 100%; height: 100%; }
+.result-card-title { padding: 8px 0 4px; font-size: 16px; font-weight: 500; color: #464142; line-height: 22px; letter-spacing: 1px; }
+.result-card-text { font-size: 14px; color: #555152; line-height: 20px; text-align: justify; letter-spacing: 1px; }
+.result-suggest { box-sizing: border-box; margin-top: 24px; padding: 23px 12px 12px; border-radius: 8px; background: #FFF7F2; font-size: 13px; color: #464142; line-height: 20px; position: relative; }
+.result-suggest::after { content: '建议'; position: absolute; top: -11px; left: 0; width: 56px; height: 22px; background: url('../assets/source/icon/suggestIcon.png') center / 100% no-repeat; color: #fff; font-size: 14px; font-weight: 500; line-height: 22px; text-align: center; }
+.result-history { box-sizing: border-box; width: 92%; height: 40px; margin: 10px auto 0; padding: 0 12px; border-radius: 12px; background: url('../assets/source/image/historyExamBack.png') center / 100% no-repeat; display: flex; align-items: center; justify-content: space-between; }
+.result-history span { font-size: 13px; color: #555152; letter-spacing: 1px; }
+.result-history i { width: 18px; height: 18px; background: url('../assets/source/icon/historyExamGoIcon.png') center / 100% no-repeat; }
+.result-harmony { box-sizing: border-box; width: 92%; margin: 10px auto 0; padding: 0 20px 20px; border-radius: 12px; background: #fff; }
+.result-harmony-title { width: 141px; height: 30px; margin: auto; background: url('../assets/source/icon/titleIcon.png') center / 100% no-repeat; color: #fff; font-size: 14px; font-weight: 500; line-height: 30px; text-align: center; }
+.result-harmony-chart { width: 100%; height: 250px; margin: 10px auto 0; }
+.result-class { box-sizing: border-box; width: 92%; margin: 10px auto 0; padding: 6px 16px 0; border-radius: 12px; background: #fff; }
+.result-class-tabs { position: relative; display: flex; align-items: center; height: 40px; }
+.result-class-tab { width: 90px; margin-right: 30px; height: 40px; font-size: 16px; font-weight: 500; color: #464142; line-height: 38px; text-align: center; }
+.result-class-underline { position: absolute; top: 36px; left: 36px; width: 20px; height: 3px; border-radius: 2px; background: #FF9343; transition: all .4s; }
+.result-goods { width: 100%; height: 95px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #EFE9E4; }
+.result-goods:last-child { border-bottom: 0; }
+.result-goods-img { width: 112px; height: 63px; margin-right: 16px; border-radius: 4px; background-size: cover; background-position: center; background-color: #D8D8D8; }
+.result-goods-info { width: calc(100% - 128px); }
+.result-goods-title { font-size: 16px; font-weight: 500; color: #464142; line-height: 20px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.result-goods-price { margin-top: 20px; font-size: 15px; font-weight: 500; color: #FF9343; }
+.result-feedback { box-sizing: border-box; width: 92%; margin: 10px auto 0; padding: 0 16px 20px; border-radius: 12px; background: #fff; }
+.result-feedback-title { width: 100%; height: 40px; font-size: 13px; font-weight: 500; color: #333; line-height: 50px; }
+.result-stars { display: flex; align-items: center; height: 30px; }
+.result-stars button { border: 0; background: transparent; font-size: 25px; color: #e2e6ee; padding: 0; }
+.result-stars button.is-on { color: #FFD47F; }
+.result-star-score { width: 60px; height: 30px; font-size: 16px; font-weight: 500; color: #FF8E79; line-height: 30px; text-align: center; }
+.result-feedback textarea { width: 100%; min-height: 72px; border: 0; border-radius: 8px; background: #f8f8f8; padding: 10px; font-size: 13px; color: #555152; resize: vertical; outline: none; }
+.result-feedback-btn { margin-top: 12px; width: 100%; height: 40px; border-radius: 22px; background: #FF9E4D; color: #fff; font-size: 14px; font-weight: 500; line-height: 40px; text-align: center; }
+.result-end { width: 100%; height: 40px; font-size: 12px; color: #696566; line-height: 50px; text-align: center; }
+.result-home-btn { position: fixed; right: 12px; bottom: 106px; z-index: 100; width: 48px; height: 48px; border-radius: 50%; background: url('../assets/source/icon/goIndex.png') center / 100% no-repeat; }
+
+/* 我的测评 */
+.history-page { min-height: 100vh; padding-bottom: 40px; background: #FFF4EE; overflow-x: hidden; }
+.history-back { position: relative; height: 367px; margin-bottom: -367px; background: url('../assets/source/image/myExamBackWX.png') top / 100% no-repeat; }
+.history-block { position: relative; z-index: 50; }
+.history-all { position: relative; box-sizing: border-box; width: 92%; margin: 10px auto 0; padding: 0 20px 20px; border-radius: 12px; background: #fff; }
+.history-all-title { width: 141px; height: 30px; margin: auto; background: url('../assets/source/icon/titleIcon.png') center / 100% no-repeat; color: #fff; font-size: 14px; font-weight: 500; line-height: 30px; text-align: center; }
+.history-all-chart { width: 100%; height: 250px; margin: 10px auto 0; }
+.history-list { position: relative; margin-top: 24px; width: 100%; }
+.history-select { position: relative; z-index: 20; display: flex; height: 56px; }
+.history-select-bg { position: absolute; top: 0; left: 0; width: 100%; height: 56px; background: url('../assets/source/image/myChooseLeft.png') center / 100% no-repeat; z-index: 10; }
+.history-select-bg.right { background-image: url('../assets/source/image/myChooseRight.png'); }
+.history-select div { position: relative; z-index: 20; width: 50%; height: 56px; font-size: 16px; line-height: 56px; text-align: center; color: #847C7E; }
+.history-select div.is-on { font-weight: 500; color: #555152; }
+.history-list-block { box-sizing: border-box; padding: 12px; width: 100%; background: #FFF4EE; }
+.history-card { box-sizing: border-box; padding: 16px 12px; width: 100%; border-radius: 8px; background: #fff; }
+.history-item { margin-bottom: 32px; }
+.history-item:last-child { margin-bottom: 0; }
+.history-item-content { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 83px; }
+.history-img { position: relative; width: 100px; height: 83px; border-radius: 8px; background-size: cover; background-position: center; background-color: #f8f8f8; overflow: hidden; }
+.history-img span { position: absolute; bottom: 0; left: 0; width: 100%; height: 22px; background: linear-gradient(133deg, #FFB097, #FF6D6D); color: #fff; font-size: 10px; line-height: 22px; text-align: center; }
+.history-info { width: calc(100% - 112px); }
+.history-title { display: flex; align-items: center; justify-content: space-between; }
+.history-title b { font-size: 14px; font-weight: 500; color: #2E2A2B; }
+.history-tip { font-size: 10px; color: #FF915F; }
+.history-other { margin-top: 6px; font-size: 10px; color: #A3A0A0; }
+.history-price { margin-top: 8px; font-size: 11px; color: #FF915F; }
+.history-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
+.history-actions button { height: 28px; padding: 0 14px; border: 1px solid #FF9E4D; border-radius: 14px; background: #fff; color: #FF9E4D; font-size: 11px; }
+.history-actions button.solid { background: #FF9E4D; color: #fff; }
+.history-empty { padding: 40px 0; text-align: center; color: #696566; font-size: 12px; }
+
+/* 订单 */
+.order-page { width: 100%; height: 100vh; overflow: hidden; background: #f8f8f8; }
+.order-header { position: relative; box-sizing: border-box; padding-top: 44px; width: 100%; height: 88px; display: flex; align-items: center; justify-content: center; background: #fff; }
+.order-header-title { font-size: 16px; font-weight: 500; color: #392D2B; }
+.order-back { position: absolute; left: 0; bottom: 0; width: 40px; height: 40px; background: url('../assets/source/icon/backIcon.png') center / 50% no-repeat; }
+.order-body { box-sizing: border-box; padding: 10px 12px 40px; width: 100%; height: calc(100% - 154px); overflow-y: auto; }
+.order-card { box-sizing: border-box; padding: 16px 12px; width: 100%; border-radius: 6px; background: #fff; }
+.order-item { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 70px; }
+.order-img { width: 123px; height: 70px; margin-right: 10px; border-radius: 4px; background-size: cover; background-position: center; background-color: #f8f8f8; }
+.order-info { width: calc(100% - 143px); height: 70px; display: flex; flex-direction: column; justify-content: space-between; }
+.order-name { font-size: 16px; font-weight: 500; color: #030305; line-height: 26px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.order-price { font-size: 14px; font-weight: 600; color: #030305; line-height: 26px; }
+.order-num { font-size: 12px; color: #A7A7A7; }
+.order-row { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+.order-label { font-size: 14px; color: #030305; }
+.order-muted { font-size: 14px; color: #B2B2B5; }
+.order-money { font-size: 14px; font-weight: 500; color: #EA595E; }
+.order-bottom { box-sizing: border-box; padding: 0 16px; width: 100%; height: 66px; display: flex; align-items: center; justify-content: space-between; background: #fff; box-shadow: 0 0 10px 1px rgba(0,0,0,.04); }
+.order-total { font-size: 18px; font-weight: 700; color: #EA595E; }
+.order-submit { width: 104px; height: 40px; border-radius: 20px; background: #FFAC4D; color: #fff; font-size: 14px; line-height: 40px; text-align: center; }
+.order-check { width: 18px; height: 18px; border-radius: 50%; border: 1px solid #ccc; }
+.order-check.is-on { border-color: #ffac4d; background: #ffac4d; box-shadow: inset 0 0 0 4px #fff; }
+
+/* 登录 */
+.login-page { min-height: 100vh; background: #fff; }
+.login-logo { width: 100%; margin-top: 60px; display: flex; flex-direction: column; align-items: center; }
+.login-logo img { width: 90px; height: 80px; object-fit: contain; }
+.login-logo p { margin: 8px 0 0; font-size: 13px; font-weight: bold; color: #323232; letter-spacing: 1px; line-height: 34px; }
+.login-form { box-sizing: border-box; width: 90%; margin: 10px auto; padding: 10px; background: #f0f0f0; }
+.login-form input { width: 100%; height: 44px; margin-top: 12px; border: 0; border-bottom: 1px solid #e5e5e5; background: transparent; font-size: 14px; color: #333; outline: none; }
+.login-btn { width: 100%; height: 40px; margin-top: 40px; border-radius: 4px; background: #FF9C2A; color: #fff; font-size: 14px; font-weight: bold; line-height: 40px; text-align: center; }
+
+/* 海报弹窗 */
+.src-poster-mask { position: fixed; inset: 0; z-index: 150; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.55); padding: 18px; }
+.src-poster-mask.is-open { display: flex; }
+.src-poster-card { width: 275px; }
+.src-poster-img { width: 275px; height: 478px; border-radius: 6px; overflow: hidden; background: #fff; }
+.src-poster-img img { width: 100%; height: 100%; object-fit: cover; }
+.src-poster-save { margin-top: 16px; width: 275px; height: 44px; border-radius: 6px; background: #fff; color: #030305; font-size: 14px; line-height: 44px; text-align: center; letter-spacing: 1px; }
+.src-poster-close { margin-top: 10px; text-align: center; color: #fff; font-size: 12px; }
