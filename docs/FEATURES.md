@@ -102,6 +102,21 @@
 | EX-204 | 风险提示 | done | `record=demo-mid` | 取 `riskTip`，为空回退卡点 risk，再空整块隐藏 |
 | EX-205 | 深度了解与底部预约 CTA | done | `record=demo-mid` | 呼吸动画主 CTA「预约导师 1v1 解读」→ 二维码抽屉；下方历史 / 再答 |
 | EX-206 | 觉醒海报（深绿金 9:16） | done | `record=demo-high` → 报告头分享 | 勋章 / 金句 / 金色雷达 / 百分比 / 背书 / 二维码；导出 810×1440 |
+| EX-207 | 海报雷达取数规则 | done | `record=demo-mid&note=EX-207` | dims → 每维上限还原原始分 → 标注 `(N分)`；无记录用 8 分示意 |
+| EX-208 | 扫码分流与免费无感建单 | done | `entry.html?goodsId=g-free&ref=S6MULM1` | 免费自动建 0 元订单直进测评；收费进商品详情 |
+| EX-209 | 推荐关系继承 | done | 同上带 `ref` | ref 落库、首次优先、订单带 referrer |
+| EX-210 | 扫码登录校验 | done | 同上（清 session） | 未登录跳登录并 redirect 回跳；H5/APP 一致 |
+
+### 5. 扫码进入链路
+
+详细规格见 `specs/002-report-v2.1.0/share-entry.md`。
+
+| 商品价格 | 行为 |
+| --- | --- |
+| `price = 0` | 自动建免费订单（0 元、finished、带 referrer）→ 直接进测评须知 |
+| `price > 0` | 进商品详情页，不代下单 |
+
+登录：未登录先跳 `login.html?redirect=…`，登录成功回落地页继续；H5 与 APP 内嵌一律要求登录。
 
 ### 3. 固定模拟数据
 

@@ -235,6 +235,26 @@
       recommend: ["g-eq", "g-6q", "g-rq"]
     },
     {
+      /* 免费商品：用于验证「扫码进入 → 自动建单 → 无感进测评」分流 */
+      id: "g-free", key: "free", name: "亲子养育能力快测 · 限时免费", subTitle: "3 分钟看见你的育儿卡点",
+      category: "亲子关系", categoryId: "c-parent", cover: COVER + "parent.svg", poster: COVER + "poster-parent.svg",
+      price: 0, testCount: 8620, questionCount: 20, minutes: 5, scoreTotal: 60,
+      tags: ["限时免费", "五力雷达", "约 5 分钟"],
+      intro: "同样 20 题、五力计分，限时免费开放。适合先体验一次再做完整版。",
+      forWho: "第一次接触 6Q 亲子测评、想先免费体验的父母。",
+      dims: DIMS_PARENT,
+      questions: makeParentQuestions(),
+      results: PARENT_BANDS,
+      resultLayout: 2,
+      riskTip: "您和孩子正在严重消耗中。如果不做调整，3-6 个月内可能出现沟通关闭、孩子不愿说话。",
+      ctaText: "想知道这个育儿卡点是如何形成的？1 对 1 测评深度解读，帮您把测评结果转化为一份可落地的《家庭育儿改善清单》。",
+      ctaSubText: "添加导师微信，帮您把分数变成方向",
+      ctaQrCode: COVER + "qr.svg",
+      painCopy: POWER_PAIN,
+      showTotal: true, showRadar: true, showDist: false, showHarmony: false,
+      recommend: ["g-parent", "g-eq", "g-6q"]
+    },
+    {
       id: "g-eq", key: "eq", name: "情绪智慧 EQ 测评", subTitle: "和情绪做朋友",
       category: "EQ 情商", categoryId: "c-eq", cover: COVER + "eq.svg", poster: COVER + "poster-eq.svg",
       price: 99, testCount: 11205, questionCount: 12, minutes: 7, scoreTotal: 72,

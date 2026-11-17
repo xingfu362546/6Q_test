@@ -11,7 +11,10 @@
     records: "exam_records",
     favorites: "exam_favorites",
     feedback: "exam_feedbacks",
-    appointments: "exam_appointments"
+    appointments: "exam_appointments",
+    orders: "exam_orders",
+    session: "exam_session",
+    referral: "exam_referral"
   };
 
   function read(key, fallback) {
@@ -75,6 +78,74 @@
     var list = read(K.appointments, []);
     list.unshift(item);
     write(K.appointments, list);
+  }
+
+  /* ---------- 登录态（扫码进入的准入校验） ---------- */
+  function session() { return read(K.session, null); }
+  function saveSession(s) { write(K.session, s); }
+  function clearSession() { try { localStorage.removeItem(K.session); } catch (e) {} }
+  function isLoggedIn() {
+    var s = session();
+    return !!(s && s.token);
+  }
+
+  /* ---------- 订单 ---------- */
+  function orders() { return read(K.orders, []); }
+  function saveOrders(list) { write(K.orders, list.slice(0, 100)); }
+  function addOrder(order) {
+    var list = orders().filter(function (o) { return o.id !== order.id; });
+    list.unshift(order);
+    saveOrders(list);
+    return order;
+  }
+  function ordersByGoods(goodsId) {
+    return orders().filter(function (o) { return o.goodsId === goodsId; });
+  }
+
+  /* ---------- 推荐关系 ---------- */
+  function referral() { return read(K.referral, null); }
+  function saveReferral(r) {
+    if (!r || !r.ref) return referral();
+    var old = read(K.referral, null);
+    if (old && old.ref && old.ref !== r.ref) return old; // 已有推荐人时以首次为准，不被覆盖
+    var val = {
+      ref: r.ref,
+      goodsId: r.goodsId || "",
+      from: r.from || "poster",
+      channel: r.channel || "share_poster",
+      ts: r.ts || now()
+    };
+    write(K.referral, val);
+    return val;
+  }
+
+  /* ---------- 免费商品无感建单 ----------
+     规则：仅当商品价格为 0 时自动建单；已有同类免费订单则复用，不重复生成。
+     订单带上推荐关系，供后续结算与业绩归属使用。 */
+  function ensureFreeOrder(goods, ref) {
+    if (!goods || Number(goods.price) !== 0) return null;
+    var exist = orders().filter(function (o) {
+      return o.goodsId === goods.goodsId && Number(o.price) === 0 && o.status === "finished";
+    })[0];
+    if (exist) return { order: exist, created: false };
+    var rf = ref || (referral() && referral().ref) || "";
+    var order = {
+      id: uid("ord"),
+      orderNo: "EX" + Date.now(),
+      goodsId: goods.goodsId,
+      templeteId: goods.templeteId,
+      title: goods.title,
+      price: 0,
+      payAmount: 0,
+      status: "finished",
+      channel: "scan_free",
+      referrer: rf,
+      referrerGoodsId: goods.goodsId,
+      createTime: now(),
+      payTime: now()
+    };
+    addOrder(order);
+    return { order: order, created: true };
   }
 
   function calcResult(goods, answers) {
@@ -299,6 +370,7 @@
 
     function open(req) {
       panel.classList.add("is-open");
+      btn.classList.add("is-open");
       panel.querySelectorAll(".h5-note-block").forEach(function (el) {
         el.style.borderColor = req && el.getAttribute("data-req") === req ? "#ffb4a8" : "";
       });
@@ -306,9 +378,13 @@
       if (target) target.scrollIntoView({ block: "start", behavior: "smooth" });
       else panel.scrollTop = 0;
     }
+    function close() {
+      panel.classList.remove("is-open");
+      btn.classList.remove("is-open");
+    }
 
     btn.addEventListener("click", function () { open(""); });
-    panel.querySelector("[data-notes-close]").addEventListener("click", function () { panel.classList.remove("is-open"); });
+    panel.querySelector("[data-notes-close]").addEventListener("click", function () { close(); });
     refreshNotes(pageKey);
     document.addEventListener("click", function (e) {
       var dot = e.target.closest(".h5-dot[data-req]");
@@ -333,6 +409,9 @@
     favorites: favorites, toggleFavorite: toggleFavorite, isFavorite: isFavorite,
     progress: progress, saveProgress: saveProgress, clearProgress: clearProgress,
     addFeedback: addFeedback, addAppointment: addAppointment,
+    session: session, saveSession: saveSession, clearSession: clearSession, isLoggedIn: isLoggedIn,
+    orders: orders, saveOrders: saveOrders, addOrder: addOrder, ordersByGoods: ordersByGoods,
+    referral: referral, saveReferral: saveReferral, ensureFreeOrder: ensureFreeOrder,
     calcResult: calcResult,
     ringSvg: ringSvg, radarSvg: radarSvg, distSvg: distSvg,
     toast: toast, modal: modal, confirm: confirm, share: share,

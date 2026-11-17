@@ -33,6 +33,9 @@
 | `exam/exam/user/favourite/exportTempleteUserAnswer` | GET | **改**：同上 |
 | `exam/exam/user/check/findUserCheckStatistic` | GET | 不改 |
 | `exam/exam/user/favourite/findTempleteUserFavouriteStatistic` | GET | 不改 |
+| `POST exam/order/create` | POST | **改**：新增 `referrer` / `referrerGoodsId` / `channel` |
+| `POST /security/api/user/login` | POST | 不改 |
+| `GET /security/api/user/info` | GET | 不改 |
 
 ## 3. `GET /exam/app/api/viewCheckResult`
 
@@ -194,7 +197,42 @@
 
 后台另加「导出内容预览」：读同一份明细，在页面里渲染表头对照与逐题预览，不产出文件。
 
-## 9. 埋点建议（待确认）
+## 9. 分享与扫码进入（EX-207 ~ EX-210）
+
+完整链路见 [share-entry.md](../share-entry.md)。
+
+### 9.1 `POST exam/order/create`
+
+| 字段 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `goodsId` | string | 是 | 商品 ID |
+| `templeteId` | string | 是 | 关联模板 |
+| `price` | number | 是 | 商品价；免费商品为 0 |
+| `payAmount` | number | 是 | 实付金额；免费为 0 |
+| `referrer` | string | 否 | **新增**：推荐人标识，来自海报 `ref` |
+| `referrerGoodsId` | string | 否 | **新增**：发生推荐的商品 |
+| `channel` | string | 否 | **新增**：`scan_free`（扫码免费）/ `h5_order`（正常下单） |
+
+免费订单约束：`price = 0`、`payAmount = 0`、`status = finished`，不参与退款与结算。
+
+### 9.2 `POST /security/api/user/share/center/createShare`
+
+不改字段。`sourceParam` 需带 `goodsId` 与 `ref`，保证生成的二维码落地到 `entry.html?goodsId=&ref=`。
+
+### 9.3 `POST /security/api/user/login`
+
+不改。H5 登录成功后写本地 `exam_session`（含 token），作为扫码准入判断依据。
+
+### 9.4 海报雷达取数
+
+不新增接口。用 `viewCheckResult` 的 `scoreList[]`：
+
+```
+maxPer = round(record.total / dims.length)
+raw[i] = round(dims[i].value / 100 * maxPer)
+```
+
+## 10. 埋点建议（待确认）
 
 | 事件 | 触发 |
 | --- | --- |
@@ -203,3 +241,8 @@
 | `report_v2_qr_open` | 二维码抽屉打开 |
 | `report_v2_poster_save` | 海报保存 |
 | `data_export_preview_open` | 打开导出内容预览 |
+| `scan_entry_view` | 扫码落地页打开 |
+| `scan_entry_login_redirect` | 未登录跳登录 |
+| `scan_free_order_created` | 免费订单创建成功 |
+| `scan_entry_to_quiz` | 进入测评须知 |
+| `scan_entry_to_goods` | 收费商品跳详情 |

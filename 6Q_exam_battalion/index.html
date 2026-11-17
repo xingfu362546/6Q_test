@@ -64,7 +64,7 @@
       <p class="nav-hero__eye">EXAM · v2.1.0 · 本期需求清单</p>
       <h1>测评管理 · 亲子养育报告改版</h1>
       <p>
-        本清单只列 v2.1.0 本期需求，共 9 条：后台 3 条（EX-051、EX-052、EX-053）、H5 结果报告页 6 条（EX-201 ~ EX-206）。
+        本清单只列 v2.1.0 本期需求，共 13 条：后台 3 条（EX-051 ~ EX-053）、H5 报告与分享链路 10 条（EX-201 ~ EX-210）。
         v2.0.0 基线功能不在本页展示，作为改动依据写在各条「逻辑说明」里。
         每条需求都标了是否需要 UI 出稿；点序号或原型链接直接打开对应页面并展开该条注释。
         结果报告页的每条需求都配了固定模拟数据（见「三、固定模拟数据」），打开即复现同一份报告。
@@ -77,7 +77,7 @@
     </header>
 
     <div class="meta">
-      <span>本期 9 条需求</span><span>后台 3 条</span><span>H5 报告页 6 条</span><span>需 UI 出稿 9 条</span><span>固定模拟数据 3 档</span>
+      <span>本期 13 条需求</span><span>后台 3 条</span><span>H5 10 条</span><span>需 UI 出稿 13 条</span><span>固定模拟数据 3 档</span>
     </div>
 
     <div class="legend">
@@ -369,11 +369,115 @@
               <a href="../6Q_exam_h5/result.html?record=demo-high&goodsId=g-parent&note=EX-206"><span class="tag">高档 56 分</span>海报（点右上分享）</a>
             </td>
           </tr>
+          <tr id="req-EX-207">
+            <td class="no"><a href="../6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent&note=EX-207">EX-207</a></td>
+            <td class="scope">要做</td>
+            <td class="ui ui--yes">需 UI<span class="ui-note">海报雷达带分数标注</span></td>
+            <td class="st">设计已实现</td>
+            <td class="team">测评项目组</td>
+            <td class="who">需求方</td>
+            <td class="mod">海报</td>
+            <td class="text">海报里的雷达图取数规则要写清楚：画的是百分比还是原始得分、每维上限怎么来、没有测评记录时怎么兜底。</td>
+            <td class="logic">
+              1、取该次测评记录的 <code>dims</code>（五维，元素含 <code>value</code> 百分比）。<br />
+              2、每维上限 <code>maxPer = round(记录总分 ÷ 维数)</code>，五力即 12 分。<br />
+              3、还原原始得分 <code>raw = round(value ÷ 100 × maxPer)</code>。<br />
+              4、按 <code>raw ÷ maxPer</code> 归一化画点，维度名下方标 <code>(raw分)</code>。<br />
+              5、无测评记录时（详情页分享）退化为各维 8 分示意值，不谎报成绩。<br />
+              6、报告与海报用同一份 <code>dims</code>，同一答卷两处图形一致。
+            </td>
+            <td class="api">
+              GET <code>/exam/app/api/viewCheckResult</code><br />
+              <code>scoreList[]</code> 需含 <code>name</code> / <code>score</code> / <code>maxScore</code><br />
+              <span class="keep">不新增接口</span>
+            </td>
+            <td class="proto">
+              <a href="../6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent&note=EX-207"><span class="tag">中档 40 分</span>海报雷达取数</a>
+            </td>
+          </tr>
+          <tr id="req-EX-208">
+            <td class="no"><a href="../6Q_exam_h5/entry.html?goodsId=g-free&ref=S6MULM1&from=poster&note=EX-208">EX-208</a></td>
+            <td class="scope">要做</td>
+            <td class="ui ui--yes">需 UI<span class="ui-note">扫码落地页 + 三段状态文案</span></td>
+            <td class="st">设计已实现</td>
+            <td class="team">测评项目组</td>
+            <td class="who">需求方</td>
+            <td class="mod">扫码进入</td>
+            <td class="text">别人扫码进来时，免费测评要直接能测；但现在必须先下单、再从订单点测试，路径太长，容易流失。收费商品仍走商品详情。</td>
+            <td class="logic">
+              1、新增统一落地页 <code>entry.html</code>，带 <code>goodsId</code> / <code>ref</code>。<br />
+              2、<b>免费（price = 0）</b>：自动生成免费订单（金额 0、状态已完成）→ 直接进测评须知，用户无感。<br />
+              3、<b>收费（price &gt; 0）</b>：跳商品详情页，用户自行下单。<br />
+              4、同商品已有免费订单时复用，不重复建单。<br />
+              5、判定只看价格，不看优惠券；免费订单不参与退款与结算。<br />
+              6、落地页展示「校验登录 → 开通订单 → 进入测评」三段状态，全程不出现支付页。
+            </td>
+            <td class="api">
+              POST <code>exam/order/create</code>（免费商品，金额 0）<br />
+              GET <code>exam/exam/templete/detail</code><br />
+              <span class="new">需新增</span> 订单状态回写与渠道字段 <code>scan_free</code>
+            </td>
+            <td class="proto">
+              <a href="../6Q_exam_h5/entry.html?goodsId=g-free&ref=S6MULM1&from=poster&note=EX-208"><span class="tag">免费商品</span>无感建单进入</a>
+              <a href="../6Q_exam_h5/entry.html?goodsId=g-parent&ref=S6MULM1&from=poster&note=EX-208"><span class="tag">收费商品</span>进商品详情</a>
+            </td>
+          </tr>
+          <tr id="req-EX-209">
+            <td class="no"><a href="../6Q_exam_h5/entry.html?goodsId=g-free&ref=S6MULM1&from=poster&note=EX-209">EX-209</a></td>
+            <td class="scope">要做</td>
+            <td class="ui ui--yes">需 UI<span class="ui-note">推荐人展示位</span></td>
+            <td class="st">设计已实现</td>
+            <td class="team">测评项目组</td>
+            <td class="who">需求方</td>
+            <td class="mod">扫码进入</td>
+            <td class="text">海报分享出去后，业务系统要保留推荐关系，不能因为走扫码就丢掉归属。</td>
+            <td class="logic">
+              1、海报二维码带 <code>ref</code>（分发人）与 <code>goodsId</code>。<br />
+              2、落地页<b>第一时间</b>写入推荐关系，未登录也先落库，避免登录跳转丢失。<br />
+              3、已有推荐人时以<b>首次</b>为准，不被后一次分享覆盖。<br />
+              4、免费订单与收费订单都写 <code>referrer</code>，随订单提交业务系统。<br />
+              5、订单确认页展示推荐人，便于核对归属。
+            </td>
+            <td class="api">
+              POST <code>/security/api/user/share/center/createShare</code>（生成带 ref 链接）<br />
+              POST <code>exam/order/create</code>（订单带 <code>referrer</code>）<br />
+              <span class="new">需新增</span> 订单字段 <code>referrer</code> / <code>referrerGoodsId</code>
+            </td>
+            <td class="proto">
+              <a href="../6Q_exam_h5/entry.html?goodsId=g-free&ref=S6MULM1&from=poster&note=EX-209"><span class="tag">带 ref</span>推荐关系继承</a>
+            </td>
+          </tr>
+          <tr id="req-EX-210">
+            <td class="no"><a href="../6Q_exam_h5/entry.html?goodsId=g-free&ref=S6MULM1&from=poster&note=EX-210">EX-210</a></td>
+            <td class="scope">要做</td>
+            <td class="ui ui--yes">需 UI<span class="ui-note">登录拦截与回跳</span></td>
+            <td class="st">设计已实现</td>
+            <td class="team">测评项目组</td>
+            <td class="who">需求方</td>
+            <td class="mod">扫码进入</td>
+            <td class="text">扫码进来如果没登录，要先登录才能测；APP 内嵌也一样，不能因为容器就跳过登录。</td>
+            <td class="logic">
+              1、落地页先判登录态（<code>exam_session</code> 有无 token），未登录跳登录页。<br />
+              2、登录页支持 <code>redirect</code>，登录成功后回落地页继续，不是简单返回。<br />
+              3、跳登录前先存推荐关系与目标商品，登录回来参数不丢。<br />
+              4、<b>H5 与 APP 内嵌（含微信 / 凡泰）一律要求登录</b>，不因环境跳过。<br />
+              5、登录成功后才建单与进测评，未登录不产生订单。<br />
+              6、已登录用户直接进分支，不二次弹登录。
+            </td>
+            <td class="api">
+              POST <code>/security/api/user/login</code>（返回 token）<br />
+              GET <code>/security/api/user/info</code><br />
+              <span class="keep">登录接口既有，不改字段</span>
+            </td>
+            <td class="proto">
+              <a href="../6Q_exam_h5/entry.html?goodsId=g-free&ref=S6MULM1&from=poster&note=EX-210"><span class="tag">未登录</span>跳登录后回跳</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="zone-head"><h2>三、固定模拟数据</h2><span>结果报告页用 <code>record=demo-low / demo-mid / demo-high</code> 复现，答案、日期、单号均写死</span></div>
+    <div class="zone-head"><h2>三、固定模拟数据</h2><span>结果报告页用 <code>record=demo-low / demo-mid / demo-high</code> 复现，答案、日期、单号均写死；扫码进入用免费商品 <code>g-free</code>（0 元）+ 收费商品 <code>g-parent</code>（199 元）对照</span></div>
     <div class="sheet">
       <table class="demo">
         <thead>
@@ -384,8 +488,7 @@
             <td><a href="../6Q_exam_h5/result.html?record=demo-low&goodsId=g-parent">demo-low</a></td>
             <td>16</td><td>低档</td><td>超越 15%</td><td>边界松弛力</td><td>2026-11-05 10:24:08</td>
             <td>五维各选项压到 0–1 分，用于验收低档勋章与卡点。</td>
-          </tr>
-          <tr>
+          </tr>          <tr>
             <td><a href="../6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent">demo-mid</a></td>
             <td>40</td><td>中档</td><td>超越 45%</td><td>情感链接力</td><td>2026-11-03 17:13:32</td>
             <td>五维全选第 3 个选项，并列最低时按固定优先序取首个维度。</td>
@@ -394,6 +497,19 @@
             <td><a href="../6Q_exam_h5/result.html?record=demo-high&goodsId=g-parent">demo-high</a></td>
             <td>56</td><td>高档</td><td>超越 95%</td><td>边界松弛力</td><td>2026-11-07 21:40:15</td>
             <td>整体高位、边界维略低，用于验收高档勋章与金句。</td>
+          </tr>
+          <tr>
+            <td colspan="7" style="background:#f8fafc;font-weight:700">扫码进入链路</td>
+          </tr>
+          <tr>
+            <td><a href="../6Q_exam_h5/entry.html?goodsId=g-free&ref=S6MULM1&from=poster">g-free</a></td>
+            <td>0 元</td><td>免费</td><td>—</td><td>—</td><td>—</td>
+            <td>免费商品：已登录 → 自动建免费订单 → 直接进测评须知；未登录 → 先跳登录再回跳。</td>
+          </tr>
+          <tr>
+            <td><a href="../6Q_exam_h5/entry.html?goodsId=g-parent&ref=S6MULM1&from=poster">g-parent</a></td>
+            <td>199 元</td><td>收费</td><td>—</td><td>—</td><td>—</td>
+            <td>收费商品：不代下单，跳商品详情页，由用户自行购买。</td>
           </tr>
         </tbody>
       </table>

@@ -196,7 +196,7 @@
 
   /* ---------------- 登录 ---------------- */
   function renderLogin() {
-    var user = E.user();
+    var redirect = qs("redirect") || "";
     root.innerHTML = '<div class="login-page"><div class="login-logo"><img src="../assets/source/6Qlogo.png" alt="6Q" /><p>欢迎登录，体验更多功能' + dot("login") + '</p></div>' +
       '<div class="login-form"><input id="login-mobile" placeholder="输入手机号码 / 账号" />' +
       '<input id="login-password" type="password" placeholder="输入密码" /></div>' +
@@ -207,16 +207,82 @@
       if (!mobile) { mobile = "13925806313"; document.getElementById("login-mobile").value = mobile; }
       if (!password) { password = "6qiloveyou"; document.getElementById("login-password").value = password; }
       E.saveUser({ name: "余炜烽", serialNo: mobile, mobile: mobile, avatar: "余", isGuest: false });
+      E.saveSession({ token: "mock-token-" + Date.now(), userId: mobile, loginAt: E.now(), channel: "h5" });
       E.toast("登录成功");
-      setTimeout(function () { if (history.length > 1) history.back(); else go("index.html"); }, 500);
+      setTimeout(function () {
+        if (redirect) { location.replace(decodeURIComponent(redirect)); return; }
+        if (history.length > 1) history.back(); else go("index.html");
+      }, 400);
     });
     E.mountNotes("login");
+  }
+
+  /* ---------------- 扫码进入 ----------------
+     分流优先级：
+     1. 先落推荐关系（未登录也要先存，避免登录后丢失）
+     2. 未登录 → 去登录，登录成功后回到本页继续
+     3. 商品免费 → 自动生成免费订单 → 无感进入测评须知
+     4. 商品收费 → 进商品详情页，由用户自行下单
+  */
+  function renderEntry() {
+    var goodsId = qs("goodsId") || qs("id") || "g-parent";
+    var ref = qs("ref") || qs("uid") || "";
+    var from = qs("from") || "poster";
+    var g = G(D.byId(goodsId)) || goodsList()[0];
+
+    // 1. 推荐关系先落库（含未登录场景）
+    var rf = E.saveReferral({ ref: ref, goodsId: g.goodsId, from: from, channel: "share_poster" });
+
+    var selfUrl = "entry.html?goodsId=" + encodeURIComponent(g.goodsId) + (ref ? "&ref=" + encodeURIComponent(ref) : "") + "&from=" + encodeURIComponent(from);
+
+    root.innerHTML = '<div class="entry-page"><div class="entry-card">' +
+      '<div class="entry-qr"></div>' +
+      '<div class="entry-title">正在为你打开测评' + dot("entry-flow") + '</div>' +
+      '<div class="entry-goods">' + esc(g.title) + '</div>' +
+      '<div class="entry-price">' + money(g.price) + '</div>' +
+      '<div class="entry-step" id="entry-step">校验登录状态…</div>' +
+      '<div class="entry-ref">H5 与 APP 内嵌均需登录后测试' + dot("entry-login") + '</div>' +
+      (rf ? '<div class="entry-ref">推荐人：' + esc(rf.ref) + dot("entry-referral") + '</div>' : "") +
+      '</div></div>';
+
+    function step(text, ms, next) {
+      document.getElementById("entry-step").textContent = text;
+      setTimeout(next, ms);
+    }
+
+    // 2. 登录校验：H5 与 APP 内嵌都要求登录后测试
+    if (!E.isLoggedIn()) {
+      step("需要登录后继续", 700, function () {
+        location.replace("login.html?redirect=" + encodeURIComponent(selfUrl));
+      });
+      E.mountNotes("entry");
+      return;
+    }
+
+    // 3/4. 免费直进，收费去商品详情
+    var isFree = Number(g.price) === 0;
+    if (isFree) {
+      var res = E.ensureFreeOrder(g, rf ? rf.ref : "");
+      step(res && res.created ? "已为你开通免费测评，正在进入…" : "已检测到有效订单，正在进入…", 750, function () {
+        var next = g.agedTag ? "pre-exam.html" : "quiz.html";
+        go("notice.html?goodsId=" + encodeURIComponent(g.goodsId) +
+          "&templeteId=" + encodeURIComponent(g.templeteId) +
+          "&from=scan" + (rf && rf.ref ? "&ref=" + encodeURIComponent(rf.ref) : ""));
+      });
+    } else {
+      step("正在打开商品详情…", 650, function () {
+        go("detail.html?goodsId=" + encodeURIComponent(g.goodsId) + (rf && rf.ref ? "&ref=" + encodeURIComponent(rf.ref) : ""));
+      });
+    }
+    E.mountNotes("entry");
   }
 
   /* ---------------- 详情 ---------------- */
   function renderDetail() {
     var id = qs("goodsId") || qs("id") || "g-6q";
     var g = G(D.byId(id)) || goodsList()[0];
+    var ref = qs("ref") || "";
+    if (ref) E.saveReferral({ ref: ref, goodsId: g.goodsId, from: "detail" });
     var collected = E.isFavorite(g.goodsId);
     root.innerHTML = '<div class="detail-page"><div class="src-header"><div class="src-back" data-back></div><div class="src-header-title">测评详情</div><div class="src-header-other" id="detail-share"><div class="src-share-icon"></div>' + dot("detail-poster") + '</div></div>' +
       '<div class="detail-scroll"><div class="detail-img" style="background-image:url(' + esc(g.coverImage) + ')"></div>' +
@@ -234,6 +300,16 @@
       E.toast(on ? "已收藏" : "已取消收藏");
     });
     document.getElementById("start").addEventListener("click", function () {
+      var enterUrl = "notice.html?goodsId=" + encodeURIComponent(g.goodsId) +
+        "&templeteId=" + encodeURIComponent(g.templeteId) +
+        (ref ? "&ref=" + encodeURIComponent(ref) : "");
+      // 免费测评：直接开通订单并进入，不再走支付
+      if (Number(g.price) === 0) {
+        var free = E.ensureFreeOrder(g, ref);
+        if (free) E.toast(free.created ? "已为你开通免费测评" : "已为你打开测评");
+        setTimeout(function () { go(enterUrl); }, 400);
+        return;
+      }
       var done = E.records().filter(function (r) { return r.goodsId === g.goodsId; })[0];
       if (done) {
         E.modal({
@@ -243,7 +319,7 @@
         });
         return;
       }
-      go("notice.html?goodsId=" + encodeURIComponent(g.goodsId) + "&templeteId=" + encodeURIComponent(g.templeteId));
+      go(enterUrl);
     });
     document.getElementById("detail-share").addEventListener("click", function () { openPoster("detail", g); });
     E.mountNotes("detail");
@@ -512,7 +588,7 @@
 
     root.innerHTML = '<div class="result-page rb-page">' +
       '<div class="rb-header"><div class="src-back" data-back></div><div class="rb-header-title">测评报告</div>' +
-      '<div class="rb-header-right"><span class="rb-header-share" id="rb-share"></span>' + dot("rb-poster") + '</div></div>' +
+      '<div class="rb-header-right"><span class="rb-header-share" id="rb-share"></span>' + dot("rb-poster") + dot("rb-poster-data") + '</div></div>' +
       '<div class="rb-hero"><div class="rb-hero-title">测评报告' + dot("rb-head") + '</div>' +
       '<div class="rb-hero-date">测评日期：' + esc(record.createTime || E.now()) + '</div></div>' +
 
@@ -778,13 +854,31 @@
   function renderOrderConfirm() {
     var id = qs("goodsId") || "g-6q";
     var g = G(D.byId(id)) || goodsList()[0];
+    var ref = qs("ref") || (E.referral() && E.referral().ref) || "";
     root.innerHTML = '<div class="order-page"><div class="order-header"><div class="order-back" data-back></div><div class="order-header-title">确认订单' + dot("orderConfirm") + '</div></div>' +
       '<div class="order-body"><div class="order-card"><div class="order-item"><div class="order-img" style="background-image:url(' + esc(g.coverImage) + ')"></div>' +
       '<div class="order-info"><div class="order-name">' + esc(g.title) + '</div><div class="order-price">' + money(g.price) + '</div></div><div class="order-num">x1</div></div></div>' +
       '<div class="order-card" style="margin-top:10px"><div class="order-row"><div class="order-label">商品价格</div><div class="order-muted">共1件商品</div><div class="order-money">' + money(g.price) + '</div></div>' +
       '<div class="order-row"><div class="order-label">总价</div><div class="order-money">' + money(g.price) + '</div></div></div></div>' +
+      (ref ? '<div class="order-ref">推荐人：' + esc(ref) + '（下单后计入推荐关系）</div>' : "") +
       '<div class="order-bottom"><div class="order-total"><span style="font-size:12px">￥</span>' + (g.price || 0).toFixed(2) + '</div><div class="order-submit" id="submit-order">提交订单</div></div></div>';
-    document.getElementById("submit-order").addEventListener("click", function () { go("order-pay.html?goodsId=" + encodeURIComponent(g.goodsId) + "&orderNo=EX" + Date.now()); });
+    document.getElementById("submit-order").addEventListener("click", function () {
+      var order = E.addOrder({
+        id: E.uid("ord"),
+        orderNo: "EX" + Date.now(),
+        goodsId: g.goodsId,
+        templeteId: g.templeteId,
+        title: g.title,
+        price: g.price,
+        payAmount: g.price,
+        status: "unpaid",
+        channel: "h5_order",
+        referrer: ref,
+        createTime: E.now()
+      });
+      go("order-pay.html?goodsId=" + encodeURIComponent(g.goodsId) + "&orderNo=" + encodeURIComponent(order.orderNo) +
+        (ref ? "&ref=" + encodeURIComponent(ref) : ""));
+    });
     E.mountNotes("orderConfirm");
   }
 
@@ -825,6 +919,13 @@
     if (!record) return dims.map(function () { return 8; });
     var maxPer = Math.round(record.total / Math.max(1, dims.length)) || 12;
     return dims.map(function (d) { return Math.round(d.value / 100 * maxPer); });
+  }
+
+  /* 海报二维码的扫码落地地址：带商品与推荐人，真实环境由 createShare 生成同结构链接 */
+  function posterScanUrl(g) {
+    var ref = (E.referral() && E.referral().ref) || (E.user() && E.user().serialNo) || "";
+    return "entry.html?goodsId=" + encodeURIComponent(g.goodsId) +
+      (ref ? "&ref=" + encodeURIComponent(ref) : "") + "&from=poster";
   }
 
   function openPoster(kind, g, record) {
@@ -873,8 +974,9 @@
       (band ? '<div class="v2p-percent">' + esc(band.percentile) + '</div>' : "") +
       '<div class="v2p-credit">🔥 已有 ' + (g.testerCount || 0).toLocaleString("en-US") + ' 位父母完成测评，依托 6Q 20 年专业沉淀</div>' +
       '<div class="v2p-foot"><img class="v2p-qr" src="../assets/covers/v3/qr.svg" alt="二维码" />' +
-      '<div class="v2p-foot-text">长按解锁你的亲子觉醒指数<br/>测评结果仅供参考，不作为诊断依据</div></div>' +
+      '<div class="v2p-foot-text">长按识别二维码，免费测你的亲子觉醒指数<br/>测评结果仅供参考，不作为诊断依据</div></div>' +
       "</div></div>" +
+      '<a class="src-poster-scan" id="poster-scan" href="' + esc(posterScanUrl(g)) + '">模拟扫码进入 ›</a>' +
       '<div class="src-poster-save" id="poster-save">点击保存至相册</div><div class="src-poster-close" id="poster-close">关闭</div></div>';
   }
 
@@ -1075,6 +1177,7 @@
     switch (PAGE) {
       case "menu": return renderMenu();
       case "login": return renderLogin();
+      case "entry": return renderEntry();
       case "detail": return renderDetail();
       case "notice": return renderNotice();
       case "preExam": return renderPreExam();

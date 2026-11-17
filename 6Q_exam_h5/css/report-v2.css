@@ -259,3 +259,69 @@
   object-fit: contain;
 }
 .v2p-foot-text { font-size: 8px; line-height: 1.7; color: rgba(243, 238, 223, .62); }
+
+/* 海报弹窗 · 模拟扫码（原型用，真实环境由二维码承载） */
+.src-poster-scan {
+  display: block;
+  margin-top: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .14);
+  border: 1px solid rgba(255, 255, 255, .26);
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+}
+.src-poster-scan:hover { background: rgba(255, 255, 255, .22); }
+
+/* ===== 扫码进入页（v2.1.0） ===== */
+.entry-page {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 22vh 24px 40px;
+  background: linear-gradient(180deg, #FCE9EE 0%, #FDF7F8 60%);
+}
+.entry-card {
+  padding: 28px 22px 24px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(190, 120, 140, .14);
+  text-align: center;
+}
+.entry-qr {
+  width: 64px; height: 64px;
+  margin: 0 auto 16px;
+  border: 1px dashed #EF6B78;
+  border-radius: 12px;
+  background: url('../assets/source/icon/examTick.png') center / 40% no-repeat, #FDF2F4;
+}
+.entry-title { font-size: 17px; font-weight: 700; color: #2E2A2B; }
+.entry-goods { margin-top: 8px; font-size: 14px; color: #4B4548; }
+.entry-price { margin-top: 4px; font-size: 15px; font-weight: 700; color: #EF6B78; }
+.entry-step {
+  margin-top: 18px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #FDF2F4;
+  color: #A6283E;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.entry-ref {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #8A8285;
+}
+
+/* 订单页推荐关系提示 */
+.order-ref {
+  margin: 0 auto;
+  width: 92%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #FFF7F2;
+  color: #B45309;
+  font-size: 12px;
+  line-height: 1.7;
+}
