@@ -686,6 +686,85 @@
   }
 
   /* ---------------- 测评数据 ---------------- */
+  /* 答题数据导出预览：题目与选项必须是可读内容，不能只回「问题N / A、B、C、D」
+     题目、选项、分值三者的明细统一由卷王答题明细返回（见 EX-053 注释）。 */
+  function exportAnswerRows(tpl) {
+    var picks = [3, 3, 2, 3, 3, 2, 2, 3, 2, 3, 2, 2, 3, 2, 3, 2, 3, 2, 3, 2];
+    return (tpl.questions || []).map(function (q, i) {
+      var oi = Math.min(picks[i] !== undefined ? picks[i] : 2, q.options.length - 1);
+      var opt = q.options[oi] || {};
+      return {
+        no: i + 1,
+        title: q.title,
+        dimName: (tpl.dimensionExplains || []).filter(function (d) { return d.dimensionId === q.dimensionalityId; })[0],
+        dim: q.dimensionalityId,
+        optionIdx: oi,
+        optionContent: opt.content || "",
+        score: opt.score,
+        maxScore: Math.max.apply(null, (q.options || []).map(function (o) { return Number(o.score || 0); }).concat([0]))
+      };
+    });
+  }
+
+  function openExportPreview(kind) {
+    var tpl = D.templates.filter(function (t) { return t.id === "tpl-parent"; })[0] || D.templates[0];
+    var dimMap = {};
+    var dt = D.dimensions.filter(function (d) { return d.id === tpl.dimensionalityId; })[0];
+    if (dt && dt.rows) {
+      dt.rows.forEach(function (r) { dimMap[r.key] = r.name; });
+    }
+    (tpl.dimensionExplains || []).forEach(function (d) {
+      var k = d.key || d.dimensionId;
+      if (k && !dimMap[k]) dimMap[k] = d.name;
+    });
+
+    var rows = exportAnswerRows(tpl);
+    var body = '<div class="ex-alert ex-mb12"><b>本次改动</b>：导出的题目列不再写「问题1 / 问题2」，选项列不再写「A / B / C / D」，' +
+      '统一输出<b>题目原文</b>与<b>选项原文</b>。题目、选项、分值的明细数据<b>来自卷王答题明细返回</b>，' +
+      '若接口不返回这两个字段，导出只能拿到序号与字母。</div>' +
+
+      '<div class="ex-section">导出表头对照</div>' +
+      '<table class="ex-result-table"><thead><tr><th style="width:150px">列</th><th style="width:240px">旧导出</th><th>新导出</th></tr></thead><tbody>' +
+      '<tr><td>题目列</td><td><span class="ex-code">问题1</span> <span class="ex-code">问题2</span> …</td><td>题号 + 题目原文，如 <span class="ex-code">Q1 孩子连续几次考试退步…</span></td></tr>' +
+      '<tr><td>选项值</td><td><span class="ex-code">A</span> <span class="ex-code">B</span> <span class="ex-code">C</span> <span class="ex-code">D</span></td><td>所选选项原文，如 <span class="ex-code">先拥抱孩子接住情绪…</span></td></tr>' +
+      '<tr><td>选项集</td><td>不导出</td><td>该题全部选项原文按序号拼接，便于对表</td></tr>' +
+      '<tr><td>分值</td><td>不导出</td><td>所选选项得分 / 该题最高分</td></tr>' +
+      "</tbody></table>" +
+
+      '<div class="ex-section">导出明细预览 · ' + esc(tpl.title) + " · " + rows.length + " 题</div>" +
+      '<div class="ex-muted ex-mb8">模拟学员：赵欣然 / S6MULM1 · 提交时间 2026-11-03 17:13:32 · 总分 ' + totalScore(tpl) + " 分制</div>" +
+      '<table class="ex-result-table"><thead><tr>' +
+      '<th style="width:52px">题号</th><th style="width:104px">所属维度</th><th>题目原文</th><th style="width:230px">所选选项原文</th><th style="width:96px">选项序号</th><th style="width:88px">得分</th>' +
+      "</tr></thead><tbody>" +
+      rows.map(function (r) {
+        return "<tr><td>Q" + r.no + "</td><td>" + esc(dimMap[r.dim] || r.dim) + '</td><td>' + esc(r.title) +
+          '</td><td class="ex-td-strong">' + esc(r.optionContent) + "</td><td>" + String.fromCharCode(65 + r.optionIdx) +
+          "</td><td>" + r.score + " / " + r.maxScore + "</td></tr>";
+      }).join("") +
+      "</tbody></table>" +
+
+      '<div class="ex-section">数据来源与接口</div>' +
+      '<table class="ex-result-table"><thead><tr><th style="width:210px">数据</th><th style="width:270px">来源</th><th>说明</th></tr></thead><tbody>' +
+      '<tr><td>题目原文</td><td><span class="ex-code">卷王答题明细返回</span></td><td>字段 <span class="ex-code">questionTitle</span>（待接口确认命名）；不返回时导出退回「问题N」</td></tr>' +
+      '<tr><td>选项原文</td><td><span class="ex-code">卷王答题明细返回</span></td><td>字段 <span class="ex-code">optionContent</span>（待接口确认命名）；不返回时导出退回 A/B/C/D</td></tr>' +
+      '<tr><td>所选选项序号</td><td><span class="ex-code">卷王答题明细返回</span></td><td>字段 <span class="ex-code">optionSort</span>，用于定位选项原文</td></tr>' +
+      '<tr><td>选项得分 / 最高分</td><td><span class="ex-code">卷王答题明细返回</span></td><td>字段 <span class="ex-code">optionScore</span> / <span class="ex-code">maxScore</span></td></tr>' +
+      '<tr><td>学员与提交时间</td><td><span class="ex-code">exam/exam/user/check/findUserCheckStatistic</span></td><td>既有，不改</td></tr>' +
+      "</tbody></table>" +
+      '<div class="ex-alert ex-mt12">导出接口：<span class="ex-code">GET exam/exam/user/check/exportCheckStatistic</span>（明细）、' +
+      '<span class="ex-code">GET exam/exam/user/favourite/exportTempleteUserAnswer</span>（汇总下载）。' +
+      "两个接口需把卷王返回的题目与选项原文透传到导出文件，具体字段以卷王实际契约为准。</div>";
+
+    S.drawer({
+      title: "答题数据导出预览",
+      subtitle: tpl.title + " · " + rows.length + " 题",
+      wide: true,
+      body: body,
+      foot: '<button class="ex-btn" type="button" data-close-drawer="1">关闭</button>' +
+        '<button class="ex-btn ex-btn--primary" type="button" data-close-drawer="1">知道了</button>'
+    });
+  }
+
   function renderDataPage(spec) {
     var details = D.checkDetails, summary = D.checkSummary;
     var kpi = [
@@ -701,7 +780,7 @@
       }).join("") + "</div>" +
       '<section class="ex-panel"><div class="ex-data-tabs"><button class="is-on" data-data-tab="detail">测评模板填写情况明细' + dot("data-detail") + '</button><button data-data-tab="summary">测评模板填写情况汇总' + dot("data-summary") + "</button></div>" +
       '<div class="ex-data-pane" data-pane="detail">' +
-      '<div class="ex-toolbar"><button class="ex-btn" data-export="detail">导出</button><span class="ex-toolbar__right">按当前筛选导出</span></div>' +
+      '<div class="ex-toolbar"><button class="ex-btn" data-export="detail">导出</button><button class="ex-btn" data-export-preview="detail">导出内容预览' + dot("data-export") + '</button><span class="ex-toolbar__right">按当前筛选导出</span></div>' +
       '<div class="ex-filter" style="padding-bottom:12px"><div class="ex-filter__row">' +
       '<div class="ex-field"><label>模板标题</label><div class="ex-field__control"><input class="ex-input" data-dfilter="title" placeholder="请输入模板标题" /></div></div>' +
       '<div class="ex-field"><label>填写人</label><div class="ex-field__control"><input class="ex-input" data-dfilter="name" placeholder="姓名 / 会员ID" /></div></div>' +
@@ -710,7 +789,7 @@
       "</div></div>" +
       '<div class="ex-table-wrap"><table class="ex-table"><thead><tr><th>测评类型</th><th>分类</th><th>模板标题</th><th>状态</th><th>填写人ID</th><th>填写人</th><th>年龄</th><th>性别</th><th>电话</th><th>会员类型</th><th>6Q身份</th><th>总分</th><th>得分</th><th>分数区间</th><th>填写时长</th><th>填写时间</th></tr></thead><tbody data-detail-body></tbody></table></div></div>' +
       '<div class="ex-data-pane" data-pane="summary" hidden>' +
-      '<div class="ex-toolbar"><button class="ex-btn" data-export="summary">导出</button><span class="ex-toolbar__right">按模板汇总收藏、查看、分享与测试人数</span></div>' +
+      '<div class="ex-toolbar"><button class="ex-btn" data-export="summary">导出</button><button class="ex-btn" data-export-preview="summary">导出内容预览</button><span class="ex-toolbar__right">按模板汇总收藏、查看、分享与测试人数</span></div>' +
       '<div class="ex-filter" style="padding-bottom:12px"><div class="ex-filter__row">' +
       '<div class="ex-field"><label>模板标题</label><div class="ex-field__control"><input class="ex-input" data-sfilter="title" placeholder="请输入模板标题" /></div></div>' +
       '<div class="ex-field"><label>测评类型</label><div class="ex-field__control">' + select("examType", "", ["6Q 全维", "AQ 逆商", "EQ 情商", "亲子关系", "IQ 学习力", "RQ 关系力"], "全部") + "</div></div>" +
@@ -765,8 +844,10 @@
         mount.querySelectorAll("[data-pane]").forEach(function (p) { p.hidden = p.getAttribute("data-pane") !== tab; });
         return;
       }
+      if (t.getAttribute("data-export") === "answer") { openExportPreview("answer"); return; }
+      if (t.getAttribute("data-export-preview")) { openExportPreview(t.getAttribute("data-export-preview")); return; }
       if (t.getAttribute("data-export")) {
-        S.toast(t.getAttribute("data-export") === "answer" ? "答题数据导出已提交" : "导出已提交，原型不产生真实文件");
+        S.toast("导出已提交，原型不产生真实文件；题目与选项原文见「导出内容预览」");
       }
     });
     mount.addEventListener("input", function (e) {
@@ -965,8 +1046,8 @@
           '<div class="ex-form-grid">' +
           '<div class="ex-form-item ex-form-item--full"><label>风险提示（「孩子正在经历什么」）</label><textarea class="ex-textarea" data-draft="riskTip" rows="3" placeholder="仅新版结果页展示">' + esc(draft.riskTip || "") + "</textarea></div>" +
           '<div class="ex-form-item ex-form-item--full"><label>转化文案（「深度了解」）</label><textarea class="ex-textarea" data-draft="ctaText" rows="4" placeholder="仅新版结果页展示">' + esc(draft.ctaText || "") + "</textarea></div>" +
-          '<div class="ex-form-item"><label>转化引导语</label><input class="ex-input" data-draft="ctaSubText" value="' + esc(draft.ctaSubText || "") + '" placeholder="如 添加班主任微信" /></div>' +
-          '<div class="ex-form-item"><label>班主任二维码</label><input class="ex-input" data-draft="ctaQrCode" value="' + esc(draft.ctaQrCode || "") + '" placeholder="图片地址，原型用占位图" /></div>' +
+          '<div class="ex-form-item"><label>转化引导语</label><input class="ex-input" data-draft="ctaSubText" value="' + esc(draft.ctaSubText || "") + '" placeholder="如 添加导师微信" /></div>' +
+          '<div class="ex-form-item"><label>导师二维码</label><input class="ex-input" data-draft="ctaQrCode" value="' + esc(draft.ctaQrCode || "") + '" placeholder="图片地址，原型用占位图" /></div>' +
           "</div>"
         : '<div class="ex-section">新风控与转化文案 ' + dot("template-cta") + "</div>" +
           '<div class="ex-alert">这组字段只在新版结果页渲染。当前模板是旧版结果页，填写后不会展示；切到新版后再配置。</div>';
@@ -1181,7 +1262,7 @@
         ? '<div class="ex-section">新风控与转化文案</div><div class="ex-desc">' +
           descItem("风险提示", row.riskTip || "-", true) + descItem("转化文案", row.ctaText || "-", true) +
           descItem("转化引导语", row.ctaSubText || "-") +
-          descItem("班主任二维码", row.ctaQrCode ? '<img class="ex-thumb" src="' + esc(row.ctaQrCode) + '" />' : "-") + "</div>"
+          descItem("导师二维码", row.ctaQrCode ? '<img class="ex-thumb" src="' + esc(row.ctaQrCode) + '" />' : "-") + "</div>"
         : '<div class="ex-section">新风控与转化文案</div><div class="ex-alert">旧版结果页不渲染这组字段。切到新版后再配置。</div>';
       return '<div class="ex-section">报告结果信息</div>' +
         switchTags +

@@ -90,6 +90,7 @@
 | --- | --- | --- | --- | --- |
 | EX-051 | 模板级结果页版式开关 | done | `replica.html?p=template-form&id=tpl-parent&tab=1&note=EX-051` | `resultLayout`：1 旧版 / 2 新版；默认 1；挂在模板，模板赋给商品后生效；新版下正态分布与和谐指数开关整行移除 |
 | EX-052 | 新风控与转化文案 | done | `replica.html?p=template-form&id=tpl-parent&tab=3&note=EX-052` | `riskTip` / `ctaText` / `ctaSubText` / `ctaQrCode`；档位表加 `badge` / `quote` / `percentile` |
+| EX-053 | 导出题目与选项原文 | partial | `replica.html?p=data&note=EX-053` | 题目列写题目原文、选项值写选项原文，替代「问题N / A、B、C、D」；明细来自卷王答题明细，字段名待确认；原型只做预览不产出文件 |
 
 ### 2. H5（固定模拟数据）
 
@@ -99,7 +100,7 @@
 | EX-202 | 档位结论与超越百分比 | done | `record=demo-low / demo-mid / demo-high` | 三档唯一勋章与金句；百分比固定 15% / 45% / 95% |
 | EX-203 | 核心卡点 | done | `record=demo-mid`（情感链接力）、`demo-low`（边界松弛力） | 最低分维度；并列按固定优先序，不随机 |
 | EX-204 | 风险提示 | done | `record=demo-mid` | 取 `riskTip`，为空回退卡点 risk，再空整块隐藏 |
-| EX-205 | 深度了解与底部预约 CTA | done | `record=demo-mid` | 呼吸动画主 CTA → 二维码抽屉；下方历史 / 再答 |
+| EX-205 | 深度了解与底部预约 CTA | done | `record=demo-mid` | 呼吸动画主 CTA「预约导师 1v1 解读」→ 二维码抽屉；下方历史 / 再答 |
 | EX-206 | 觉醒海报（深绿金 9:16） | done | `record=demo-high` → 报告头分享 | 勋章 / 金句 / 金色雷达 / 百分比 / 背书 / 二维码；导出 810×1440 |
 
 ### 3. 固定模拟数据

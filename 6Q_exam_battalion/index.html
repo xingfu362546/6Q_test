@@ -64,7 +64,7 @@
       <p class="nav-hero__eye">EXAM · v2.1.0 · 本期需求清单</p>
       <h1>测评管理 · 亲子养育报告改版</h1>
       <p>
-        本清单只列 v2.1.0 本期需求，共 8 条：后台 2 条（EX-051、EX-052）、H5 结果报告页 6 条（EX-201 ~ EX-206）。
+        本清单只列 v2.1.0 本期需求，共 9 条：后台 3 条（EX-051、EX-052、EX-053）、H5 结果报告页 6 条（EX-201 ~ EX-206）。
         v2.0.0 基线功能不在本页展示，作为改动依据写在各条「逻辑说明」里。
         每条需求都标了是否需要 UI 出稿；点序号或原型链接直接打开对应页面并展开该条注释。
         结果报告页的每条需求都配了固定模拟数据（见「三、固定模拟数据」），打开即复现同一份报告。
@@ -77,7 +77,7 @@
     </header>
 
     <div class="meta">
-      <span>本期 8 条需求</span><span>后台 2 条</span><span>H5 报告页 6 条</span><span>需 UI 出稿 8 条</span><span>固定模拟数据 3 档</span>
+      <span>本期 9 条需求</span><span>后台 3 条</span><span>H5 报告页 6 条</span><span>需 UI 出稿 9 条</span><span>固定模拟数据 3 档</span>
     </div>
 
     <div class="legend">
@@ -86,7 +86,7 @@
       <span><b class="red">接口新增</b>：接口需扩的字段；其余为既有字段，不改</span>
     </div>
 
-    <div class="zone-head"><h2>一、后台配置 · 模板级</h2><span>版式与文案都挂在模板上，模板赋给商品后由 H5 读取</span></div>
+    <div class="zone-head"><h2>一、后台配置</h2><span>版式与文案挂在模板上，模板赋给商品后由 H5 读取；数据导出见 EX-053</span></div>
     <div class="sheet">
       <table>
         <thead>
@@ -143,7 +143,7 @@
             <td class="team">测评项目组</td>
             <td class="who">需求方</td>
             <td class="mod">测评模板</td>
-            <td class="text">报告里的风险预警、转化文案、班主任二维码要能运营自己改，不能每次改文案都发版；三档的勋章、金句、超越百分比也要可配。</td>
+            <td class="text">报告里的风险预警、转化文案、导师二维码要能运营自己改，不能每次改文案都发版；三档的勋章、金句、超越百分比也要可配。</td>
             <td class="logic">
               1、档位表复用现有「测评模板结果」区间，<b>不新建表</b>，只加 <code>badge</code> / <code>quote</code> / <code>percentile</code> 三列。<br />
               2、新增四个模板文本字段：<code>riskTip</code>、<code>ctaText</code>、<code>ctaSubText</code>、<code>ctaQrCode</code>。<br />
@@ -161,6 +161,34 @@
             <td class="proto">
               <a href="replica.html?p=template-form&id=tpl-parent&tab=3&note=EX-052">新版模板 · 报告结果</a>
               <a href="replica.html?p=template-detail&id=tpl-parent&tab=report">模板详情 · 报告结果（只读）</a>
+            </td>
+          </tr>
+          <tr id="req-EX-053">
+            <td class="no"><a href="replica.html?p=data&note=EX-053">EX-053</a></td>
+            <td class="scope">要做</td>
+            <td class="ui ui--yes">需 UI<span class="ui-note">导出预览抽屉 + 表头对照表</span></td>
+            <td class="st st--partial">设计已实现</td>
+            <td class="team">测评项目组</td>
+            <td class="who">需求方</td>
+            <td class="mod">测评数据</td>
+            <td class="text">测评数据导出出来的题目和选项要有明确内容，目前都是「问题1 / 问题2 / 问题3」和「A / B / C / D」，看不出题目问的是什么、用户选的又是什么。</td>
+            <td class="logic">
+              1、题目列改为「题号 + 题目原文」，不再写「问题N」。<br />
+              2、选项值改为「所选选项原文」，不再写 A/B/C/D 字母。<br />
+              3、新增两列：该题全部选项原文、所选选项得分 / 该题最高分。<br />
+              4、新增「所属维度」列，取题目关联维度的名称。<br />
+              5、<b>题目、选项、分值的明细统一来自卷王答题明细返回</b>；卷王不返回题目与选项原文时，导出退回「问题N / 字母」并在文件里标红提示。<br />
+              6、后台新增「导出内容预览」，导出前直接看表头对照与明细，不必先下载文件。
+            </td>
+            <td class="api">
+              <span class="new">需补字段</span> 卷王答题明细：题目原文 / 选项原文 / 选项序号 / 选项分值<br />
+              GET <code>exam/exam/user/check/exportCheckStatistic</code>（明细导出）<br />
+              GET <code>exam/exam/user/favourite/exportTempleteUserAnswer</code>（汇总下载）<br />
+              <span class="keep">两个导出接口需把卷王返回的题目与选项原文透传到文件；字段名以卷王实际契约为准（原型标「待接口确认」）</span>
+            </td>
+            <td class="proto">
+              <a href="replica.html?p=data&note=EX-053"><span class="tag">导出预览</span>测评数据</a>
+              <a href="replica.html?p=data&note=EX-053">打开后点「导出内容预览」</a>
             </td>
           </tr>
         </tbody>
@@ -296,9 +324,9 @@
             <td class="team">测评项目组</td>
             <td class="who">需求方</td>
             <td class="mod">结果报告</td>
-            <td class="text">报告底部要固定一个能弹出班主任二维码的入口，最好带动画吸引点击；同时保留历史记录与再答一次。</td>
+            <td class="text">报告底部要固定一个能弹出导师二维码的入口，最好带动画吸引点击；同时保留历史记录与再答一次。</td>
             <td class="logic">
-              1、底部三层：呼吸动画主 CTA「预约班主任 1 对 1 解读」→ 弹二维码抽屉；下方保留「查看历史测试记录 / 再答一次」。<br />
+              1、底部三层：呼吸动画主 CTA「预约导师 1v1 解读」→ 弹二维码抽屉；下方保留「查看历史测试记录 / 再答一次」。<br />
               2、动画只用 CSS：呼吸缩放 + 光晕 + 箭头位移，<code>prefers-reduced-motion</code> 下关闭。<br />
               3、二维码抽屉点遮罩或关闭可收起，不跳页。<br />
               4、课程商城并入「深度了解」卡，不再单开 Tab。<br />

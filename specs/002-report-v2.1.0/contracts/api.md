@@ -28,6 +28,11 @@
 | `exam/exam/templete/detail` | GET | **改**：响应扩字段 |
 | `exam/exam/templete/create` | POST | **改**：请求扩字段 |
 | `exam/exam/templete/modify` | PUT | **改**：请求扩字段 |
+| 卷王答题明细接口 | — | **改**：需返回题目原文 / 选项原文 / 选项序号 / 选项分值 |
+| `exam/exam/user/check/exportCheckStatistic` | GET | **改**：导出题目与选项原文 |
+| `exam/exam/user/favourite/exportTempleteUserAnswer` | GET | **改**：同上 |
+| `exam/exam/user/check/findUserCheckStatistic` | GET | 不改 |
+| `exam/exam/user/favourite/findTempleteUserFavouriteStatistic` | GET | 不改 |
 
 ## 3. `GET /exam/app/api/viewCheckResult`
 
@@ -57,7 +62,7 @@
       "resultLayout": 2,
       "riskTip": "您和孩子正在严重消耗中……",
       "ctaText": "想知道这个育儿卡点是如何形成的？……",
-      "ctaSubText": "添加班主任微信，帮您把分数变成方向",
+      "ctaSubText": "添加导师微信，帮您把分数变成方向",
       "ctaQrCode": "https://cdn.example.com/qr/bzr.png",
 
       // 既有：复用为档位表，新增三个字段
@@ -134,11 +139,62 @@
 | 场景 | 来源 |
 | --- | --- |
 | 海报内二维码 | `POST /security/api/user/share/center/createShare`（带 `userId`、`sourceParam`），返回带参 `qrCode` |
-| 报告底部班主任码 | 模板字段 `ctaQrCode`，静态图片直出，**不新增接口** |
+| 报告底部导师码 | 模板字段 `ctaQrCode`，静态图片直出，**不新增接口** |
 
 两者语义不同：前者是用户专属溯源，后者是加微入口。不要混用。
 
-## 8. 埋点建议（待确认）
+## 8. 答题数据导出（EX-053）
+
+### 8.1 问题
+
+现网导出把题目写成「问题1 / 问题2 / 问题3」，选项值写成「A / B / C / D」，
+导出文件离开系统后无法独立阅读，核对数据只能回表逐题比对。
+
+### 8.2 目标结构
+
+一行一个学员，题目列写题目原文，值写所选选项原文：
+
+| 列 | 内容 | 来源 |
+| --- | --- | --- |
+| 填写人ID / 姓名 / 手机 | 学员身份 | `exam/exam/user/check/findUserCheckStatistic`（既有） |
+| 提交时间 / 总分 / 得分区间 | 记录信息 | 同上 |
+| 所属维度 | 题目关联维度名称 | 卷王答题明细 |
+| 题目 | 题号 + 题目原文 | **卷王答题明细** |
+| 所选选项 | 选项原文（不写字母） | **卷王答题明细** |
+| 全部选项 | 该题所有选项原文，按序号拼接 | **卷王答题明细** |
+| 得分 | 所选选项得分 / 该题最高分 | **卷王答题明细** |
+
+### 8.3 卷王答题明细需返回的字段
+
+字段名以卷王实际契约为准，下列为原型占位命名，标注「待接口确认」：
+
+| 字段 | 类型 | 说明 |
+| --- | --- | --- |
+| `questionTitle` | string | 题目原文 |
+| `optionContent` | string | 选项原文 |
+| `optionSort` | int | 选项序号（1 起），用于定位所选选项 |
+| `optionScore` | number | 该选项得分 |
+| `maxScore` | number | 该题最高分 |
+| `options` | array | 该题全部选项 `[{content, score, sort}]` |
+
+### 8.4 降级约定
+
+| 情况 | 行为 |
+| --- | --- |
+| 卷王返回题目与选项原文 | 按新结构导出 |
+| 卷王只返回序号 / 字母 | 退回「问题N / 字母」，并在导出文件首行标红提示「题目与选项原文缺失」 |
+| 卷王接口整体失败 | 导出失败并提示重试，不产出只有表头的空文件 |
+
+### 8.5 导出接口
+
+| 接口 | 用途 | 改动 |
+| --- | --- | --- |
+| `GET exam/exam/user/check/exportCheckStatistic` | 明细导出 | 透传卷王的题目与选项原文 |
+| `GET exam/exam/user/favourite/exportTempleteUserAnswer` | 汇总「下载」 | 同上 |
+
+后台另加「导出内容预览」：读同一份明细，在页面里渲染表头对照与逐题预览，不产出文件。
+
+## 9. 埋点建议（待确认）
 
 | 事件 | 触发 |
 | --- | --- |
@@ -146,3 +202,4 @@
 | `report_v2_cta_click` | 点击底部主 CTA |
 | `report_v2_qr_open` | 二维码抽屉打开 |
 | `report_v2_poster_save` | 海报保存 |
+| `data_export_preview_open` | 打开导出内容预览 |

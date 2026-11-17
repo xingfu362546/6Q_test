@@ -534,7 +534,7 @@
 
       (g.ctaText ? '<div class="rb-card rb-deep"><div class="rb-card-title">如果您想深度了解' + dot("rb-cta") + '</div>' +
         '<div class="rb-deep-text">' + esc(g.ctaText) + '</div>' +
-        '<div class="rb-deep-sub">' + esc(g.ctaSubText || "如有疑问，请咨询您的书童老师或班主任老师~") + '</div>' +
+        '<div class="rb-deep-sub">' + esc(g.ctaSubText || "如有疑问，请咨询您的书童老师或导师老师~") + '</div>' +
         '<div class="rb-goods">' + recommend.map(function (x) {
           return '<div class="rb-goods-row"><span>' + esc(x.name) + '</span><b>￥' + x.price + '</b></div>';
         }).join("") + '</div></div>' : "") +
@@ -551,16 +551,16 @@
       /* 底部三层：呼吸 CTA + 双按钮 */
       '<div class="rb-bottom">' +
       '<button type="button" class="rb-cta" id="rb-cta"><span class="rb-cta-glow"></span>' +
-      '<span class="rb-cta-text">预约班主任 1 对 1 解读</span><span class="rb-cta-arrow">›</span></button>' +
+      '<span class="rb-cta-text">预约导师 1v1 解读</span><span class="rb-cta-arrow">›</span></button>' +
       '<div class="rb-bottom-row">' +
       '<button type="button" class="rb-btn rb-btn--history" id="rb-history">查看历史测试记录</button>' +
       '<button type="button" class="rb-btn rb-btn--again" id="rb-again">再答一次</button>' +
       '</div></div>' +
 
-      /* 班主任二维码抽屉 */
+      /* 导师二维码抽屉 */
       '<div class="rb-qr-mask" id="rb-qr-mask"><div class="rb-qr">' +
-      '<div class="rb-qr-title">' + esc(g.ctaSubText || "添加班主任微信") + '</div>' +
-      '<div class="rb-qr-img"><img src="' + esc(g.ctaQrCode || "../assets/covers/v3/qr.svg") + '" alt="班主任二维码" /></div>' +
+      '<div class="rb-qr-title">' + esc(g.ctaSubText || "添加导师微信") + '</div>' +
+      '<div class="rb-qr-img"><img src="' + esc(g.ctaQrCode || "../assets/covers/v3/qr.svg") + '" alt="导师二维码" /></div>' +
       '<div class="rb-qr-note">长按识别二维码，获取 1 对 1 解读与《家庭育儿改善清单》</div>' +
       '<button type="button" class="rb-qr-close" id="rb-qr-close">关闭</button>' +
       '</div></div>';

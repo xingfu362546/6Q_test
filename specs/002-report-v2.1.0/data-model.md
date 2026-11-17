@@ -8,7 +8,7 @@
 | `riskTip` | text | 否 | "" | 「您的孩子正在经历什么」文案；空则回退卡点 risk |
 | `ctaText` | text | 否 | "" | 「如果您想深度了解」文案；空则整卡隐藏 |
 | `ctaSubText` | varchar(100) | 否 | "" | 底部 CTA 副标题 / 二维码抽屉标题 |
-| `ctaQrCode` | varchar(255) | 否 | "" | 班主任二维码图片地址；空则用占位图 |
+| `ctaQrCode` | varchar(255) | 否 | "" | 导师二维码图片地址；空则用占位图 |
 
 ## 2. 模板结果（exam_explain）新增字段
 

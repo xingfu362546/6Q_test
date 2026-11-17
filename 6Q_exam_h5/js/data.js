@@ -228,7 +228,7 @@
       resultLayout: 2,
       riskTip: "您和孩子正在严重消耗中。如果不做调整，3-6 个月内可能出现沟通关闭、孩子不愿说话。",
       ctaText: "想知道这个育儿卡点是如何形成的？为什么“道理都懂，面对孩子还是忍不住火大”？1 对 1 测评深度解读，帮您把测评结果转化为一份可落地的《家庭育儿改善清单》。",
-      ctaSubText: "添加班主任微信，帮您把分数变成方向",
+      ctaSubText: "添加导师微信，帮您把分数变成方向",
       ctaQrCode: COVER + "qr.svg",
       painCopy: POWER_PAIN,
       showTotal: true, showRadar: true, showDist: false, showHarmony: false,

@@ -148,13 +148,13 @@
         note(
           "EX-052", "template-cta", "",
           "新风控与转化文案",
-          "v2.0.0 及以前：结果页的解读全部来自结果区间表与维度解读表，没有「风险提示」与「转化文案」概念，也没有班主任二维码。图 2、图 3、图 6 里的风险预警与预约解读文案在旧数据结构里无处承载。",
-          "新增模板级文本字段 riskTip（孩子正在经历什么）、ctaText（深度了解）、ctaSubText（转化引导语）、ctaQrCode（班主任二维码）。四个字段只在新版结果页渲染，旧版忽略。文案留空时前端整块隐藏，不出现空卡片。",
+          "v2.0.0 及以前：结果页的解读全部来自结果区间表与维度解读表，没有「风险提示」与「转化文案」概念，也没有导师二维码。图 2、图 3、图 6 里的风险预警与预约解读文案在旧数据结构里无处承载。",
+          "新增模板级文本字段 riskTip（孩子正在经历什么）、ctaText（深度了解）、ctaSubText（转化引导语）、ctaQrCode（导师二维码）。四个字段只在新版结果页渲染，旧版忽略。文案留空时前端整块隐藏，不出现空卡片。",
           [
             row("风险提示", "多行文本", "否", "riskTip，对应「您的孩子正在经历什么」。", "new"),
             row("转化文案", "多行文本", "否", "ctaText，对应「如果您想深度了解」。", "new"),
             row("转化引导语", "输入", "否", "ctaSubText，底部主 CTA 副标题。", "new"),
-            row("班主任二维码", "图片", "否", "ctaQrCode，原型用占位图。", "new")
+            row("导师二维码", "图片", "否", "ctaQrCode，原型用占位图。", "new")
           ],
           "GET exam/exam/templete/detail\nPOST exam/exam/templete/create\nPUT exam/exam/templete/modify\nGET exam/app/api/viewCheckResult（H5 读取 templete.riskTip / ctaText / ctaSubText / ctaQrCode）",
           "模板表单 → 模板 → 商品 → H5 结果页：文案随模板下发；二维码弹窗不新增接口，图片直出。",
@@ -351,6 +351,24 @@
           ],
           "GET exam/exam/user/favourite/findTempleteUserFavouriteStatistic\nGET exam/exam/user/favourite/exportTempleteUserAnswer\nGET exam/exam/user/favourite/exportTempleteUserFavouriteStatistic",
           "H5 浏览/收藏/分享/测试 → 后台汇总：按模板聚合人数；下载导出答题明细。"
+        ),
+        note(
+          "EX-053", "data-export", "",
+          "答题数据导出的题目与选项内容",
+          "现网导出的答题明细里，题目列只有「问题1 / 问题2 / 问题3」，选项值只有「A / B / C / D」字母，看不出题目问的是什么、用户选的又是什么。核对数据时只能回表逐题比对，导出文件本身无法独立阅读。",
+          "导出改为输出可读内容：题目列写题号 + 题目原文，选项列写所选选项原文，并补「该题全部选项」与「得分 / 该题最高分」两列。题目、选项、分值三者的明细统一取自<b>卷王答题明细返回</b>；卷王不返回题目与选项原文时，导出退回原先的「问题N / 字母」并在文件里标红提示。新增「导出内容预览」，导出前可在后台直接看到表头与明细的样子。",
+          [
+            row("题目列", "导出列", "是", "题号 + 题目原文，替代「问题N」。", "new"),
+            row("选项值", "导出列", "是", "所选选项原文，替代 A/B/C/D 字母。", "new"),
+            row("选项集", "导出列", "否", "该题全部选项原文，按序号拼接。", "new"),
+            row("得分", "导出列", "否", "所选选项得分 / 该题最高分。", "new"),
+            row("所属维度", "导出列", "否", "取题目关联维度名称。", "new"),
+            row("导出内容预览", "按钮", "否", "打开抽屉看表头对照与明细预览。", "new"),
+            row("卷王明细", "接口", "是", "题目原文 / 选项原文 / 选项序号 / 选项分值。", "new")
+          ],
+          "GET exam/exam/user/check/exportCheckStatistic\nGET exam/exam/user/favourite/exportTempleteUserAnswer\n卷王答题明细接口（题目与选项原文来源，字段名待确认）",
+          "H5 答题 → 卷王答题明细（题目 / 选项 / 分值）→ 后台导出接口透传 → 导出文件；后台「导出内容预览」读同一份明细。",
+          { now: "现在的逻辑 · v2.1.0" }
         )
       ]
     },
