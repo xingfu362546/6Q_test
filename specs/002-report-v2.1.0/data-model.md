@@ -44,6 +44,36 @@
 
 校验规则：新版式保存时，每维题目最高分之和必须等于 `总分 / 维数`。
 
+## 3.1 各维度指标结果（exam_explain 维度行）新增字段
+
+按维度配置，前端读取**该维度索引为 0** 的那一行：
+
+| 字段 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `painText` | text | 否 | 卡点文案，核心卡点维度的剖析 |
+| `riskText` | text | 否 | 风险文案，该维度对应的风险预警 |
+| `appreciate` | text | 否 | 欣赏文案，句式「欣赏你 + 行为白描 + 意义升华」 |
+| `appreciateTip` | text | 否 | 欣赏小建议 |
+| `appreciateAlt` | text | 否 | 相对优势版，非卡点维度全部低于阈值时的兜底 |
+
+规则：
+
+- 卡点维度取自己的 `painText` / `riskText`；欣赏只取非卡点维度。
+- 任一字段为空时该段不渲染。
+- 旧的 `detail` / `suggest` 仍保留，供旧版结果页使用。
+
+## 3.2 欣赏版块派生数据
+
+```js
+maxPer = round(record.total / dims.length)          // 12
+thr    = round(maxPer * 2 / 3)                      // 8
+cand   = dims.filter(d => d.key !== painKey).map(...)  // 排除卡点维度
+top    = cand.filter(c => c.score >= thr).sort(desc).slice(0, 3)
+if (!top.length) top = [max(cand)]; useAlt = true   // 兜底 1 条
+```
+
+与计分、分档（24/48）、卡点命中算法完全解耦。
+
 ## 4. 题目（exam_question）
 
 - 20 题，单选，`typeFlag=1`。

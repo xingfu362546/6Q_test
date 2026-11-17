@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>测评管理 · v2.1.0 功能清单</title>
+  <title>测评管理 · v2.2 功能清单</title>
   <style>
     :root {
       --ink: #0f172a; --ink2: #334155; --muted: #64748b; --line: rgba(15,23,42,.08);
@@ -61,10 +61,10 @@
 <body>
   <div class="nav-page">
     <header class="nav-hero">
-      <p class="nav-hero__eye">EXAM · v2.1.0 · 本期需求清单</p>
+      <p class="nav-hero__eye">EXAM · v2.2 · 本期需求清单</p>
       <h1>测评管理 · 亲子养育报告改版</h1>
       <p>
-        本清单只列 v2.1.0 本期需求，共 13 条：后台 3 条（EX-051 ~ EX-053）、H5 报告与分享链路 10 条（EX-201 ~ EX-210）。
+        本清单只列 v2.1.0 / v2.2 补丁本期需求，共 15 条：后台 4 条（EX-051 ~ EX-054）、H5 报告与分享链路 11 条（EX-201 ~ EX-211）。
         v2.0.0 基线功能不在本页展示，作为改动依据写在各条「逻辑说明」里。
         每条需求都标了是否需要 UI 出稿；点序号或原型链接直接打开对应页面并展开该条注释。
         结果报告页的每条需求都配了固定模拟数据（见「三、固定模拟数据」），打开即复现同一份报告。
@@ -77,7 +77,7 @@
     </header>
 
     <div class="meta">
-      <span>本期 13 条需求</span><span>后台 3 条</span><span>H5 10 条</span><span>需 UI 出稿 13 条</span><span>固定模拟数据 3 档</span>
+      <span>本期 15 条需求</span><span>后台 4 条</span><span>H5 11 条</span><span>需 UI 出稿 15 条</span><span>固定模拟数据 3 档</span>
     </div>
 
     <div class="legend">
@@ -191,12 +191,39 @@
               <a href="replica.html?p=data&note=EX-053">打开后点「导出内容预览」</a>
             </td>
           </tr>
+          <tr id="req-EX-054">
+            <td class="no"><a href="replica.html?p=template-form&id=tpl-parent&tab=3&note=EX-054">EX-054</a></td>
+            <td class="scope">要做</td>
+            <td class="ui ui--yes">需 UI<span class="ui-note">各维度指标结果扩五列</span></td>
+            <td class="st">设计已实现</td>
+            <td class="team">测评项目组</td>
+            <td class="who">需求方</td>
+            <td class="mod">测评模板</td>
+            <td class="text">卡点、风险、欣赏三段文案都要能按维度配置，运营改文案不用发版；现在卡点和风险写死在前端，欣赏文案没有落点。</td>
+            <td class="logic">
+              1、「各维度指标结果」新增五列：卡点文案 <code>painText</code>、风险文案 <code>riskText</code>、欣赏文案 <code>appreciate</code>、欣赏小建议 <code>appreciateTip</code>、相对优势版 <code>appreciateAlt</code>。<br />
+              2、按维度配置，<b>取该维度索引为 0 的那一行</b>；前端按维度 key 读取。<br />
+              3、卡点维度读自己的卡点与风险；欣赏只取非卡点维度。<br />
+              4、任一字段留空时该段不渲染，不出现空段落。<br />
+              5、旧的「详细解读 / 建议」保留，供旧版结果页使用。<br />
+              6、模板详情同步展示这五列，便于核对。
+            </td>
+            <td class="api">
+              <span class="new">新增字段</span> <code>painText</code> <code>riskText</code> <code>appreciate</code> <code>appreciateTip</code> <code>appreciateAlt</code><br />
+              GET <code>exam/exam/templete/detail</code> / POST <code>create</code> / PUT <code>modify</code> 的 <code>dimensionExplains[]</code><br />
+              GET <code>/exam/app/api/viewCheckResult</code> 的 <code>weiduExplainList[]</code><br />
+              <span class="keep">不新增接口、不新建表</span>
+            </td>
+            <td class="proto">
+              <a href="replica.html?p=template-form&id=tpl-parent&tab=3&note=EX-054">各维度文案配置</a>
+              <a href="replica.html?p=template-detail&id=tpl-parent&tab=report">模板详情 · 只读</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="zone-head"><h2>二、H5 结果报告页</h2><span>前端页面改动，全部需 UI 出稿；每条都可在固定模拟数据下打开</span></div>
-    <div class="sheet">
+    <div class="zone-head"><h2>二、H5 结果报告页</h2><span>前端页面改动，全部需 UI 出稿；每条都可在固定模拟数据下打开</span></div>    <div class="sheet">
       <table>
         <thead>
           <tr>
@@ -471,6 +498,35 @@
             </td>
             <td class="proto">
               <a href="../6Q_exam_h5/entry.html?goodsId=g-free&ref=S6MULM1&from=poster&note=EX-210"><span class="tag">未登录</span>跳登录后回跳</a>
+            </td>
+          </tr>
+          <tr id="req-EX-211">
+            <td class="no"><a href="../6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent&note=EX-211">EX-211</a></td>
+            <td class="scope">要做</td>
+            <td class="ui ui--yes">需 UI<span class="ui-note">暖金欣赏卡片 + 绿色小建议行</span></td>
+            <td class="st">设计已实现</td>
+            <td class="team">测评项目组</td>
+            <td class="who">需求方</td>
+            <td class="mod">结果报告</td>
+            <td class="text">报告只讲「我哪里不行」，做得好的维度没有反馈；结论区还把同一句「你已经超过 X% 的家长」说了两次。</td>
+            <td class="logic">
+              1、结论区去重：档位描述渲染前剥掉与「超越百分比」重复的前缀，兼容历史数据。<br />
+              2、新增「这些力，值得欣赏 🌟」：候选为<b>排除核心卡点维度</b>后的其余 4 个维度。<br />
+              3、维度分 ≥ 每维满分 × 2/3（五力即 8 分）入选，按分数降序，最多 3 条。<br />
+              4、若全部低于阈值，取最高分那 1 个，文案改用「相对优势版」，保证人人至少 1 条。<br />
+              5、核心卡点维度永不出现在欣赏列表。<br />
+              6、<b>版块顺序：核心卡点 → 孩子正在经历什么 → 这些力值得欣赏</b>（规格书原稿把欣赏插在卡点与风险之间，按需求方口径改为先卡点与风险、后欣赏）。<br />
+              7、文案按维度从后台配置取，小建议单独成行。
+            </td>
+            <td class="api">
+              GET <code>/exam/app/api/viewCheckResult</code><br />
+              <code>weiduExplainList[]</code> 携带 <code>painText</code> / <code>riskText</code> / <code>appreciate</code> / <code>appreciateTip</code> / <code>appreciateAlt</code>（同 EX-054）<br />
+              <span class="keep">与计分、分档、卡点算法解耦</span>
+            </td>
+            <td class="proto">
+              <a href="../6Q_exam_h5/result.html?record=demo-low&goodsId=g-parent&note=EX-211"><span class="tag">低档 16 分</span>相对优势版兜底</a>
+              <a href="../6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent&note=EX-211"><span class="tag">中档 40 分</span>3 条欣赏</a>
+              <a href="../6Q_exam_h5/result.html?record=demo-high&goodsId=g-parent&note=EX-211"><span class="tag">高档 56 分</span>卡点维度被排除</a>
             </td>
           </tr>
         </tbody>

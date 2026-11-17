@@ -232,6 +232,24 @@ maxPer = round(record.total / dims.length)
 raw[i] = round(dims[i].value / 100 * maxPer)
 ```
 
+### 9.5 维度文案字段（EX-054 / EX-211）
+
+`viewCheckResult` 的 `weiduExplainList[]` 每条增加五个字段：
+
+| 字段 | 类型 | 说明 |
+| --- | --- | --- |
+| `painText` | string | 卡点文案 |
+| `riskText` | string | 风险文案 |
+| `appreciate` | string | 欣赏文案 |
+| `appreciateTip` | string | 欣赏小建议 |
+| `appreciateAlt` | string | 相对优势版 |
+
+后台 `exam/exam/templete/detail` / `create` / `modify` 的 `dimensionExplains[]` 同步收发这五个字段，
+取该维度索引为 0 的那一行。旧的 `detail` / `suggest` 保留不动。
+
+建议后端直接返回 `appreciations` 数组（`[{dim, score, text}]`）以减少前端重复计算，
+但原型为保持「只扩字段」原则，仍由前端按 `scoreList` 计算。
+
 ## 10. 埋点建议（待确认）
 
 | 事件 | 触发 |
@@ -246,3 +264,5 @@ raw[i] = round(dims[i].value / 100 * maxPer)
 | `scan_free_order_created` | 免费订单创建成功 |
 | `scan_entry_to_quiz` | 进入测评须知 |
 | `scan_entry_to_goods` | 收费商品跳详情 |
+| `report_appreciation_view` | 欣赏版块展示（记录条数与被展示维度） |
+| `report_appreciation_count` | 展示条数：1 / 2 / 3，用于验证对完读率的影响 |

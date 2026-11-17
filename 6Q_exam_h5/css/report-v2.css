@@ -63,6 +63,43 @@
 .rb-risk-text { margin-top: 12px; font-size: 14px; line-height: 1.95; color: #4B4548; }
 .rb-risk { border-left: 3px solid #F37490; }
 
+/* 这些力，值得欣赏（v2.2） */
+.rb-appreciate {
+  background: linear-gradient(180deg, #FFFDF7 0%, #FFF9EC 100%);
+  border: 1px solid #F6E3B8;
+  box-shadow: 0 8px 22px rgba(214, 168, 74, .14);
+}
+.rb-appreciate .rb-card-title { color: #8A5A12; }
+.rb-appreciate-sub {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #A98A5A;
+}
+.rb-app-item {
+  margin-top: 14px;
+  padding: 12px 13px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #F7E9CC;
+}
+.rb-app-head {
+  font-size: 15px;
+  font-weight: 700;
+  color: #B07A1C;
+  letter-spacing: .3px;
+}
+.rb-app-text { margin-top: 8px; font-size: 14px; line-height: 1.95; color: #4B4548; }
+.rb-app-tip {
+  margin-top: 10px;
+  padding: 9px 11px;
+  border-radius: 9px;
+  background: #F1F9F1;
+  color: #2F6B3A;
+  font-size: 13px;
+  line-height: 1.85;
+}
+
 .rb-deep-text { margin-top: 12px; font-size: 14px; line-height: 1.95; color: #4B4548; }
 .rb-deep-sub { margin-top: 12px; font-size: 13px; color: #8A8285; line-height: 1.8; }
 .rb-goods { margin-top: 14px; border-top: 1px dashed #F0DDE2; padding-top: 10px; }

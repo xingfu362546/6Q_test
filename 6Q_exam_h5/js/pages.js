@@ -59,7 +59,8 @@
       ctaText: g.ctaText || "",
       ctaSubText: g.ctaSubText || "",
       ctaQrCode: g.ctaQrCode || "",
-      painCopy: g.painCopy || null
+      painCopy: g.painCopy || null,
+      dimCopy: g.dimCopy || null
     };
   }
 
@@ -526,6 +527,16 @@
   }
 
   /* ---------------- 结果页 · 新版（v2.1.0） ---------------- */
+  /* 结论去重：档位 base 与「超越 X% 的家长」由两处渲染，
+     历史数据里 base 可能自带「亲爱的，你的测评结果显示：你已经超过了 X% 的家长。」，
+     这里统一剥掉重复前缀，避免同一段话说两次。 */
+  function stripPctPrefix(text) {
+    return String(text || "")
+      .replace(/^你?已经?(超越|超过)了?\s*\d+(\.\d+)?%\s*的家长[。，,、\s]*/g, "")
+      .replace(/^亲爱的[，,]\s*你的测评结果显示[：:]\s*/g, "")
+      .trim();
+  }
+
   function powerRadarSvg(dims, values, maxScore, size, theme) {
     var gold = theme === "gold";
     var lineColor = gold ? "rgba(201,162,39,.42)" : "#F7D3D6";
@@ -571,14 +582,52 @@
     // 每维实际得分：value 是百分比，按每维上限还原
     var rawScores = dims.map(function (d) { return Math.round(d.value / 100 * maxPer); });
 
+    // 档位描述：剥掉与「超越百分比」重复的前缀，只留解读本身
+    var conclusionBase = stripPctPrefix(range.base);
+
     // 核心卡点：并列最低分按维度顺序取首个，结果可复现
     var painKey = null, painMin = Infinity;
     rawScores.forEach(function (v, i) {
       if (v < painMin) { painMin = v; painKey = dims[i].key; }
     });
     var painDim = dims.filter(function (d) { return d.key === painKey; })[0] || dims[0] || { name: "" };
-    var pain = (g.painCopy && g.painCopy[painKey]) || null;
-    var riskText = g.riskTip || (pain && pain.risk) || "";
+    var painCopy = (g.dimCopy && g.dimCopy[painKey]) || null;
+    var pain = painCopy
+      ? { tip: painCopy.painTip, text: painCopy.painText }
+      : ((g.painCopy && g.painCopy[painKey]) || null);
+    // 风险文案：维度配置优先，其次模板级 riskTip，最后回退卡点里的 risk
+    var riskText = (painCopy && painCopy.riskText) || g.riskTip || "";
+    if (!riskText && g.painCopy && g.painCopy[painKey]) riskText = g.painCopy[painKey].risk || "";
+
+    /* 这些力，值得欣赏（v2.2）
+       规则：排除核心卡点维度 → 维度分 ≥ 8（满分 12 的 2/3）→ 按分数降序取前 3；
+       若都不到 8 分，取非卡点维度里最高分那 1 个，改用「相对优势版」措辞。 */
+    var appreciateMin = Math.round(maxPer * 2 / 3);
+    var appreciateList = [];
+    var candidates = [];
+    dims.forEach(function (d, i) {
+      if (d.key === painKey) return;
+      candidates.push({ key: d.key, name: d.name, score: rawScores[i] });
+    });
+    var qualified = candidates.filter(function (c) { return c.score >= appreciateMin; });
+    var useFallback = false;
+    if (qualified.length) {
+      qualified.sort(function (a, b) { return b.score - a.score; });
+      appreciateList = qualified.slice(0, 3);
+    } else if (candidates.length) {
+      useFallback = true;
+      appreciateList = candidates.slice().sort(function (a, b) { return b.score - a.score; }).slice(0, 1);
+    }
+    appreciateList = appreciateList.map(function (c) {
+      var copy = (g.dimCopy && g.dimCopy[c.key]) || null;
+      return {
+        key: c.key,
+        name: c.name,
+        score: c.score,
+        text: copy ? (useFallback ? (copy.appreciateAlt || copy.appreciate) : copy.appreciate) : "",
+        tip: copy ? copy.appreciateTip : ""
+      };
+    }).filter(function (c) { return c.text; });
 
     var recommend = [
       { name: "高EQ父母 · 亲子沟通课", price: 199 },
@@ -597,8 +646,8 @@
       (g.showTotalScore ? '<div class="rb-total">总分：<b>' + record.score + '</b>分</div>' : "") +
       '<div class="rb-radar-wrap">' + powerRadarSvg(dims, rawScores, maxPer, 320) + '</div>' +
       '<div class="rb-conclusion">亲爱的，你的测评结果显示：</div>' +
-      '<div class="rb-conclusion-line">你已经' + esc(range.percentile || "超越 45% 的家长") + '。</div>' +
-      '<div class="rb-conclusion-line">' + esc(range.base) + '</div>' +
+      '<div class="rb-conclusion-line">你已经' + esc(stripPctPrefix(range.percentile || "超越 45% 的家长")) + '。</div>' +
+      (conclusionBase ? '<div class="rb-conclusion-line">' + esc(conclusionBase) + '</div>' : "") +
       '</div>' +
 
       (pain ? '<div class="rb-pain"><div class="rb-pain-title">您的核心卡点' + dot("rb-pain") + '</div>' +
@@ -607,6 +656,16 @@
 
       (riskText ? '<div class="rb-card rb-risk"><div class="rb-card-title">您的孩子正在经历什么？' + dot("rb-risk") + '</div>' +
         '<div class="rb-risk-text">' + esc(riskText) + '</div></div>' : "") +
+
+      (appreciateList.length ? '<div class="rb-card rb-appreciate"><div class="rb-card-title">这些力，值得欣赏 🌟' + dot("rb-appreciate") + '</div>' +
+        '<div class="rb-appreciate-sub">' + (useFallback ? "这一次先看看你已经走在前面的一点。" : "除了要练的那一块，你身上也有已经长出来的力量。") + '</div>' +
+        appreciateList.map(function (a) {
+          return '<div class="rb-app-item">' +
+            '<div class="rb-app-head">【' + esc(a.name) + '】（' + a.score + '分）</div>' +
+            '<div class="rb-app-text">' + esc(a.text) + '</div>' +
+            (a.tip ? '<div class="rb-app-tip">小建议：' + esc(a.tip) + '</div>' : "") +
+            "</div>";
+        }).join("") + '</div>' : "") +
 
       (g.ctaText ? '<div class="rb-card rb-deep"><div class="rb-card-title">如果您想深度了解' + dot("rb-cta") + '</div>' +
         '<div class="rb-deep-text">' + esc(g.ctaText) + '</div>' +

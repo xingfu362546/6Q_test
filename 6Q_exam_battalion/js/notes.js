@@ -159,6 +159,23 @@
           "GET exam/exam/templete/detail\nPOST exam/exam/templete/create\nPUT exam/exam/templete/modify\nGET exam/app/api/viewCheckResult（H5 读取 templete.riskTip / ctaText / ctaSubText / ctaQrCode）",
           "模板表单 → 模板 → 商品 → H5 结果页：文案随模板下发；二维码弹窗不新增接口，图片直出。",
           { now: "现在的逻辑 · v2.1.0" }
+        ),
+        note(
+          "EX-054", "template-dimcopy", "",
+          "各维度文案配置（卡点 / 风险 / 欣赏）",
+          "v2.1.0：卡点、风险、欣赏三段文案没有统一落点。卡点与风险写在前端常量里，欣赏文案是 v2.2 新增，只能硬编码，运营改不了；维度指标结果表也只有「详细解读 / 建议」两列。",
+          "v2.2 把三段文案统一挂到「各维度指标结果」上，按维度配置，取该维度<b>索引为 0</b> 的那一行：\n1、卡点文案 painText、风险文案 riskText、欣赏文案 appreciate；\n2、欣赏小建议 appreciateTip，展示在欣赏段下方；\n3、相对优势版 appreciateAlt，用于非卡点维度全部低于阈值时的兜底措辞；\n4、前端按维度 key 读取，卡点维度读谁的卡点、风险就输出谁的风险，欣赏只取非卡点维度；\n5、任一字段留空时该段不渲染，不出现空段落；\n6、模板详情同步展示这五列，便于核对。",
+          [
+            row("卡点文案", "多行文本", "否", "painText，核心卡点维度的剖析。", "new"),
+            row("风险文案", "多行文本", "否", "riskText，该维度对应的风险预警。", "new"),
+            row("欣赏文案", "多行文本", "否", "appreciate，句式「欣赏你 + 行为白描 + 意义升华」。", "new"),
+            row("欣赏小建议", "多行文本", "否", "appreciateTip，绿色小建议行。", "new"),
+            row("相对优势版", "多行文本", "否", "appreciateAlt，低分兜底用。", "new"),
+            row("取值行", "规则", "是", "取该维度索引为 0 的配置行。", "new")
+          ],
+          "GET exam/exam/templete/detail\nPOST exam/exam/templete/create\nPUT exam/exam/templete/modify\nGET exam/app/api/viewCheckResult（weiduExplainList[] 携带五段文案）",
+          "维度管理 → 模板表单各维度指标结果 → 模板 → H5 报告：卡点取卡点维度配置，风险同维度，欣赏取非卡点维度配置。",
+          { now: "现在的逻辑 · v2.2" }
         )
       ]
     },
