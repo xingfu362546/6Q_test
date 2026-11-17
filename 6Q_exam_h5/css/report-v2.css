@@ -250,4 +250,12 @@
   text-align: left;
 }
 .v2p-qr { width: 56px; height: 56px; border-radius: 6px; background: #fff; padding: 3px; }
+/* 海报容器里的全局 img 规则会覆盖上面的尺寸，这里按更高特异性固定二维码 */
+.src-poster-img.v2 .v2p-qr {
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  padding: 3px;
+  object-fit: contain;
+}
 .v2p-foot-text { font-size: 8px; line-height: 1.7; color: rgba(243, 238, 223, .62); }

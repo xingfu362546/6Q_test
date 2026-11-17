@@ -914,23 +914,44 @@
         '<button class="ex-btn" type="button" data-q-import>导入题目</button></div></div>';
     }
 
+    /* 版式与展示开关联动：新版固定不展示正态分布与 6Q 和谐指数，维度图固定展示 */
+    function applyLayoutSwitches(layout) {
+      draft.resultLayout = layout;
+      if (layout === 2) {
+        draft.showDimensionalityImage = true;
+        draft.showDistributionImage = false;
+        draft.showHarmonyImage = false;
+      }
+    }
+
+    function isV2() { return Number(draft.resultLayout || 1) === 2; }
+
+    function switchRow(key, label, hint, locked) {
+      return '<div class="ex-form-item"><label>' + label +
+        (locked ? ' <span class="ex-tag ex-tag--blue">新版固定</span>' : "") + "</label>" +
+        '<div class="ex-radio-row">' +
+        '<label class="ex-radio' + (locked ? " ex-radio--locked" : "") + '"><input type="radio" name="' + key + '" data-switch-field="' + key + '" value="1" ' + (draft[key] ? "checked" : "") + (locked ? " disabled" : "") + " /> 是</label>" +
+        '<label class="ex-radio' + (locked ? " ex-radio--locked" : "") + '"><input type="radio" name="' + key + '" data-switch-field="' + key + '" value="0" ' + (!draft[key] ? "checked" : "") + (locked ? " disabled" : "") + " /> 否</label>" +
+        "</div>" + (hint ? '<div class="ex-muted ex-mt8" style="font-size:12px">' + hint + "</div>" : "") + "</div>";
+    }
+
     function tab3() {
-      var switches = [
-        ["showTotalScore", "是否展示总分"],
-        ["showDimensionalityImage", "维度图表展示"],
-        ["showDistributionImage", "正态分布图表展示"],
-        ["showHarmonyImage", "6Q和谐指数展示"]
-      ].map(function (s) {
-        return '<div class="ex-form-item"><label>' + s[1] + '</label><div class="ex-radio-row">' +
-          '<label class="ex-radio"><input type="radio" name="' + s[0] + '" data-switch-field="' + s[0] + '" value="1" ' + (draft[s[0]] ? "checked" : "") + ' /> 是</label>' +
-          '<label class="ex-radio"><input type="radio" name="' + s[0] + '" data-switch-field="' + s[0] + '" value="0" ' + (!draft[s[0]] ? "checked" : "") + ' /> 否</label></div></div>';
-      }).join("");
+      var v2 = isV2();
+      var switches = v2
+        ? switchRow("showTotalScore", "是否展示总分", "新版报告「测评结果」卡内固定展示总分，可关闭。", false) +
+          switchRow("showDimensionalityImage", "维度图表展示", "新版固定展示五维雷达（维度名下方带该维得分），不可关闭。", true)
+        : switchRow("showTotalScore", "是否展示总分", "", false) +
+          switchRow("showDimensionalityImage", "维度图表展示", "", false) +
+          switchRow("showDistributionImage", "正态分布图表展示", "", false) +
+          switchRow("showHarmonyImage", "6Q和谐指数展示", "", false);
       var resultRows = draft.results.map(function (r, i) {
         return "<tr><td>" + (i + 1) + '</td><td><input class="ex-input" data-result="' + i + '" data-result-field="name" value="' + esc(r.name) + '" /></td>' +
           '<td><div class="ex-flex"><input class="ex-input" type="number" data-result="' + i + '" data-result-field="scoreMin" value="' + r.scoreMin + '" style="width:70px" /><span>—</span><input class="ex-input" type="number" data-result="' + i + '" data-result-field="scoreMax" value="' + r.scoreMax + '" style="width:70px" /></div></td>' +
-          '<td><input class="ex-input" data-result="' + i + '" data-result-field="badge" value="' + esc(r.badge || "") + '" placeholder="如 ✨ 温柔笃定的觉醒妈妈" /></td>' +
-          '<td><textarea class="ex-textarea" data-result="' + i + '" data-result-field="quote" rows="2" placeholder="觉醒金句">' + esc(r.quote || "") + "</textarea></td>" +
-          '<td><input class="ex-input" data-result="' + i + '" data-result-field="percentile" value="' + esc(r.percentile || "") + '" placeholder="如 超越 95% 的家长" style="width:130px" /></td>' +
+          (v2
+            ? '<td><input class="ex-input" data-result="' + i + '" data-result-field="badge" value="' + esc(r.badge || "") + '" placeholder="如 ✨ 温柔笃定的觉醒妈妈" /></td>' +
+              '<td><textarea class="ex-textarea" data-result="' + i + '" data-result-field="quote" rows="2" placeholder="觉醒金句">' + esc(r.quote || "") + "</textarea></td>" +
+              '<td><input class="ex-input" data-result="' + i + '" data-result-field="percentile" value="' + esc(r.percentile || "") + '" placeholder="如 超越 95% 的家长" style="width:130px" /></td>'
+            : "") +
           '<td><textarea class="ex-textarea" data-result="' + i + '" data-result-field="base" rows="2">' + esc(r.base) + "</textarea></td>" +
           '<td><button class="ex-link ex-link--danger" type="button" data-result-del="' + i + '">删除</button></td></tr>';
       }).join("");
@@ -939,18 +960,29 @@
           '<td><textarea class="ex-textarea" data-dimx="' + i + '" data-dimx-field="detail" rows="2">' + esc(d.detail) + "</textarea></td>" +
           '<td><textarea class="ex-textarea" data-dimx="' + i + '" data-dimx-field="suggest" rows="2">' + esc(d.suggest) + "</textarea></td></tr>";
       }).join("");
+      var ctaBlock = v2
+        ? '<div class="ex-section">新风控与转化文案 ' + dot("template-cta") + "</div>" +
+          '<div class="ex-form-grid">' +
+          '<div class="ex-form-item ex-form-item--full"><label>风险提示（「孩子正在经历什么」）</label><textarea class="ex-textarea" data-draft="riskTip" rows="3" placeholder="仅新版结果页展示">' + esc(draft.riskTip || "") + "</textarea></div>" +
+          '<div class="ex-form-item ex-form-item--full"><label>转化文案（「深度了解」）</label><textarea class="ex-textarea" data-draft="ctaText" rows="4" placeholder="仅新版结果页展示">' + esc(draft.ctaText || "") + "</textarea></div>" +
+          '<div class="ex-form-item"><label>转化引导语</label><input class="ex-input" data-draft="ctaSubText" value="' + esc(draft.ctaSubText || "") + '" placeholder="如 添加班主任微信" /></div>' +
+          '<div class="ex-form-item"><label>班主任二维码</label><input class="ex-input" data-draft="ctaQrCode" value="' + esc(draft.ctaQrCode || "") + '" placeholder="图片地址，原型用占位图" /></div>' +
+          "</div>"
+        : '<div class="ex-section">新风控与转化文案 ' + dot("template-cta") + "</div>" +
+          '<div class="ex-alert">这组字段只在新版结果页渲染。当前模板是旧版结果页，填写后不会展示；切到新版后再配置。</div>';
+      var resultHead = v2
+        ? '<tr><th style="width:48px">序号</th><th style="width:110px">档位名称</th><th style="width:150px">分数区间</th><th style="width:170px">觉醒勋章</th><th>觉醒金句</th><th style="width:140px">超越百分比</th><th>基础解读</th><th style="width:60px">操作</th></tr>'
+        : '<tr><th style="width:48px">序号</th><th style="width:130px">指数名称</th><th style="width:160px">指数范围</th><th>基础解读</th><th style="width:60px">操作</th></tr>';
+      var layoutHint = v2
+        ? '<div class="ex-alert">当前为<b>新版结果页</b>：固定展示档位勋章、五维雷达、核心卡点、风险提示、深度了解与底部预约 CTA；<b>不含正态分布图与 6Q 和谐指数</b>，两个旧开关已从本页移除。</div>'
+        : '<div class="ex-alert">当前为<b>旧版结果页</b>：展示总分、维度雷达 / 正态分布、整体解读、各类详解与课程商城；不使用档位勋章、核心卡点与转化 CTA。';
       return '<div class="ex-tab-body" data-tab="3"><div class="ex-section">结果页配置 ' + dot("template-report") + "</div>" +
+        layoutHint +
         '<div class="ex-form-grid">' + switches + "</div>" +
-        '<div class="ex-section">新风控与转化文案 ' + dot("template-cta") + "</div>" +
-        '<div class="ex-form-grid">' +
-        '<div class="ex-form-item ex-form-item--full"><label>风险提示（「孩子正在经历什么」）</label><textarea class="ex-textarea" data-draft="riskTip" rows="3" placeholder="仅新版结果页展示">' + esc(draft.riskTip || "") + "</textarea></div>" +
-        '<div class="ex-form-item ex-form-item--full"><label>转化文案（「深度了解」）</label><textarea class="ex-textarea" data-draft="ctaText" rows="4" placeholder="仅新版结果页展示">' + esc(draft.ctaText || "") + "</textarea></div>" +
-        '<div class="ex-form-item"><label>转化引导语</label><input class="ex-input" data-draft="ctaSubText" value="' + esc(draft.ctaSubText || "") + '" placeholder="如 添加班主任微信" /></div>' +
-        '<div class="ex-form-item"><label>班主任二维码</label><input class="ex-input" data-draft="ctaQrCode" value="' + esc(draft.ctaQrCode || "") + '" placeholder="图片地址，原型用占位图" /></div>' +
-        "</div>" +
+        ctaBlock +
         '<div class="ex-section">测评模板结果</div>' +
         '<div class="ex-flex ex-mb8"><span class="ex-muted">测评总分</span><input class="ex-input js-total" readonly value="' + totalScore(draft) + '" style="width:110px" /></div>' +
-        '<table class="ex-result-table"><thead><tr><th style="width:48px">序号</th><th style="width:110px">档位名称</th><th style="width:150px">分数区间</th><th style="width:170px">觉醒勋章</th><th>觉醒金句</th><th style="width:140px">超越百分比</th><th>基础解读</th><th style="width:60px">操作</th></tr></thead><tbody>' + resultRows + "</tbody></table>" +
+        '<table class="ex-result-table"><thead>' + resultHead + "</thead><tbody>" + resultRows + "</tbody></table>" +
         '<button class="ex-btn ex-btn--sm ex-mt8" type="button" data-result-add>新增一个</button>' +
         '<div class="ex-section">各维度指标结果</div>' +
         '<table class="ex-result-table"><thead><tr><th>维度指标名称</th><th style="width:150px">指标范围</th><th>详细解读</th><th>建议</th></tr></thead><tbody>' + dimRows + "</tbody></table>" +
@@ -996,7 +1028,11 @@
         el.addEventListener("change", function () { draft.agedTag = el.value === "1"; });
       });
       wrap.querySelectorAll("[data-layout-field]").forEach(function (el) {
-        el.addEventListener("change", function () { draft.resultLayout = Number(el.value); });
+        el.addEventListener("change", function () {
+          syncDraft();
+          applyLayoutSwitches(Number(el.value));
+          rerenderTab();
+        });
       });
       wrap.querySelectorAll("[data-switch-field]").forEach(function (el) {
         el.addEventListener("change", function () { draft[el.getAttribute("data-switch-field")] = el.value === "1"; });
@@ -1124,22 +1160,34 @@
               "</td><td>" + q.options.map(function (o) { return esc(o.content) + ' <span class="ex-code">' + o.score + "</span>"; }).join("　") + "</td></tr>";
           }).join("") + "</tbody></table>";
       }
-      return '<div class="ex-section">报告结果信息</div>' +
-        '<div class="ex-flex ex-flex-wrap ex-mb12">' +
-        '<span class="ex-tag ' + (Number(row.resultLayout || 1) === 2 ? "ex-tag--blue" : "") + '">版式 ' + (Number(row.resultLayout || 1) === 2 ? "新版" : "旧版") + "</span>" +
+      var isNew = Number(row.resultLayout || 1) === 2;
+      var switchTags = '<div class="ex-flex ex-flex-wrap ex-mb12">' +
+        '<span class="ex-tag ' + (isNew ? "ex-tag--blue" : "") + '">版式 ' + (isNew ? "新版" : "旧版") + "</span>" +
         '<span class="ex-tag ' + (row.showTotalScore ? "ex-tag--green" : "") + '">总分 ' + (row.showTotalScore ? "展示" : "不展示") + "</span>" +
         '<span class="ex-tag ' + (row.showDimensionalityImage ? "ex-tag--green" : "") + '">维度图 ' + (row.showDimensionalityImage ? "展示" : "不展示") + "</span>" +
-        '<span class="ex-tag ' + (row.showDistributionImage ? "ex-tag--green" : "") + '">正态分布 ' + (row.showDistributionImage ? "展示" : "不展示") + "</span>" +
-        '<span class="ex-tag ' + (row.showHarmonyImage ? "ex-tag--green" : "") + '">和谐指数 ' + (row.showHarmonyImage ? "展示" : "不展示") + "</span></div>" +
-        '<table class="ex-result-table"><thead><tr><th>档位名称</th><th>分数区间</th><th>觉醒勋章</th><th>觉醒金句</th><th>超越百分比</th><th>基础解读</th></tr></thead><tbody>' +
-        row.results.map(function (r) {
-          return "<tr><td>" + esc(r.name) + "</td><td>" + r.scoreMin + " — " + r.scoreMax + " 分</td><td>" + esc(r.badge || "-") +
-            "</td><td>" + esc(r.quote || "-") + "</td><td>" + esc(r.percentile || "-") + "</td><td>" + esc(r.base) + "</td></tr>";
-        }).join("") + "</tbody></table>" +
-        '<div class="ex-section">新风控与转化文案</div><div class="ex-desc">' +
-        descItem("风险提示", row.riskTip || "-", true) + descItem("转化文案", row.ctaText || "-", true) +
-        descItem("转化引导语", row.ctaSubText || "-") + descItem("班主任二维码", row.ctaQrCode ? '<img class="ex-thumb" src="' + esc(row.ctaQrCode) + '" />' : "-") +
-        "</div>" +
+        (isNew ? "" :
+          '<span class="ex-tag ' + (row.showDistributionImage ? "ex-tag--green" : "") + '">正态分布 ' + (row.showDistributionImage ? "展示" : "不展示") + "</span>" +
+          '<span class="ex-tag ' + (row.showHarmonyImage ? "ex-tag--green" : "") + '">和谐指数 ' + (row.showHarmonyImage ? "展示" : "不展示") + "</span>") +
+        "</div>";
+      var resultHead = isNew
+        ? "<tr><th>档位名称</th><th>分数区间</th><th>觉醒勋章</th><th>觉醒金句</th><th>超越百分比</th><th>基础解读</th></tr>"
+        : "<tr><th>指数名称</th><th>指数范围</th><th>基础解读</th></tr>";
+      var resultBody = row.results.map(function (r) {
+        return "<tr><td>" + esc(r.name) + "</td><td>" + r.scoreMin + " — " + r.scoreMax + " 分</td>" +
+          (isNew ? "<td>" + esc(r.badge || "-") + "</td><td>" + esc(r.quote || "-") + "</td><td>" + esc(r.percentile || "-") + "</td>" : "") +
+          "<td>" + esc(r.base) + "</td></tr>";
+      }).join("");
+      var ctaDesc = isNew
+        ? '<div class="ex-section">新风控与转化文案</div><div class="ex-desc">' +
+          descItem("风险提示", row.riskTip || "-", true) + descItem("转化文案", row.ctaText || "-", true) +
+          descItem("转化引导语", row.ctaSubText || "-") +
+          descItem("班主任二维码", row.ctaQrCode ? '<img class="ex-thumb" src="' + esc(row.ctaQrCode) + '" />' : "-") + "</div>"
+        : '<div class="ex-section">新风控与转化文案</div><div class="ex-alert">旧版结果页不渲染这组字段。切到新版后再配置。</div>';
+      return '<div class="ex-section">报告结果信息</div>' +
+        switchTags +
+        (isNew ? '<div class="ex-alert">新版结果页不含正态分布图与 6Q 和谐指数。</div>' : "") +
+        '<table class="ex-result-table"><thead>' + resultHead + "</thead><tbody>" + resultBody + "</tbody></table>" +
+        ctaDesc +
         '<div class="ex-section">各维度指标结果</div><table class="ex-result-table"><thead><tr><th>维度指标</th><th>指标范围</th><th>详细解读</th><th>建议</th></tr></thead><tbody>' +
         row.dimensionExplains.map(function (d) {
           return "<tr><td>" + esc(d.name) + "</td><td>" + d.scoreMin + " — " + d.scoreMax + " 分</td><td>" + esc(d.detail) + "</td><td>" + esc(d.suggest) + "</td></tr>";

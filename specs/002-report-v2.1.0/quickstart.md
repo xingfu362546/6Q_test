@@ -7,7 +7,30 @@ cd D:/Cursor/6Q_test
 python -m http.server 8766
 ```
 
-## 2. 看新版结果页（3 步）
+## 1.1 从功能清单进入
+
+`http://localhost:8766/6Q_exam_battalion/index.html`
+
+清单只展示 v2.1.0 的 8 条需求，列为：
+序号 / 本期范围 / **UI 设计** / 设计是否实现 / 所属团队 / 提出人 / 模块 / 需求详细描述 / **逻辑说明** / **接口改动** / 原型入口。
+
+- 点序号或原型链接：直达页面并自动展开该条注释
+- H5 需求全部标「需 UI」，链接里带固定 `record=demo-*`，打开即复现同一份报告
+- 底部「三、固定模拟数据」列出三档的总分 / 档位 / 卡点 / 日期对照表
+
+## 2. 看新版结果页（两种方式）
+
+### 方式 A · 固定模拟数据（推荐，刷新不变）
+
+| 想看什么 | 直接打开 |
+| --- | --- |
+| 低档报告（16 分 / 15% / 卡点边界松弛力） | `http://localhost:8766/6Q_exam_h5/result.html?record=demo-low&goodsId=g-parent` |
+| 中档报告（40 分 / 45% / 卡点情感链接力） | `http://localhost:8766/6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent` |
+| 高档报告（56 分 / 95% / 卡点边界松弛力） | `http://localhost:8766/6Q_exam_h5/result.html?record=demo-high&goodsId=g-parent` |
+
+`record=demo` 或不传 `record` 时按 `demo-mid` 处理。三档答案、测评日期、订单号都写死，不写 `localStorage`。
+
+### 方式 B · 真实答题
 
 1. 打开 `http://localhost:8766/6Q_exam_h5/quiz.html?goodsId=g-parent`
 2. 连续点任意选项，到第 20 题后点「提交」

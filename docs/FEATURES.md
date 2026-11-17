@@ -88,21 +88,31 @@
 
 | 编号 | 功能 | 状态 | 原型 | 说明 |
 | --- | --- | --- | --- | --- |
-| EX-051 | 模板级结果页版式开关 | done | `replica.html?p=template-form&note=EX-051` | `resultLayout`：1 旧版 / 2 新版；默认 1；挂在模板，模板赋给商品后生效 |
-| EX-052 | 新风控与转化文案 | done | `replica.html?p=template-form&tab=3&note=EX-052` | `riskTip` / `ctaText` / `ctaSubText` / `ctaQrCode`；档位表加 `badge` / `quote` / `percentile` |
+| EX-051 | 模板级结果页版式开关 | done | `replica.html?p=template-form&id=tpl-parent&tab=1&note=EX-051` | `resultLayout`：1 旧版 / 2 新版；默认 1；挂在模板，模板赋给商品后生效；新版下正态分布与和谐指数开关整行移除 |
+| EX-052 | 新风控与转化文案 | done | `replica.html?p=template-form&id=tpl-parent&tab=3&note=EX-052` | `riskTip` / `ctaText` / `ctaSubText` / `ctaQrCode`；档位表加 `badge` / `quote` / `percentile` |
 
-### 2. H5
+### 2. H5（固定模拟数据）
 
 | 编号 | 功能 | 状态 | 原型 | 说明 |
 | --- | --- | --- | --- | --- |
-| EX-201 | 报告头与测评日期 | done | `quiz.html?goodsId=g-parent` → 结果页 | 大标题 + 测评日期；计分规则按钮本轮隐藏 |
-| EX-202 | 档位结论与超越百分比 | done | 同上 | 三档唯一勋章与金句；百分比固定 15% / 45% / 95% |
-| EX-203 | 核心卡点 | done | 同上 | 最低分维度；并列按固定优先序，不随机 |
-| EX-204 | 风险提示 | done | 同上 | 取 `riskTip`，为空回退卡点 risk，再空整块隐藏 |
-| EX-205 | 深度了解与底部预约 CTA | done | 同上 | 呼吸动画主 CTA → 二维码抽屉；下方历史 / 再答 |
-| EX-206 | 觉醒海报（深绿金 9:16） | done | 同上 · 报告头分享 | 勋章 / 金句 / 金色雷达 / 百分比 / 背书 / 二维码；导出 810×1440 |
+| EX-201 | 报告头与测评日期 | done | `result.html?record=demo-mid&goodsId=g-parent&note=EX-201` | 大标题 + 测评日期；计分规则按钮本轮隐藏 |
+| EX-202 | 档位结论与超越百分比 | done | `record=demo-low / demo-mid / demo-high` | 三档唯一勋章与金句；百分比固定 15% / 45% / 95% |
+| EX-203 | 核心卡点 | done | `record=demo-mid`（情感链接力）、`demo-low`（边界松弛力） | 最低分维度；并列按固定优先序，不随机 |
+| EX-204 | 风险提示 | done | `record=demo-mid` | 取 `riskTip`，为空回退卡点 risk，再空整块隐藏 |
+| EX-205 | 深度了解与底部预约 CTA | done | `record=demo-mid` | 呼吸动画主 CTA → 二维码抽屉；下方历史 / 再答 |
+| EX-206 | 觉醒海报（深绿金 9:16） | done | `record=demo-high` → 报告头分享 | 勋章 / 金句 / 金色雷达 / 百分比 / 背书 / 二维码；导出 810×1440 |
 
-### 3. 计分口径
+### 3. 固定模拟数据
+
+| record | 总分 | 档位 | 超越 | 核心卡点 | 测评日期 |
+| --- | --- | --- | --- | --- | --- |
+| `demo-low` | 16 | 低档 | 15% | 边界松弛力 | 2026-11-05 10:24:08 |
+| `demo-mid` | 40 | 中档 | 45% | 情感链接力 | 2026-11-03 17:13:32 |
+| `demo-high` | 56 | 高档 | 95% | 边界松弛力 | 2026-11-07 21:40:15 |
+
+`record=demo` 或不传时按 `demo-mid`；`demo-*` 不写入 `exam_records`，刷新不变。
+
+### 4. 计分口径
 
 | 项 | 值 |
 | --- | --- |

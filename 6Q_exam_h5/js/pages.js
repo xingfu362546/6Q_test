@@ -67,27 +67,57 @@
 
   function getRecord() {
     var id = qs("record") || qs("checkId");
-    if (!id || id === "demo") return demoRecord();
+    if (!id || id.indexOf("demo") === 0) return demoRecord(id);
     return E.recordById(id) || E.records()[0] || demoRecord();
   }
 
-  function demoRecord() {
+  /* 固定演示数据：demo-low / demo-mid / demo-high 三档各一份，答案、日期、单号都写死，
+     用于功能清单跳转与验收复现，不读写 localStorage。 */
+  var DEMO_PRESETS = {
+    "demo-low": {
+      picks: [1, 1, 0, 1, 1],
+      createTime: "2026-11-05 10:24:08",
+      orderNo: "EX20261105001"
+    },
+    "demo-mid": {
+      picks: [2, 2, 2, 2, 2],
+      createTime: "2026-11-03 17:13:32",
+      orderNo: "EX20261103002"
+    },
+    "demo-high": {
+      picks: [3, 3, 2, 3, 3],
+      createTime: "2026-11-07 21:40:15",
+      orderNo: "EX20261107003"
+    }
+  };
+
+  function demoRecord(recordId) {
     var wantId = qs("goodsId") || qs("id");
     var g = (wantId && D.byId(wantId)) || D.byId("g-6q");
     var answers = {};
     if (Number(g.resultLayout || 1) === 2) {
-      // 新版式示例：每题选第 3 个选项（2 分），落在中档，便于对照需求图
-      g.questions.forEach(function (q) { answers[q.id] = Math.min(2, q.options.length - 1); });
-    } else {
-      g.questions.forEach(function (q, i) { answers[q.id] = i % 4 === 0 ? 0 : i % 7 === 0 ? 3 : 1; });
+      var presetKey = DEMO_PRESETS[recordId] ? recordId : "demo-mid";
+      var preset = DEMO_PRESETS[presetKey];
+      var dimOrder = [];
+      g.questions.forEach(function (q) {
+        if (dimOrder.indexOf(q.dim) < 0) dimOrder.push(q.dim);
+      });
+      g.questions.forEach(function (q) {
+        var dimIndex = dimOrder.indexOf(q.dim);
+        var pick = preset.picks[dimIndex];
+        answers[q.id] = Math.min(pick, q.options.length - 1);
+      });
+      var r = E.calcResult(g, answers);
+      return makeRecord(g, r, answers, { id: "rec-" + presetKey, createTime: preset.createTime, orderNo: preset.orderNo });
     }
-    var r = E.calcResult(g, answers);
-    return makeRecord(g, r, answers);
+    g.questions.forEach(function (q, i) { answers[q.id] = i % 4 === 0 ? 0 : i % 7 === 0 ? 3 : 1; });
+    var r0 = E.calcResult(g, answers);
+    return makeRecord(g, r0, answers, { id: "rec-demo", createTime: "2026-11-03 17:13:32", orderNo: "EX20261103001" });
   }
 
-  function makeRecord(g, r, answers) {
+  function makeRecord(g, r, answers, overrides) {
     var id = E.uid("rec");
-    return {
+    var rec = {
       id: id, checkId: id, goodsId: g.id, templeteId: g.templeteId || g.id,
       title: g.name, coverImage: imgPath(g.cover), price: g.price, priceIos: g.price,
       score: r.total, total: g.scoreTotal, rangeName: r.range.name,
@@ -95,6 +125,14 @@
       answers: answers, createTime: nowStr(), payTime: nowStr(),
       orderNo: "EX" + Date.now(), status: "finished"
     };
+    if (overrides) {
+      Object.keys(overrides).forEach(function (k) {
+        rec[k] = overrides[k];
+        if (k === "id") rec.checkId = overrides[k];
+        if (k === "createTime") rec.payTime = overrides[k];
+      });
+    }
+    return rec;
   }
 
   /* ---------------- 首页 ---------------- */
@@ -450,6 +488,7 @@
   }
 
   function renderResultV2(record, g, range, existingFeedback, starNum) {
+    // 新版式结构固定：忽略 showDistributionImage / showHarmonyImage，两个旧开关在新版式下不参与渲染
     var dims = record.dims || [];
     var values = dims.map(function (d) { return d.value; });
     var maxPer = Math.round(record.total / Math.max(1, dims.length)) || 12;
@@ -479,7 +518,7 @@
 
       '<div class="rb-card rb-result">' +
       '<div class="rb-card-title">测评结果' + dot("rb-band") + '</div>' +
-      '<div class="rb-total">总分：<b>' + record.score + '</b>分</div>' +
+      (g.showTotalScore ? '<div class="rb-total">总分：<b>' + record.score + '</b>分</div>' : "") +
       '<div class="rb-radar-wrap">' + powerRadarSvg(dims, rawScores, maxPer, 320) + '</div>' +
       '<div class="rb-conclusion">亲爱的，你的测评结果显示：</div>' +
       '<div class="rb-conclusion-line">你已经' + esc(range.percentile || "超越 45% 的家长") + '。</div>' +

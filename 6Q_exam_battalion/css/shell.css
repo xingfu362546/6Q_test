@@ -585,6 +585,8 @@ button { cursor: pointer; }
 .ex-radio-row { display: flex; flex-wrap: wrap; gap: 16px; }
 .ex-radio { display: inline-flex; align-items: center; gap: 6px; color: var(--ex-ink-2); font-size: 12px; cursor: pointer; }
 .ex-radio input { accent-color: var(--ex-blue); }
+.ex-radio--locked { color: var(--ex-muted); cursor: not-allowed; }
+.ex-radio--locked input { cursor: not-allowed; }
 .ex-check { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
 .ex-check input { accent-color: var(--ex-blue); }
 
