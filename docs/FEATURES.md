@@ -91,7 +91,7 @@
 | EX-051 | 模板级结果页版式开关 | done | `replica.html?p=template-form&id=tpl-parent&tab=1&note=EX-051` | `resultLayout`：1 旧版 / 2 新版；默认 1；挂在模板，模板赋给商品后生效；新版下正态分布与和谐指数开关整行移除 |
 | EX-052 | 新风控与转化文案 | done | `replica.html?p=template-form&id=tpl-parent&tab=3&note=EX-052` | `riskTip` / `ctaText` / `ctaSubText` / `ctaQrCode`；档位表加 `badge` / `quote` / `percentile` |
 | EX-053 | 导出题目与选项原文 | partial | `replica.html?p=data&note=EX-053` | 题目列写题目原文、选项值写选项原文，替代「问题N / A、B、C、D」；明细来自卷王答题明细，字段名待确认；原型只做预览不产出文件 |
-| EX-054 | 各维度文案配置 | done | `replica.html?p=template-form&id=tpl-parent&tab=3&note=EX-054` | 各维度指标结果扩五列：卡点 / 风险 / 欣赏 / 小建议 / 相对优势版，按维度取索引为 0 的行 |
+| EX-054 | 各维度文案配置 | done | `replica.html?p=template-form&id=tpl-parent&tab=3&note=EX-054` | 各维度指标结果扩四列：卡点 / 风险 / 欣赏 / 相对优势版，按维度取索引为 0 的行 |
 
 ### 2. H5（固定模拟数据）
 
@@ -107,7 +107,7 @@
 | EX-208 | 扫码分流与免费无感建单 | done | `entry.html?goodsId=g-free&ref=S6MULM1` | 免费自动建 0 元订单直进测评；收费进商品详情 |
 | EX-209 | 推荐关系继承 | done | 同上带 `ref` | ref 落库、首次优先、订单带 referrer |
 | EX-210 | 扫码登录校验 | done | 同上（清 session） | 未登录跳登录并 redirect 回跳；H5/APP 一致 |
-| EX-211 | 这些力，值得欣赏 | done | `result.html?record=demo-mid&note=EX-211` | 排除卡点维度、阈值 2/3、降序最多 3 条；全低于阈值时用相对优势版兜底；版块顺序 卡点 → 风险 → 欣赏 |
+| EX-211 | 这些力，值得欣赏 | done | `result.html?record=demo-mid&note=EX-211` | 只展示 1 条：非卡点维度中分数最高者，同分取索引更小；低于 8 分改用相对优势版；无小建议。版块顺序 卡点 → 风险 → 欣赏 |
 
 ### 3. 报告结构（v2.2）
 
@@ -116,10 +116,11 @@
 | 1 | 报告头 + 总分 + 五维雷达 + 档位结论 | EX-201 / EX-202 |
 | 2 | 您的核心卡点 | EX-203 |
 | 3 | 您的孩子正在经历什么 | EX-204 |
-| 4 | 这些力，值得欣赏（1–3 条） | EX-211 |
+| 4 | 这些力，值得欣赏（固定 1 条） | EX-211 |
 | 5 | 深度了解 + 底部三层 CTA | EX-205 |
 
-测试三档：`demo-low`（兜底 1 条相对优势版）、`demo-mid`（3 条）、`demo-high`（卡点维度被排除）。
+测试三档：`demo-low`（相对优势版兜底，情感链接力 4 分）、`demo-mid`（走心沟通力 8 分）、`demo-high`（情感链接力 12 分）。
+三档都只展示 1 条；同分时取维度配置顺序靠前的那个。
 
 ### 4. 扫码进入链路
 

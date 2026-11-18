@@ -90,15 +90,6 @@
   letter-spacing: .3px;
 }
 .rb-app-text { margin-top: 8px; font-size: 14px; line-height: 1.95; color: #4B4548; }
-.rb-app-tip {
-  margin-top: 10px;
-  padding: 9px 11px;
-  border-radius: 9px;
-  background: #F1F9F1;
-  color: #2F6B3A;
-  font-size: 13px;
-  line-height: 1.85;
-}
 
 .rb-deep-text { margin-top: 12px; font-size: 14px; line-height: 1.95; color: #4B4548; }
 .rb-deep-sub { margin-top: 12px; font-size: 13px; color: #8A8285; line-height: 1.8; }

@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>测评管理 · v2.2 功能清单</title>
-  <style>
+  <title>测评管理 · v2.2 功能清单</title>  <style>
     :root {
       --ink: #0f172a; --ink2: #334155; --muted: #64748b; --line: rgba(15,23,42,.08);
       --blue: #1677ff; --deep: #0b2b5c; --bg: #f1f5f9; --red: #cf1322; --amber: #d48806; --green: #389e0d;
@@ -61,7 +60,7 @@
 <body>
   <div class="nav-page">
     <header class="nav-hero">
-      <p class="nav-hero__eye">EXAM · v2.2 · 本期需求清单</p>
+      <p class="nav-hero__eye">EXAM · v2.2.1 · 本期需求清单</p>
       <h1>测评管理 · 亲子养育报告改版</h1>
       <p>
         本清单只列 v2.1.0 / v2.2 补丁本期需求，共 15 条：后台 4 条（EX-051 ~ EX-054）、H5 报告与分享链路 11 条（EX-201 ~ EX-211）。
@@ -194,22 +193,22 @@
           <tr id="req-EX-054">
             <td class="no"><a href="replica.html?p=template-form&id=tpl-parent&tab=3&note=EX-054">EX-054</a></td>
             <td class="scope">要做</td>
-            <td class="ui ui--yes">需 UI<span class="ui-note">各维度指标结果扩五列</span></td>
+            <td class="ui ui--yes">需 UI<span class="ui-note">各维度指标结果扩四列</span></td>
             <td class="st">设计已实现</td>
             <td class="team">测评项目组</td>
             <td class="who">需求方</td>
             <td class="mod">测评模板</td>
             <td class="text">卡点、风险、欣赏三段文案都要能按维度配置，运营改文案不用发版；现在卡点和风险写死在前端，欣赏文案没有落点。</td>
             <td class="logic">
-              1、「各维度指标结果」新增五列：卡点文案 <code>painText</code>、风险文案 <code>riskText</code>、欣赏文案 <code>appreciate</code>、欣赏小建议 <code>appreciateTip</code>、相对优势版 <code>appreciateAlt</code>。<br />
+              1、「各维度指标结果」新增四列：卡点文案 <code>painText</code>、风险文案 <code>riskText</code>、欣赏文案 <code>appreciate</code>、相对优势版 <code>appreciateAlt</code>。<br />
               2、按维度配置，<b>取该维度索引为 0 的那一行</b>；前端按维度 key 读取。<br />
-              3、卡点维度读自己的卡点与风险；欣赏只取非卡点维度。<br />
+              3、卡点、风险、欣赏都<b>只展示一条</b>：卡点取最低分维度、风险取同一维度、欣赏取分数最高的非卡点维度；分数相同时取索引更小的。<br />
               4、任一字段留空时该段不渲染，不出现空段落。<br />
               5、旧的「详细解读 / 建议」保留，供旧版结果页使用。<br />
-              6、模板详情同步展示这五列，便于核对。
+              6、v2.2.1 移除「欣赏小建议」列。
             </td>
             <td class="api">
-              <span class="new">新增字段</span> <code>painText</code> <code>riskText</code> <code>appreciate</code> <code>appreciateTip</code> <code>appreciateAlt</code><br />
+              <span class="new">新增字段</span> <code>painText</code> <code>riskText</code> <code>appreciate</code> <code>appreciateAlt</code><br />
               GET <code>exam/exam/templete/detail</code> / POST <code>create</code> / PUT <code>modify</code> 的 <code>dimensionExplains[]</code><br />
               GET <code>/exam/app/api/viewCheckResult</code> 的 <code>weiduExplainList[]</code><br />
               <span class="keep">不新增接口、不新建表</span>
@@ -512,20 +511,21 @@
             <td class="logic">
               1、结论区去重：档位描述渲染前剥掉与「超越百分比」重复的前缀，兼容历史数据。<br />
               2、新增「这些力，值得欣赏 🌟」：候选为<b>排除核心卡点维度</b>后的其余 4 个维度。<br />
-              3、维度分 ≥ 每维满分 × 2/3（五力即 8 分）入选，按分数降序，最多 3 条。<br />
-              4、若全部低于阈值，取最高分那 1 个，文案改用「相对优势版」，保证人人至少 1 条。<br />
-              5、核心卡点维度永不出现在欣赏列表。<br />
-              6、<b>版块顺序：核心卡点 → 孩子正在经历什么 → 这些力值得欣赏</b>（规格书原稿把欣赏插在卡点与风险之间，按需求方口径改为先卡点与风险、后欣赏）。<br />
-              7、文案按维度从后台配置取，小建议单独成行。
+              3、<b>只展示 1 条</b>：取分数最高的非卡点维度，不展示多条。<br />
+              4、<b>同分取索引更小</b>（维度配置顺序靠前）的那个，保证结果唯一可复现。<br />
+              5、该维度低于 8 分（每维满分 × 2/3）时，文案改用「相对优势版」，保证人人都有 1 条。<br />
+              6、<b>不展示小建议</b>（v2.2.1 移除）。<br />
+              7、<b>版块顺序：核心卡点 → 孩子正在经历什么 → 这些力值得欣赏</b>（规格书原稿把欣赏插在卡点与风险之间，按需求方口径改为先卡点与风险、后欣赏）。<br />
+              8、卡点与风险同样只展示一条：卡点取最低分维度、风险取同一维度，分数相同时取索引更小的。
             </td>
             <td class="api">
               GET <code>/exam/app/api/viewCheckResult</code><br />
-              <code>weiduExplainList[]</code> 携带 <code>painText</code> / <code>riskText</code> / <code>appreciate</code> / <code>appreciateTip</code> / <code>appreciateAlt</code>（同 EX-054）<br />
+              <code>weiduExplainList[]</code> 携带 <code>painText</code> / <code>riskText</code> / <code>appreciate</code> / <code>appreciateAlt</code>（同 EX-054）<br />
               <span class="keep">与计分、分档、卡点算法解耦</span>
             </td>
             <td class="proto">
               <a href="../6Q_exam_h5/result.html?record=demo-low&goodsId=g-parent&note=EX-211"><span class="tag">低档 16 分</span>相对优势版兜底</a>
-              <a href="../6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent&note=EX-211"><span class="tag">中档 40 分</span>3 条欣赏</a>
+              <a href="../6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent&note=EX-211"><span class="tag">中档 40 分</span>单条欣赏</a>
               <a href="../6Q_exam_h5/result.html?record=demo-high&goodsId=g-parent&note=EX-211"><span class="tag">高档 56 分</span>卡点维度被排除</a>
             </td>
           </tr>

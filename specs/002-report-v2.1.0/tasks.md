@@ -107,6 +107,16 @@
 - [x] T7D-7 注释 EX-054（后台）与 EX-211（H5）
 - [x] T7D-8 清单增至 15 条；requirements / data-model / contracts 同步
 
+## 阶段 7·5 · 欣赏收敛为单条（v2.2.1）
+
+- [x] T7E-1 欣赏只展示 1 条：非卡点维度中分数最高者
+- [x] T7E-2 同分取索引更小的维度，不并列展示
+- [x] T7E-3 8 分阈值只用于判断是否改用相对优势版措辞
+- [x] T7E-4 移除欣赏小建议：前端渲染、CSS、后台列、数据字段全部删除
+- [x] T7E-5 卡点与风险的「同分取索引小」在 spec 中写明
+- [x] T7E-6 注释 EX-054 / EX-211 与功能清单同步
+- [x] T7E-7 requirements / data-model / contracts / checklist / FEATURES / CHANGELOG 同步
+
 ## 阶段 8 · 待需求方确认
 
 - [ ] T8-1 五维卡点文案（POWER_PAIN）定稿

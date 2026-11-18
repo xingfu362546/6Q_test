@@ -241,14 +241,14 @@ raw[i] = round(dims[i].value / 100 * maxPer)
 | `painText` | string | 卡点文案 |
 | `riskText` | string | 风险文案 |
 | `appreciate` | string | 欣赏文案 |
-| `appreciateTip` | string | 欣赏小建议 |
 | `appreciateAlt` | string | 相对优势版 |
 
-后台 `exam/exam/templete/detail` / `create` / `modify` 的 `dimensionExplains[]` 同步收发这五个字段，
+后台 `exam/exam/templete/detail` / `create` / `modify` 的 `dimensionExplains[]` 同步收发这四个字段，
 取该维度索引为 0 的那一行。旧的 `detail` / `suggest` 保留不动。
 
-建议后端直接返回 `appreciations` 数组（`[{dim, score, text}]`）以减少前端重复计算，
+建议后端直接返回 `appreciation` 对象（`{dim, dimName, score, text}`）以减少前端重复计算，
 但原型为保持「只扩字段」原则，仍由前端按 `scoreList` 计算。
+返回对象只应有一条：非卡点维度中分数最高者，同分取索引更小。
 
 ## 10. 埋点建议（待确认）
 

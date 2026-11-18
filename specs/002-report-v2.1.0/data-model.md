@@ -51,25 +51,38 @@
 | 字段 | 类型 | 必填 | 说明 |
 | --- | --- | --- | --- |
 | `painText` | text | 否 | 卡点文案，核心卡点维度的剖析 |
-| `riskText` | text | 否 | 风险文案，该维度对应的风险预警 |
+| `riskText` | text | 否 | 风险文案，与卡点同维度的风险预警 |
 | `appreciate` | text | 否 | 欣赏文案，句式「欣赏你 + 行为白描 + 意义升华」 |
-| `appreciateTip` | text | 否 | 欣赏小建议 |
-| `appreciateAlt` | text | 否 | 相对优势版，非卡点维度全部低于阈值时的兜底 |
+| `appreciateAlt` | text | 否 | 相对优势版，该维度低于 8 分时改用此措辞 |
 
 规则：
 
-- 卡点维度取自己的 `painText` / `riskText`；欣赏只取非卡点维度。
+- 卡点、风险、欣赏三段都**只取一条**：卡点取最低分维度、风险取同维度、欣赏取最高分的非卡点维度；
+  分数相同时取 `dims` 中**索引更小**的维度。
 - 任一字段为空时该段不渲染。
 - 旧的 `detail` / `suggest` 仍保留，供旧版结果页使用。
 
 ## 3.2 欣赏版块派生数据
 
 ```js
-maxPer = round(record.total / dims.length)          // 12
-thr    = round(maxPer * 2 / 3)                      // 8
-cand   = dims.filter(d => d.key !== painKey).map(...)  // 排除卡点维度
-top    = cand.filter(c => c.score >= thr).sort(desc).slice(0, 3)
-if (!top.length) top = [max(cand)]; useAlt = true   // 兜底 1 条
+maxPer = round(record.total / dims.length)   // 12
+thr    = round(maxPer * 2 / 3)               // 8，只用于判断是否改用相对优势版
+
+// 只取 1 条：非卡点维度中分数最高；同分取索引更小
+best = null
+dims.forEach((d, i) => {
+  if (d.key === painKey) return
+  if (!best || raw[i] > best.score) best = { key: d.key, name: d.name, score: raw[i] }
+})
+
+useAlt = best.score < thr
+text   = useAlt ? dimCopy[best.key].appreciateAlt : dimCopy[best.key].appreciate
+```
+
+卡点派生同理，取最低分维度，同分取索引更小的（`v < min` 才替换，相等不替换）：
+
+```js
+dims.forEach((d, i) => { if (raw[i] < painMin) { painMin = raw[i]; painKey = d.key } })
 ```
 
 与计分、分档（24/48）、卡点命中算法完全解耦。

@@ -599,35 +599,31 @@
     var riskText = (painCopy && painCopy.riskText) || g.riskTip || "";
     if (!riskText && g.painCopy && g.painCopy[painKey]) riskText = g.painCopy[painKey].risk || "";
 
-    /* 这些力，值得欣赏（v2.2）
-       规则：排除核心卡点维度 → 维度分 ≥ 8（满分 12 的 2/3）→ 按分数降序取前 3；
-       若都不到 8 分，取非卡点维度里最高分那 1 个，改用「相对优势版」措辞。 */
+    /* 这些力，值得欣赏（v2.2.1）
+       只展示 1 条：取排除核心卡点维度后分数最高的那个维度；
+       分数相同时取索引更小（维度配置顺序靠前）的那个，保证结果唯一且可复现。
+       阈值 8 分（满分 12 的 2/3）只用于判断「要不要换相对优势版措辞」，不影响取哪一条。 */
     var appreciateMin = Math.round(maxPer * 2 / 3);
-    var appreciateList = [];
-    var candidates = [];
+    var best = null;
     dims.forEach(function (d, i) {
       if (d.key === painKey) return;
-      candidates.push({ key: d.key, name: d.name, score: rawScores[i] });
+      var cur = { key: d.key, name: d.name, score: rawScores[i] };
+      if (!best || cur.score > best.score) best = cur;
     });
-    var qualified = candidates.filter(function (c) { return c.score >= appreciateMin; });
-    var useFallback = false;
-    if (qualified.length) {
-      qualified.sort(function (a, b) { return b.score - a.score; });
-      appreciateList = qualified.slice(0, 3);
-    } else if (candidates.length) {
-      useFallback = true;
-      appreciateList = candidates.slice().sort(function (a, b) { return b.score - a.score; }).slice(0, 1);
+    var useFallback = !!best && best.score < appreciateMin;
+    var appreciate = null;
+    if (best) {
+      var bestCopy = (g.dimCopy && g.dimCopy[best.key]) || null;
+      if (bestCopy) {
+        appreciate = {
+          key: best.key,
+          name: best.name,
+          score: best.score,
+          text: useFallback ? (bestCopy.appreciateAlt || bestCopy.appreciate || "") : (bestCopy.appreciate || "")
+        };
+        if (!appreciate.text) appreciate = null;
+      }
     }
-    appreciateList = appreciateList.map(function (c) {
-      var copy = (g.dimCopy && g.dimCopy[c.key]) || null;
-      return {
-        key: c.key,
-        name: c.name,
-        score: c.score,
-        text: copy ? (useFallback ? (copy.appreciateAlt || copy.appreciate) : copy.appreciate) : "",
-        tip: copy ? copy.appreciateTip : ""
-      };
-    }).filter(function (c) { return c.text; });
 
     var recommend = [
       { name: "高EQ父母 · 亲子沟通课", price: 199 },
@@ -657,15 +653,12 @@
       (riskText ? '<div class="rb-card rb-risk"><div class="rb-card-title">您的孩子正在经历什么？' + dot("rb-risk") + '</div>' +
         '<div class="rb-risk-text">' + esc(riskText) + '</div></div>' : "") +
 
-      (appreciateList.length ? '<div class="rb-card rb-appreciate"><div class="rb-card-title">这些力，值得欣赏 🌟' + dot("rb-appreciate") + '</div>' +
+      (appreciate ? '<div class="rb-card rb-appreciate"><div class="rb-card-title">这些力，值得欣赏 🌟' + dot("rb-appreciate") + '</div>' +
         '<div class="rb-appreciate-sub">' + (useFallback ? "这一次先看看你已经走在前面的一点。" : "除了要练的那一块，你身上也有已经长出来的力量。") + '</div>' +
-        appreciateList.map(function (a) {
-          return '<div class="rb-app-item">' +
-            '<div class="rb-app-head">【' + esc(a.name) + '】（' + a.score + '分）</div>' +
-            '<div class="rb-app-text">' + esc(a.text) + '</div>' +
-            (a.tip ? '<div class="rb-app-tip">小建议：' + esc(a.tip) + '</div>' : "") +
-            "</div>";
-        }).join("") + '</div>' : "") +
+        '<div class="rb-app-item">' +
+        '<div class="rb-app-head">【' + esc(appreciate.name) + '】（' + appreciate.score + '分）</div>' +
+        '<div class="rb-app-text">' + esc(appreciate.text) + '</div>' +
+        "</div></div>" : "") +
 
       (g.ctaText ? '<div class="rb-card rb-deep"><div class="rb-card-title">如果您想深度了解' + dot("rb-cta") + '</div>' +
         '<div class="rb-deep-text">' + esc(g.ctaText) + '</div>' +

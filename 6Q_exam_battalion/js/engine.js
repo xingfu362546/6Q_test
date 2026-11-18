@@ -1041,7 +1041,6 @@
           '<td><textarea class="ex-textarea" data-dimx="' + i + '" data-dimx-field="painText" rows="2" placeholder="卡点文案">' + esc(d.painText || d.detail || "") + "</textarea></td>" +
           '<td><textarea class="ex-textarea" data-dimx="' + i + '" data-dimx-field="riskText" rows="2" placeholder="风险文案">' + esc(d.riskText || "") + "</textarea></td>" +
           '<td><textarea class="ex-textarea" data-dimx="' + i + '" data-dimx-field="appreciate" rows="2" placeholder="欣赏文案（欣赏你…）">' + esc(d.appreciate || "") + "</textarea></td>" +
-          '<td><textarea class="ex-textarea" data-dimx="' + i + '" data-dimx-field="appreciateTip" rows="2" placeholder="欣赏小建议">' + esc(d.appreciateTip || "") + "</textarea></td>" +
           '<td><textarea class="ex-textarea" data-dimx="' + i + '" data-dimx-field="appreciateAlt" rows="2" placeholder="相对优势版（兜底用）">' + esc(d.appreciateAlt || "") + "</textarea></td></tr>";
       }).join("");
       var ctaBlock = v2
@@ -1069,8 +1068,8 @@
         '<table class="ex-result-table"><thead>' + resultHead + "</thead><tbody>" + resultRows + "</tbody></table>" +
         '<button class="ex-btn ex-btn--sm ex-mt8" type="button" data-result-add>新增一个</button>' +
         '<div class="ex-section">各维度指标结果 ' + dot("template-dimcopy") + "</div>" +
-        '<div class="ex-alert">卡点、风险、欣赏三段文案都按维度配置，取该维度<b>索引为 0</b> 的那一行。欣赏文案分两版：先写「欣赏你…」，再写「相对优势版」用于非卡点维度全部低于 8 分时的兜底。</div>' +
-        '<table class="ex-result-table"><thead><tr><th style="width:110px">维度指标名称</th><th style="width:130px">指标范围</th><th>卡点文案</th><th>风险文案</th><th>欣赏文案</th><th>欣赏小建议</th><th>相对优势版</th></tr></thead><tbody>' + dimRows + "</tbody></table>" +
+        '<div class="ex-alert">卡点、风险、欣赏三段文案都按维度配置，取该维度<b>索引为 0</b> 的那一行。欣赏文案只展示<b>一条</b>（分数最高、同分取索引更小），不展示小建议；再写一版「相对优势版」，用于该维度分数低于 8 分时的兜底措辞。</div>' +
+        '<table class="ex-result-table"><thead><tr><th style="width:110px">维度指标名称</th><th style="width:130px">指标范围</th><th>卡点文案</th><th>风险文案</th><th>欣赏文案</th><th>相对优势版</th></tr></thead><tbody>' + dimRows + "</tbody></table>" +
         "</div>";
     }
 
@@ -1273,11 +1272,11 @@
         (isNew ? '<div class="ex-alert">新版结果页不含正态分布图与 6Q 和谐指数。</div>' : "") +
         '<table class="ex-result-table"><thead>' + resultHead + "</thead><tbody>" + resultBody + "</tbody></table>" +
         ctaDesc +
-        '<div class="ex-section">各维度指标结果</div><table class="ex-result-table"><thead><tr><th>维度指标</th><th>指标范围</th><th>卡点文案</th><th>风险文案</th><th>欣赏文案</th><th>欣赏小建议</th><th>相对优势版</th></tr></thead><tbody>' +
+        '<div class="ex-section">各维度指标结果</div><table class="ex-result-table"><thead><tr><th>维度指标</th><th>指标范围</th><th>卡点文案</th><th>风险文案</th><th>欣赏文案</th><th>相对优势版</th></tr></thead><tbody>' +
         row.dimensionExplains.map(function (d) {
           return "<tr><td>" + esc(d.name) + "</td><td>" + d.scoreMin + " — " + d.scoreMax + " 分</td><td>" + esc(d.painText || d.detail || "-") +
             "</td><td>" + esc(d.riskText || "-") + "</td><td>" + esc(d.appreciate || "-") +
-            "</td><td>" + esc(d.appreciateTip || "-") + "</td><td>" + esc(d.appreciateAlt || "-") + "</td></tr>";
+            "</td><td>" + esc(d.appreciateAlt || "-") + "</td></tr>";
         }).join("") + "</tbody></table>";
     }
     mount.innerHTML = pageHead(row.title, row.subTitle + " · " + row.categoryName + " · " + row.questionCount + " 题 · 约 " + row.totalTime + " 分钟") +
