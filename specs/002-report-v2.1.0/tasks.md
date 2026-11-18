@@ -117,6 +117,17 @@
 - [x] T7E-6 注释 EX-054 / EX-211 与功能清单同步
 - [x] T7E-7 requirements / data-model / contracts / checklist / FEATURES / CHANGELOG 同步
 
+## 阶段 7·6 · 按 UI 设计稿还原（v2.3.0）
+
+- [x] T7F-1 解析 Sketch：3 个画板、图层清单归档到 `docs/design/`
+- [x] T7F-2 雷达改 151×144 五边形 + 五维环绕标注
+- [x] T7F-3 导航/日期/总分排版按设计稿调整
+- [x] T7F-4 风险卡改 #F44E7E 标题条，欣赏卡改 #FFF0F1 内块
+- [x] T7F-5 深度了解改三行课程；反馈卡星星/计数/按钮按设计稿
+- [x] T7F-6 底部改 #FF9E4D + #8393C9 / #EE5896
+- [x] T7F-7 海报 303×528、二维码抽屉 143×143 + #09C382
+- [x] T7F-8 新增注释 EX-212；清单增至 16 条；CHANGELOG / FEATURES / requirements 同步
+
 ## 阶段 8 · 待需求方确认
 
 - [ ] T8-1 五维卡点文案（POWER_PAIN）定稿

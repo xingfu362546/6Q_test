@@ -1,0 +1,1191 @@
+==================== PAGE: 页面 1 (2790EF40-B2F0-42DD-86BA-CEE8231E4C75.json) ====================
+
+### ARTBOARD: 测评答题页-分享海报  [1084,-823 375x812]  class=artboard
+  - 编组 4  [-30,-44 471x332]
+    - 矩形  [30,44 375x288] fills=#D8D8D8 stroke=#979797/1
+    - 维度结果页底图  [0,0 238x136] fills=#FFDAEA stroke=#979797/1
+    - 维度结果页底图  [233,120 238x136] fills=#FFB6D6 stroke=#979797/1
+    - 72fbb669cc48ee95bfa0e391afcf36ba  [217,72 212x170]
+    - 矩形  [30,44 375x288]
+  - 编组 13  [16,89 87x20]
+    - 编组备份  [0,0 87x20]
+      - 编组  [0,0 20x20]
+        - Fill 1  [0,0 20x20] fills=#000000 stroke=#FFFFFF/2.4
+          - 路径  [15,0 4x20]
+          - 路径  [14,2 2x13]
+          - 路径  [5,4 9x15]
+          - 路径  [1,0 12x14]
+          - 路径  [0,11 5x8]
+          - 路径  [0,5 5x5]
+      - Fill 3  [23,0 20x20] fills=#000000 stroke=#FFFFFF/2.4
+        - 路径  [15,4 5x6]
+        - 路径  [7,4 5x6]
+        - 路径  [6,1 14x19]
+        - 路径  [1,0 5x5]
+        - 路径  [0,6 8x13]
+      - 编组  [45,0 20x20]
+        - Fill 5  [0,0 20x20] fills=#000000 stroke=#FFFFFF/2.4
+          - 路径  [8,0 12x20]
+          - 路径  [0,0 8x20]
+      - Fill 7  [68,0 19x20] fills=#000000 stroke=#FFFFFF/2.4
+        - 路径  [5,14 10x3]
+        - 路径  [2,11 16x9]
+        - 路径  [0,0 19x10]
+    - 编组  [0,0 87x20]
+      - 编组  [0,0 20x20]
+        - Clip 2  [0,0 20x20]
+        - Fill 1  [0,0 20x20] fills=#000000
+          - 路径  [15,0 4x20]
+          - 路径  [14,2 2x13]
+          - 路径  [5,4 9x15]
+          - 路径  [1,0 12x14]
+          - 路径  [0,11 5x8]
+          - 路径  [0,5 5x5]
+      - Fill 3  [23,0 20x20] fills=#000000
+        - 路径  [15,4 5x6]
+        - 路径  [7,4 5x6]
+        - 路径  [6,1 14x19]
+        - 路径  [1,0 5x5]
+        - 路径  [0,6 8x13]
+      - 编组  [45,0 20x20]
+        - Clip 6  [0,0 20x20]
+        - Fill 5  [0,0 20x20] fills=#000000
+          - 路径  [8,0 12x20]
+          - 路径  [0,0 8x20]
+      - Clip 8  [0,0 87x20]
+      - Fill 7  [68,0 19x20] fills=#000000
+        - 路径  [5,14 10x3]
+        - 路径  [2,11 16x9]
+        - 路径  [0,0 19x10]
+  - iPhone X/Status Bars/Status Bar (Black)备份 4  [0,0 375x44]
+  - 首页/导航栏  [16,55 204x22]
+    - 测评报告  [138,0 66x22]  TEXT="测评报告" size=16 font=PingFangSC-Medium color=#392D2B align=2
+    - 返回  [0,5 13x13]
+      - 矩形  [0,0 13x13] fills=#000000
+      - 路径  [3,1 6x11]
+      - 返回  [0,0 13x13]
+  - 转发  [343,56 20x20]
+    - 矩形  [0,0 20x20] fills=#555152
+    - 路径  [4,4 13x13]
+    - 形状  [3,4 13x13] fills=#592B0C
+      - 路径  [0,0 13x13]
+      - 路径  [0,0 12x12]
+      - 路径  [9,0 4x4]
+    - 形状  [12,4 5x5] fills=#592B0C
+      - 路径  [0,0 5x5]
+      - 路径  [0,0 4x4]
+    - 路径  [9,4 7x7]
+    - 形状  [9,4 7x7] fills=#592B0C
+      - 路径  [0,0 7x7]
+      - 路径  [0,0 7x7]
+    - 全局/转发  [0,0 20x20]
+  - 矩形  [12,145 351x455] fills=#FFFFFF stroke=#979797/1 radius=12
+  - 亲爱的，你的测评结果显示：  [27,476 186x20]  TEXT="亲爱的，你的测评结果显示：" size=14 font=PingFangSC-Regular color=#221F20 align=2
+  - 你已经超越 95% 的家长。 亲爱的，你  [28,500 319x80]  TEXT="你已经超越 95% 的家长。\n亲爱的，你的测评结果显示:你已经超过了 95%的家长。\n你能稳稳接住情绪，也愿意把选择权还给孩子。" size=14 font=PingFangSC-Regular color=#221F20 align=0
+  - 编组 3  [112,250 151x144]
+    - Fill 1  [0,0 151x144]
+    - Fill 1备份  [57,54 38x36]
+    - Fill 1备份 2  [38,36 76x72]
+    - Fill 1备份 4  [19,18 114x108]
+    - 直线 5备份  [0,55 76x88]
+    - 路径 3  [76,55 76x89]
+    - 路径 4  [75,0 1x72]
+  - Stroke 2  [147,278 79x108]
+  - 椭圆形  [143,381 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 2  [146,309 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 3  [213,365 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 4  [222,309 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 5  [184,274 8x8] fills=#FF577D stroke=#979797/1
+  - 测评结果  [27,158 66x22]  TEXT="测评结果" size=16 font=PingFangSC-Regular color=#57484C align=2
+  - 总分：56分  [104,158 85x22]  TEXT="总分：56分" size=16 font=PingFangSC-Medium color=#221F20 align=2
+  - 椭圆形  [-49,775 133x133] fills=#FFDBE1 stroke=#979797/1
+  - 矩形备份  [12,612 351x184] fills=#FFFFFF stroke=#979797/1 radius=8
+  - 编组  [28,628 132x21]
+    - 编组  [0,0 21x20]
+      - Clip 2  [0,0 21x20]
+      - Fill 1  [0,0 21x20] fills=#000000
+        - 路径  [15,13 6x7]
+        - 路径  [15,6 5x6]
+        - 路径  [10,5 4x8]
+        - 路径  [9,13 4x5]
+        - 路径  [6,0 14x7]
+        - 路径  [5,6 5x6]
+        - 路径  [5,13 10x7]
+        - 路径  [0,0 5x12]
+        - 路径  [0,13 5x6]
+    - 编组  [23,0 19x21]
+      - Clip 4  [0,0 19x21]
+      - Fill 3  [0,0 19x21] fills=#000000
+        - 路径  [10,8 6x7]
+        - 路径  [9,0 10x20]
+        - 路径  [3,13 3x4]
+        - 路径  [3,6 3x4]
+        - 路径  [0,0 9x20]
+    - Fill 5  [44,0 21x21] fills=#000000
+      - 路径  [8,11 13x10]
+      - 路径  [8,0 13x16]
+      - 路径  [1,1 8x20]
+      - 路径  [0,8 3x10]
+    - Fill 7  [66,1 21x19] fills=#000000
+      - 路径  [15,6 6x9]
+      - 路径  [9,0 6x8]
+      - 路径  [6,4 11x15]
+      - 路径  [0,6 5x10]
+    - Fill 9  [90,1 20x20] fills=#000000
+      - 路径  [11,11 7x7]
+      - 路径  [0,0 20x20]
+    - Fill 11  [111,1 21x20] fills=#000000
+      - 路径  [15,14 5x6]
+      - 路径  [11,15 4x5]
+      - 路径  [6,15 4x5]
+      - 路径  [5,8 10x3]
+      - 路径  [2,0 17x14]
+      - 路径  [0,14 5x6]
+  - 心画映射测试是一种通过绘画来了解个体内心  [28,657 319x120]  TEXT="心画映射测试是一种通过绘画来了解个体内心世界的心理测试方法。它要求受测者按照指定的主题或自由创作一幅画，通过绘画过程来展现受测者潜意识中的情感、冲突和性格特点。它要求受测者按照指定的主题或自由创作一幅画，通过绘画过程来展现受测者潜意识中的情感、冲突和性格特点。" size=14 font=PingFangSC-Regular color=#FFFFFF align=0
+  - 矩形  [0,1697 375x122] fills=#FFFFFF stroke=#979797/1
+  - 矩形备份  [12,1404 351x281] fills=#FFFFFF stroke=#979797/1 radius=4
+  - 编组  [24,1418 188x54]
+    - 请为这份量表准确度评分：  [0,0 168x20]  TEXT="请为这份量表准确度评分：" size=14 font=PingFangSC-Medium color=#333333 align=0
+    - 星星 (1)  [0,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#FF709C
+        - 路径  [0,0 23x22]
+    - 星星 (1)备份  [30,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#FF709C
+        - 路径  [0,0 23x22]
+      - 选中评分  [0,0 26x26]
+    - 星星 (1)备份 2  [60,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#272636
+        - 路径  [0,0 23x22]
+        - 路径  [1,1 20x19]
+      - 未选中评分  [0,0 26x26]
+    - 星星 (1)备份 3  [90,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#272636
+        - 路径  [0,0 23x22]
+        - 路径  [1,1 20x19]
+    - 星星 (1)备份 4  [120,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#272636
+        - 路径  [0,0 23x22]
+        - 路径  [1,1 20x19]
+    - 2分  [162,30 26x22]  TEXT="2分" size=16 font=PingFangSC-Medium color=#FF437D align=2
+  - 反馈内容  [24,1492 56x20]  TEXT="反馈内容" size=14 font=PingFangSC-Medium color=#333333 align=0
+  - 矩形  [24,1524 327x93] fills=#F8F8F8 stroke=#979797/1 radius=4
+  - 输入您对于该量表的反馈内容  [36,1536 182x20]  TEXT="输入您对于该量表的反馈内容" size=14 font=PingFangSC-Regular color=#999999 align=0
+  - 0/500  [298,1585 41x20]  TEXT="0/500" size=14 font=PingFangSC-Regular color=#999999 align=0
+  - 编组  [24,1709 327x40]
+    - 矩形  [0,0 327x40] fills=#FF9E4D stroke=#979797/1 radius=22
+    - 预约导师1v1解读  [97,10 113x21]  TEXT="预约导师1v1解读" size=15 font=PingFangSC-Medium color=#FFFFFF align=2
+  - 矩形  [24,1760 153x40] fills=#8393C9 stroke=#979797/1 radius=22
+  - 矩形备份 2  [198,1760 153x40] fills=#EE5896 stroke=#979797/1 radius=22
+  - 查看历史测试记录  [43,1770 114x20]  TEXT="查看历史测试记录" size=14 font=PingFangSC-Medium color=#FFFFFF align=2
+  - 再答一次  [247,1770 57x20]  TEXT="再答一次" size=14 font=PingFangSC-Medium color=#FFFFFF align=2
+  - 编组备份 2  [24,1629 327x40]
+    - 矩形  [0,0 327x40] fills=#E54175 stroke=#979797/1 radius=22
+    - 提交反馈  [132,9 62x21]  TEXT="提交反馈" size=15 font=PingFangSC-Medium color=#FFFFFF align=2
+  - iPhone X/Home Indicator/Home Indicator - On Light  [0,1794 375x25]
+  - 测评日期：2026-12-20 20:0  [16,113 218x20]  TEXT="测评日期：2026-12-20 20:09:10" size=14 font=PingFangSC-Regular color=#656262 align=2
+  - 情感链接力  [152,198 72x20]  TEXT="情感链接力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 自我觉察力  [28,284 72x20]  TEXT="自我觉察力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 赋能托底力  [82,406 72x20]  TEXT="赋能托底力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 边界松弛力  [221,406 72x20]  TEXT="边界松弛力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 走心沟通力  [275,284 72x20]  TEXT="走心沟通力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - （12分）  [159,218 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - 矩形备份 6  [12,815 351x107] fills=#FFFFFF stroke=#979797/1 radius=8
+  - 矩形备份 7  [12,934 351x458] fills=#FFFFFF stroke=#979797/1 radius=8
+  - 编组 10  [28,1118 319x254]
+    - 直线备份  [0,78 319x1]
+    - 直线备份 2  [0,175 319x1]
+    - 9961678872232_.pic  [0,0 112x63]
+      - 蒙版  [0,0 112x63] fills=#D8D8D8 stroke=#979797/1 radius=4
+      - 9961678872232_.pic  [-1,0 113x63]
+    - 9951678872231_.pic  [0,97 112x63]
+      - 蒙版  [0,0 112x63] fills=#D8D8D8 stroke=#979797/1 radius=4
+      - 9951678872231_.pic  [0,0 112x63]
+    - 9951678872231_.pic备份  [0,191 112x63]
+      - 蒙版  [0,0 112x63] fills=#D8D8D8 stroke=#979797/1 radius=4
+      - 9951678872231_.pic  [0,0 112x63]
+    - 编组 5  [128,0 185x63]
+      - 助力孩子学习内在动力  [0,0 160x22]  TEXT="助力孩子学习内在动力" size=16 font=PingFangSC-Medium color=#464142 align=0
+      - ¥2580.0  [0,41 62x22]  TEXT="¥2580.0" size=16 font=PingFangSC-Medium color=#FF437D align=0
+      - 204人已学习  [115,46 70x17]  TEXT="204人已学习" size=12 font=PingFangSC-Regular color=#666666 align=0
+    - 编组 5备份  [128,97 185x63]
+      - 摆脱情绪内耗 做智慧父母  [0,0 182x22]  TEXT="摆脱情绪内耗 做智慧父母" size=16 font=PingFangSC-Medium color=#464142 align=0
+      - ¥2580.0  [0,41 62x22]  TEXT="¥2580.0" size=16 font=PingFangSC-Medium color=#FF437D align=0
+      - 204人已学习  [115,46 70x17]  TEXT="204人已学习" size=12 font=PingFangSC-Regular color=#666666 align=0
+    - 编组 5备份 2  [128,191 185x63]
+      - 摆脱情绪内耗 做智慧父母  [0,0 182x22]  TEXT="摆脱情绪内耗 做智慧父母" size=16 font=PingFangSC-Medium color=#464142 align=0
+      - ¥2580.0  [0,41 62x22]  TEXT="¥2580.0" size=16 font=PingFangSC-Medium color=#FF437D align=0
+      - 204人已学习  [115,46 70x17]  TEXT="204人已学习" size=12 font=PingFangSC-Regular color=#666666 align=0
+  - 直线  [28,1102 319x1]
+  - 添加导师微信，帮您把分数变成方向  [28,1066 228x20]  TEXT="添加导师微信，帮您把分数变成方向" size=14 font=PingFangSC-Regular color=#9E9698 align=0
+  - 想知道这个育儿卡点是如何形成的?为什么“  [28,978 319x80]  TEXT="想知道这个育儿卡点是如何形成的?为什么“道理都懂，面对孩子还是忍不住火大"?1对1测评深度解读，帮您把测评结果转化为一份可落地的《家庭育儿改善清单》。" size=14 font=PingFangSC-Regular color=#221F20 align=0
+  - 矩形  [23,955 162x11] fills=#D8D8D8 stroke=#979797/1 radius=6
+  - 编组  [28,946 154x18]
+    - Clip 2  [0,0 154x18]
+    - Fill 1  [0,1 17x17] fills=#000000
+      - 路径  [11,4 3x10]
+      - 路径  [9,1 8x16]
+      - 路径  [3,5 2x8]
+      - 路径  [0,0 8x17]
+    - Fill 3  [19,1 18x17] fills=#000000
+      - 路径  [12,12 6x4]
+      - 路径  [10,5 4x1]
+      - 路径  [10,3 4x1]
+      - 路径  [4,5 4x1]
+      - 路径  [4,3 4x1]
+      - 路径  [1,0 16x17]
+      - 路径  [0,12 6x4]
+    - Fill 4  [39,1 18x17] fills=#000000
+      - 路径  [13,11 5x6]
+      - 路径  [13,5 4x5]
+      - 路径  [9,4 4x7]
+      - 路径  [8,11 4x4]
+      - 路径  [5,0 12x6]
+      - 路径  [5,5 4x5]
+      - 路径  [5,11 9x6]
+      - 路径  [0,0 4x10]
+      - 路径  [0,11 4x5]
+    - Fill 5  [58,1 18x17] fills=#000000
+      - 路径  [10,8 4x1]
+      - 路径  [10,5 4x1]
+      - 路径  [10,2 4x1]
+      - 路径  [4,11 9x6]
+      - 路径  [1,0 17x16]
+      - 路径  [0,5 2x6]
+      - 路径  [0,11 4x5]
+    - Fill 6  [78,1 17x17] fills=#000000
+      - 路径  [14,11 4x6]
+      - 路径  [12,3 5x4]
+      - 路径  [5,6 12x10]
+      - 路径  [5,3 5x4]
+      - 路径  [5,11 4x6]
+      - 路径  [1,0 17x4]
+      - 路径  [0,10 4x7]
+      - 路径  [0,4 5x5]
+    - Fill 7  [97,0 17x18] fills=#000000
+      - 路径  [8,7 4x1]
+      - 路径  [4,11 14x7]
+      - 路径  [0,0 17x18]
+    - Fill 8  [118,2 16x16]
+    - Fill 9  [136,1 18x17] fills=#000000
+      - 路径  [9,1 9x16]
+      - 路径  [6,13 1x2]
+      - 路径  [6,9 1x1]
+      - 路径  [6,6 1x1]
+      - 路径  [3,9 1x1]
+      - 路径  [3,6 1x1]
+      - 路径  [3,3 2x1]
+      - 路径  [0,0 9x17]
+  - 您和孩子正在严重消耗中，如果不做调整，3  [28,862 319x40]  TEXT="您和孩子正在严重消耗中，如果不做调整，3-6个月内可以能出现沟通关闭、孩子不愿说话。" size=14 font=PingFangSC-Regular color=#221F20 align=0
+  - （12分）备份  [35,302 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - （12分）备份 3  [89,424 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - （12分）备份 4  [228,424 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - （12分）备份 2  [282,302 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - 编组 12  [12,808 242x42]
+    - 矩形  [0,0 242x42] fills=#F44E7E stroke=#979797/1 radius=4
+    - 编组  [16,13 190x17]
+      - 编组  [0,0 17x17]
+        - Clip 2  [0,0 17x17]
+        - Fill 1  [0,0 17x17] fills=#000000
+          - 路径  [12,10 4x5]
+          - 路径  [12,5 4x5]
+          - 路径  [8,4 3x7]
+          - 路径  [7,10 3x4]
+          - 路径  [5,0 11x5]
+          - 路径  [4,5 4x5]
+          - 路径  [4,11 8x6]
+          - 路径  [0,0 4x10]
+          - 路径  [0,11 4x5]
+      - 编组  [18,0 15x17]
+        - Clip 4  [0,0 15x17]
+        - Fill 3  [0,0 15x17] fills=#000000
+          - 路径  [8,7 5x6]
+          - 路径  [7,0 8x17]
+          - 路径  [2,10 3x4]
+          - 路径  [2,5 3x3]
+          - 路径  [0,0 7x17]
+      - Fill 5  [36,0 16x17] fills=#000000
+        - 路径  [6,9 10x8]
+        - 路径  [6,0 10x13]
+        - 路径  [0,1 7x15]
+      - Fill 7  [54,1 16x16]
+      - Fill 9  [72,1 16x15]
+      - Fill 11  [90,0 16x16] fills=#000000
+        - 路径  [5,5 11x11]
+        - 路径  [0,0 16x16]
+      - Fill 13  [107,0 17x16] fills=#000000
+        - 路径  [6,1 11x15]
+        - 路径  [0,0 7x12]
+        - 路径  [0,13 6x3]
+      - Fill 15  [125,0 16x17] fills=#000000
+        - 路径  [4,3 12x13]
+        - 路径  [0,0 16x16]
+      - Fill 17  [144,0 16x16] fills=#000000
+        - 路径  [5,0 11x16]
+        - 路径  [0,0 4x16]
+      - Fill 19  [162,0 16x16] fills=#000000
+        - 路径  [11,9 4x8]
+        - 路径  [0,1 12x15]
+        - 路径  [0,0 6x10]
+      - Fill 21  [181,1 9x14] fills=#000000
+        - 路径  [2,11 3x3]
+        - 路径  [0,0 9x10]
+    - 建议底图  [0,0 242x42]
+  - 收起箭头小  [239,1722 15x15]
+    - 矩形  [0,0 15x15] fills=#000000
+    - 路径  [1,4 13x7]
+    - 箭头  [0,0 15x15]
+  - 矩形  [0,0 375x812] fills=#000000 stroke=#979797/1
+  - 编组 2  [36,67 303x612]
+    - 28821717667832_.pic  [0,0 303x528]
+      - 蒙版  [0,0 303x528] fills=#3D2F99 stroke=#979797/1 radius=8
+      - 直线 2  [16,419 271x1]
+      - 72fbb669cc48ee95bfa0e391afcf36ba  [191,62 212x170]
+      - 海报底图  [0,0 303x528]
+    - 已有15,098位父母完成测评，依托6Q  [24,393 255x16]  TEXT="已有15,098位父母完成测评，依托6Q20年专业沉淀" size=11 font=PingFangSC-Regular color=#FFFFFF align=0
+    - 超越 95% 的家长  [71,361 162x28]  TEXT="超越 95% 的家长" size=20 font=PingFangSC-Medium color=#FFFFFF align=2
+    - 特急  [11,396 11x11]
+      - 矩形  [0,0 11x11] fills=#000000
+      - 路径  [2,1 8x9]
+      - 路径  [4,5 4x5]
+      - 火焰  [0,0 11x11]
+    - 矩形  [0,564 303x48] fills=#E54175 stroke=#979797/1 radius=24
+    - 编组 6  [12,131 279x216]
+      - 编组 3  [73,46 133x126]
+        - Fill 1  [0,0 133x126]
+        - Fill 1备份  [50,47 33x32]
+        - Fill 1备份 2  [33,32 67x63]
+        - Fill 1备份 4  [17,16 100x95]
+        - 直线 5备份  [0,48 66x78]
+        - 路径 3  [66,48 66x78]
+        - 路径 4  [66,0 1x63]
+      - Stroke 2  [104,70 69x95]
+      - 椭圆形  [101,161 7x7] fills=#FF577D stroke=#979797/0.8800000000000001
+      - 椭圆形备份 2  [103,98 7x7] fills=#FF577D stroke=#979797/0.8800000000000001
+      - 椭圆形备份 3  [162,147 7x7] fills=#FF577D stroke=#979797/0.8800000000000001
+      - 椭圆形备份 4  [170,98 7x7] fills=#FF577D stroke=#979797/0.8800000000000001
+      - 椭圆形备份 5  [137,67 7x7] fills=#FF577D stroke=#979797/0.8800000000000001
+      - 情感链接力  [108,0 62x17]  TEXT="情感链接力" size=12 font=PingFangSC-Medium color=#FFE8BE align=2
+      - 自我觉察力  [0,75 62x17]  TEXT="自我觉察力" size=12 font=PingFangSC-Medium color=#FFE8BE align=2
+      - 赋能托底力  [47,182 62x17]  TEXT="赋能托底力" size=12 font=PingFangSC-Medium color=#FFE8BE align=2
+      - 边界松弛力  [170,182 62x17]  TEXT="边界松弛力" size=12 font=PingFangSC-Medium color=#FFE8BE align=2
+      - 走心沟通力  [217,75 62x17]  TEXT="走心沟通力" size=12 font=PingFangSC-Medium color=#FFE8BE align=2
+      - （12分）  [115,17 50x17]  TEXT="（12分）" size=12 font=PingFangSC-Regular color=#FFFFFF align=2
+      - （12分）备份  [6,91 50x17]  TEXT="（12分）" size=12 font=PingFangSC-Regular color=#FFFFFF align=2
+      - （12分）备份 3  [53,199 50x17]  TEXT="（12分）" size=12 font=PingFangSC-Regular color=#FFFFFF align=2
+      - （12分）备份 4  [175,199 50x17]  TEXT="（12分）" size=12 font=PingFangSC-Regular color=#FFFFFF align=2
+      - （12分）备份 2  [223,91 50x17]  TEXT="（12分）" size=12 font=PingFangSC-Regular color=#FFFFFF align=2
+    - 保存至相册  [112,577 80x22]  TEXT="保存至相册" size=16 font=PingFangSC-Medium color=#FFFFFF align=0
+    - 长按解锁你的亲子觉醒指数  [98,460 135x16]  TEXT="长按解锁你的亲子觉醒指数" size=11 font=PingFangSC-Regular color=#FFFFFF align=0
+    - 测评结果仅供参考，不作为诊断依据  [98,478 180x16]  TEXT="测评结果仅供参考，不作为诊断依据" size=11 font=PingFangSC-Regular color=#FFFFFF align=0
+    - 矩形  [16,442 70x70] fills=#FFF4ED stroke=#979797/1 radius=4
+  - 温柔笃定的觉醒妈妈  [96,161 184x26]  TEXT="温柔笃定的觉醒妈妈" size=20 font=HelloFont-WenYiHei color=#FFFABF align=0
+  - 椭圆形  [163,79 50x50] fills=grad stroke=#979797/1
+  - 关闭  [173,699 30x20]  TEXT="关闭" size=14 font=PingFangSC-Medium color=#FFFFFF align=2
+  - 鱼尾峰·完成了他的育儿觉醒体验  [105,137 166x16]  TEXT="鱼尾峰·完成了他的育儿觉醒体验" size=11.2 font=PingFangSC-Regular color=#FFFFFF align=2
+
+### ARTBOARD: 测评答题页-导师二维码弹窗  [1545,-823 375x812]  class=artboard
+  - 编组 4  [-30,-44 471x332]
+    - 矩形  [30,44 375x288] fills=#D8D8D8 stroke=#979797/1
+    - 维度结果页底图  [0,0 238x136] fills=#FFDAEA stroke=#979797/1
+    - 维度结果页底图  [233,120 238x136] fills=#FFB6D6 stroke=#979797/1
+    - 72fbb669cc48ee95bfa0e391afcf36ba  [217,72 212x170]
+    - 矩形  [30,44 375x288]
+  - 编组 13  [16,89 87x20]
+    - 编组备份  [0,0 87x20]
+      - 编组  [0,0 20x20]
+        - Fill 1  [0,0 20x20] fills=#000000 stroke=#FFFFFF/2.4
+          - 路径  [15,0 4x20]
+          - 路径  [14,2 2x13]
+          - 路径  [5,4 9x15]
+          - 路径  [1,0 12x14]
+          - 路径  [0,11 5x8]
+          - 路径  [0,5 5x5]
+      - Fill 3  [23,0 20x20] fills=#000000 stroke=#FFFFFF/2.4
+        - 路径  [15,4 5x6]
+        - 路径  [7,4 5x6]
+        - 路径  [6,1 14x19]
+        - 路径  [1,0 5x5]
+        - 路径  [0,6 8x13]
+      - 编组  [45,0 20x20]
+        - Fill 5  [0,0 20x20] fills=#000000 stroke=#FFFFFF/2.4
+          - 路径  [8,0 12x20]
+          - 路径  [0,0 8x20]
+      - Fill 7  [68,0 19x20] fills=#000000 stroke=#FFFFFF/2.4
+        - 路径  [5,14 10x3]
+        - 路径  [2,11 16x9]
+        - 路径  [0,0 19x10]
+    - 编组  [0,0 87x20]
+      - 编组  [0,0 20x20]
+        - Clip 2  [0,0 20x20]
+        - Fill 1  [0,0 20x20] fills=#000000
+          - 路径  [15,0 4x20]
+          - 路径  [14,2 2x13]
+          - 路径  [5,4 9x15]
+          - 路径  [1,0 12x14]
+          - 路径  [0,11 5x8]
+          - 路径  [0,5 5x5]
+      - Fill 3  [23,0 20x20] fills=#000000
+        - 路径  [15,4 5x6]
+        - 路径  [7,4 5x6]
+        - 路径  [6,1 14x19]
+        - 路径  [1,0 5x5]
+        - 路径  [0,6 8x13]
+      - 编组  [45,0 20x20]
+        - Clip 6  [0,0 20x20]
+        - Fill 5  [0,0 20x20] fills=#000000
+          - 路径  [8,0 12x20]
+          - 路径  [0,0 8x20]
+      - Clip 8  [0,0 87x20]
+      - Fill 7  [68,0 19x20] fills=#000000
+        - 路径  [5,14 10x3]
+        - 路径  [2,11 16x9]
+        - 路径  [0,0 19x10]
+  - iPhone X/Status Bars/Status Bar (Black)备份 4  [0,0 375x44]
+  - 首页/导航栏  [16,55 204x22]
+    - 测评报告  [138,0 66x22]  TEXT="测评报告" size=16 font=PingFangSC-Medium color=#392D2B align=2
+    - 返回  [0,5 13x13]
+      - 矩形  [0,0 13x13] fills=#000000
+      - 路径  [3,1 6x11]
+      - 返回  [0,0 13x13]
+  - 转发  [343,56 20x20]
+    - 矩形  [0,0 20x20] fills=#555152
+    - 路径  [4,4 13x13]
+    - 形状  [3,4 13x13] fills=#592B0C
+      - 路径  [0,0 13x13]
+      - 路径  [0,0 12x12]
+      - 路径  [9,0 4x4]
+    - 形状  [12,4 5x5] fills=#592B0C
+      - 路径  [0,0 5x5]
+      - 路径  [0,0 4x4]
+    - 路径  [9,4 7x7]
+    - 形状  [9,4 7x7] fills=#592B0C
+      - 路径  [0,0 7x7]
+      - 路径  [0,0 7x7]
+    - 全局/转发  [0,0 20x20]
+  - 矩形  [12,145 351x455] fills=#FFFFFF stroke=#979797/1 radius=12
+  - 亲爱的，你的测评结果显示：  [27,476 186x20]  TEXT="亲爱的，你的测评结果显示：" size=14 font=PingFangSC-Regular color=#221F20 align=2
+  - 你已经超越 95% 的家长。 亲爱的，你  [28,500 319x80]  TEXT="你已经超越 95% 的家长。\n亲爱的，你的测评结果显示:你已经超过了 95%的家长。\n你能稳稳接住情绪，也愿意把选择权还给孩子。" size=14 font=PingFangSC-Regular color=#221F20 align=0
+  - 编组 3  [112,250 151x144]
+    - Fill 1  [0,0 151x144]
+    - Fill 1备份  [57,54 38x36]
+    - Fill 1备份 2  [38,36 76x72]
+    - Fill 1备份 4  [19,18 114x108]
+    - 直线 5备份  [0,55 76x88]
+    - 路径 3  [76,55 76x89]
+    - 路径 4  [75,0 1x72]
+  - Stroke 2  [147,278 79x108]
+  - 椭圆形  [143,381 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 2  [146,309 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 3  [213,365 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 4  [222,309 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 5  [184,274 8x8] fills=#FF577D stroke=#979797/1
+  - 测评结果  [27,158 66x22]  TEXT="测评结果" size=16 font=PingFangSC-Regular color=#57484C align=2
+  - 总分：56分  [104,158 85x22]  TEXT="总分：56分" size=16 font=PingFangSC-Medium color=#221F20 align=2
+  - 椭圆形  [-49,775 133x133] fills=#FFDBE1 stroke=#979797/1
+  - 矩形备份  [12,612 351x184] fills=#FFFFFF stroke=#979797/1 radius=8
+  - 编组  [28,628 132x21]
+    - 编组  [0,0 21x20]
+      - Clip 2  [0,0 21x20]
+      - Fill 1  [0,0 21x20] fills=#000000
+        - 路径  [15,13 6x7]
+        - 路径  [15,6 5x6]
+        - 路径  [10,5 4x8]
+        - 路径  [9,13 4x5]
+        - 路径  [6,0 14x7]
+        - 路径  [5,6 5x6]
+        - 路径  [5,13 10x7]
+        - 路径  [0,0 5x12]
+        - 路径  [0,13 5x6]
+    - 编组  [23,0 19x21]
+      - Clip 4  [0,0 19x21]
+      - Fill 3  [0,0 19x21] fills=#000000
+        - 路径  [10,8 6x7]
+        - 路径  [9,0 10x20]
+        - 路径  [3,13 3x4]
+        - 路径  [3,6 3x4]
+        - 路径  [0,0 9x20]
+    - Fill 5  [44,0 21x21] fills=#000000
+      - 路径  [8,11 13x10]
+      - 路径  [8,0 13x16]
+      - 路径  [1,1 8x20]
+      - 路径  [0,8 3x10]
+    - Fill 7  [66,1 21x19] fills=#000000
+      - 路径  [15,6 6x9]
+      - 路径  [9,0 6x8]
+      - 路径  [6,4 11x15]
+      - 路径  [0,6 5x10]
+    - Fill 9  [90,1 20x20] fills=#000000
+      - 路径  [11,11 7x7]
+      - 路径  [0,0 20x20]
+    - Fill 11  [111,1 21x20] fills=#000000
+      - 路径  [15,14 5x6]
+      - 路径  [11,15 4x5]
+      - 路径  [6,15 4x5]
+      - 路径  [5,8 10x3]
+      - 路径  [2,0 17x14]
+      - 路径  [0,14 5x6]
+  - 心画映射测试是一种通过绘画来了解个体内心  [28,657 319x120]  TEXT="心画映射测试是一种通过绘画来了解个体内心世界的心理测试方法。它要求受测者按照指定的主题或自由创作一幅画，通过绘画过程来展现受测者潜意识中的情感、冲突和性格特点。它要求受测者按照指定的主题或自由创作一幅画，通过绘画过程来展现受测者潜意识中的情感、冲突和性格特点。" size=14 font=PingFangSC-Regular color=#FFFFFF align=0
+  - 矩形  [0,1697 375x122] fills=#FFFFFF stroke=#979797/1
+  - 矩形备份  [12,1404 351x281] fills=#FFFFFF stroke=#979797/1 radius=4
+  - 编组  [24,1418 188x54]
+    - 请为这份量表准确度评分：  [0,0 168x20]  TEXT="请为这份量表准确度评分：" size=14 font=PingFangSC-Medium color=#333333 align=0
+    - 星星 (1)  [0,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#FF709C
+        - 路径  [0,0 23x22]
+    - 星星 (1)备份  [30,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#FF709C
+        - 路径  [0,0 23x22]
+      - 选中评分  [0,0 26x26]
+    - 星星 (1)备份 2  [60,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#272636
+        - 路径  [0,0 23x22]
+        - 路径  [1,1 20x19]
+      - 未选中评分  [0,0 26x26]
+    - 星星 (1)备份 3  [90,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#272636
+        - 路径  [0,0 23x22]
+        - 路径  [1,1 20x19]
+    - 星星 (1)备份 4  [120,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#272636
+        - 路径  [0,0 23x22]
+        - 路径  [1,1 20x19]
+    - 2分  [162,30 26x22]  TEXT="2分" size=16 font=PingFangSC-Medium color=#FF437D align=2
+  - 反馈内容  [24,1492 56x20]  TEXT="反馈内容" size=14 font=PingFangSC-Medium color=#333333 align=0
+  - 矩形  [24,1524 327x93] fills=#F8F8F8 stroke=#979797/1 radius=4
+  - 输入您对于该量表的反馈内容  [36,1536 182x20]  TEXT="输入您对于该量表的反馈内容" size=14 font=PingFangSC-Regular color=#999999 align=0
+  - 0/500  [298,1585 41x20]  TEXT="0/500" size=14 font=PingFangSC-Regular color=#999999 align=0
+  - 编组  [24,1709 327x40]
+    - 矩形  [0,0 327x40] fills=#FF9E4D stroke=#979797/1 radius=22
+    - 预约导师1v1解读  [97,10 113x21]  TEXT="预约导师1v1解读" size=15 font=PingFangSC-Medium color=#FFFFFF align=2
+  - 矩形  [24,1760 153x40] fills=#8393C9 stroke=#979797/1 radius=22
+  - 矩形备份 2  [198,1760 153x40] fills=#EE5896 stroke=#979797/1 radius=22
+  - 查看历史测试记录  [43,1770 114x20]  TEXT="查看历史测试记录" size=14 font=PingFangSC-Medium color=#FFFFFF align=2
+  - 再答一次  [247,1770 57x20]  TEXT="再答一次" size=14 font=PingFangSC-Medium color=#FFFFFF align=2
+  - 编组备份 2  [24,1629 327x40]
+    - 矩形  [0,0 327x40] fills=#E54175 stroke=#979797/1 radius=22
+    - 提交反馈  [132,9 62x21]  TEXT="提交反馈" size=15 font=PingFangSC-Medium color=#FFFFFF align=2
+  - iPhone X/Home Indicator/Home Indicator - On Light  [0,1794 375x25]
+  - 测评日期：2026-12-20 20:0  [16,113 218x20]  TEXT="测评日期：2026-12-20 20:09:10" size=14 font=PingFangSC-Regular color=#656262 align=2
+  - 情感链接力  [152,198 72x20]  TEXT="情感链接力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 自我觉察力  [28,284 72x20]  TEXT="自我觉察力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 赋能托底力  [82,406 72x20]  TEXT="赋能托底力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 边界松弛力  [221,406 72x20]  TEXT="边界松弛力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 走心沟通力  [275,284 72x20]  TEXT="走心沟通力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - （12分）  [159,218 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - 矩形备份 6  [12,815 351x107] fills=#FFFFFF stroke=#979797/1 radius=8
+  - 矩形备份 7  [12,934 351x458] fills=#FFFFFF stroke=#979797/1 radius=8
+  - 编组 10  [28,1118 319x254]
+    - 直线备份  [0,78 319x1]
+    - 直线备份 2  [0,175 319x1]
+    - 9961678872232_.pic  [0,0 112x63]
+      - 蒙版  [0,0 112x63] fills=#D8D8D8 stroke=#979797/1 radius=4
+      - 9961678872232_.pic  [-1,0 113x63]
+    - 9951678872231_.pic  [0,97 112x63]
+      - 蒙版  [0,0 112x63] fills=#D8D8D8 stroke=#979797/1 radius=4
+      - 9951678872231_.pic  [0,0 112x63]
+    - 9951678872231_.pic备份  [0,191 112x63]
+      - 蒙版  [0,0 112x63] fills=#D8D8D8 stroke=#979797/1 radius=4
+      - 9951678872231_.pic  [0,0 112x63]
+    - 编组 5  [128,0 185x63]
+      - 助力孩子学习内在动力  [0,0 160x22]  TEXT="助力孩子学习内在动力" size=16 font=PingFangSC-Medium color=#464142 align=0
+      - ¥2580.0  [0,41 62x22]  TEXT="¥2580.0" size=16 font=PingFangSC-Medium color=#FF437D align=0
+      - 204人已学习  [115,46 70x17]  TEXT="204人已学习" size=12 font=PingFangSC-Regular color=#666666 align=0
+    - 编组 5备份  [128,97 185x63]
+      - 摆脱情绪内耗 做智慧父母  [0,0 182x22]  TEXT="摆脱情绪内耗 做智慧父母" size=16 font=PingFangSC-Medium color=#464142 align=0
+      - ¥2580.0  [0,41 62x22]  TEXT="¥2580.0" size=16 font=PingFangSC-Medium color=#FF437D align=0
+      - 204人已学习  [115,46 70x17]  TEXT="204人已学习" size=12 font=PingFangSC-Regular color=#666666 align=0
+    - 编组 5备份 2  [128,191 185x63]
+      - 摆脱情绪内耗 做智慧父母  [0,0 182x22]  TEXT="摆脱情绪内耗 做智慧父母" size=16 font=PingFangSC-Medium color=#464142 align=0
+      - ¥2580.0  [0,41 62x22]  TEXT="¥2580.0" size=16 font=PingFangSC-Medium color=#FF437D align=0
+      - 204人已学习  [115,46 70x17]  TEXT="204人已学习" size=12 font=PingFangSC-Regular color=#666666 align=0
+  - 直线  [28,1102 319x1]
+  - 添加导师微信，帮您把分数变成方向  [28,1066 228x20]  TEXT="添加导师微信，帮您把分数变成方向" size=14 font=PingFangSC-Regular color=#9E9698 align=0
+  - 想知道这个育儿卡点是如何形成的?为什么“  [28,978 319x80]  TEXT="想知道这个育儿卡点是如何形成的?为什么“道理都懂，面对孩子还是忍不住火大"?1对1测评深度解读，帮您把测评结果转化为一份可落地的《家庭育儿改善清单》。" size=14 font=PingFangSC-Regular color=#221F20 align=0
+  - 矩形  [23,955 162x11] fills=#D8D8D8 stroke=#979797/1 radius=6
+  - 编组  [28,946 154x18]
+    - Clip 2  [0,0 154x18]
+    - Fill 1  [0,1 17x17] fills=#000000
+      - 路径  [11,4 3x10]
+      - 路径  [9,1 8x16]
+      - 路径  [3,5 2x8]
+      - 路径  [0,0 8x17]
+    - Fill 3  [19,1 18x17] fills=#000000
+      - 路径  [12,12 6x4]
+      - 路径  [10,5 4x1]
+      - 路径  [10,3 4x1]
+      - 路径  [4,5 4x1]
+      - 路径  [4,3 4x1]
+      - 路径  [1,0 16x17]
+      - 路径  [0,12 6x4]
+    - Fill 4  [39,1 18x17] fills=#000000
+      - 路径  [13,11 5x6]
+      - 路径  [13,5 4x5]
+      - 路径  [9,4 4x7]
+      - 路径  [8,11 4x4]
+      - 路径  [5,0 12x6]
+      - 路径  [5,5 4x5]
+      - 路径  [5,11 9x6]
+      - 路径  [0,0 4x10]
+      - 路径  [0,11 4x5]
+    - Fill 5  [58,1 18x17] fills=#000000
+      - 路径  [10,8 4x1]
+      - 路径  [10,5 4x1]
+      - 路径  [10,2 4x1]
+      - 路径  [4,11 9x6]
+      - 路径  [1,0 17x16]
+      - 路径  [0,5 2x6]
+      - 路径  [0,11 4x5]
+    - Fill 6  [78,1 17x17] fills=#000000
+      - 路径  [14,11 4x6]
+      - 路径  [12,3 5x4]
+      - 路径  [5,6 12x10]
+      - 路径  [5,3 5x4]
+      - 路径  [5,11 4x6]
+      - 路径  [1,0 17x4]
+      - 路径  [0,10 4x7]
+      - 路径  [0,4 5x5]
+    - Fill 7  [97,0 17x18] fills=#000000
+      - 路径  [8,7 4x1]
+      - 路径  [4,11 14x7]
+      - 路径  [0,0 17x18]
+    - Fill 8  [118,2 16x16]
+    - Fill 9  [136,1 18x17] fills=#000000
+      - 路径  [9,1 9x16]
+      - 路径  [6,13 1x2]
+      - 路径  [6,9 1x1]
+      - 路径  [6,6 1x1]
+      - 路径  [3,9 1x1]
+      - 路径  [3,6 1x1]
+      - 路径  [3,3 2x1]
+      - 路径  [0,0 9x17]
+  - 您和孩子正在严重消耗中，如果不做调整，3  [28,862 319x40]  TEXT="您和孩子正在严重消耗中，如果不做调整，3-6个月内可以能出现沟通关闭、孩子不愿说话。" size=14 font=PingFangSC-Regular color=#221F20 align=0
+  - （12分）备份  [35,302 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - （12分）备份 3  [89,424 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - （12分）备份 4  [228,424 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - （12分）备份 2  [282,302 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - 编组 12  [12,808 242x42]
+    - 矩形  [0,0 242x42] fills=#F44E7E stroke=#979797/1 radius=4
+    - 编组  [16,13 190x17]
+      - 编组  [0,0 17x17]
+        - Clip 2  [0,0 17x17]
+        - Fill 1  [0,0 17x17] fills=#000000
+          - 路径  [12,10 4x5]
+          - 路径  [12,5 4x5]
+          - 路径  [8,4 3x7]
+          - 路径  [7,10 3x4]
+          - 路径  [5,0 11x5]
+          - 路径  [4,5 4x5]
+          - 路径  [4,11 8x6]
+          - 路径  [0,0 4x10]
+          - 路径  [0,11 4x5]
+      - 编组  [18,0 15x17]
+        - Clip 4  [0,0 15x17]
+        - Fill 3  [0,0 15x17] fills=#000000
+          - 路径  [8,7 5x6]
+          - 路径  [7,0 8x17]
+          - 路径  [2,10 3x4]
+          - 路径  [2,5 3x3]
+          - 路径  [0,0 7x17]
+      - Fill 5  [36,0 16x17] fills=#000000
+        - 路径  [6,9 10x8]
+        - 路径  [6,0 10x13]
+        - 路径  [0,1 7x15]
+      - Fill 7  [54,1 16x16]
+      - Fill 9  [72,1 16x15]
+      - Fill 11  [90,0 16x16] fills=#000000
+        - 路径  [5,5 11x11]
+        - 路径  [0,0 16x16]
+      - Fill 13  [107,0 17x16] fills=#000000
+        - 路径  [6,1 11x15]
+        - 路径  [0,0 7x12]
+        - 路径  [0,13 6x3]
+      - Fill 15  [125,0 16x17] fills=#000000
+        - 路径  [4,3 12x13]
+        - 路径  [0,0 16x16]
+      - Fill 17  [144,0 16x16] fills=#000000
+        - 路径  [5,0 11x16]
+        - 路径  [0,0 4x16]
+      - Fill 19  [162,0 16x16] fills=#000000
+        - 路径  [11,9 4x8]
+        - 路径  [0,1 12x15]
+        - 路径  [0,0 6x10]
+      - Fill 21  [181,1 9x14] fills=#000000
+        - 路径  [2,11 3x3]
+        - 路径  [0,0 9x10]
+    - 建议底图  [0,0 242x42]
+  - 收起箭头小  [239,1722 15x15]
+    - 矩形  [0,0 15x15] fills=#000000
+    - 路径  [1,4 13x7]
+    - 箭头  [0,0 15x15]
+  - 矩形备份 3  [0,0 375x812] fills=#000000 stroke=#979797/1
+  - 编组 14  [0,479 375x336]
+    - 矩形  [0,256 375x80] fills=#FFFFFF stroke=#979797/1
+    - 编组  [16,270 343x40]
+      - 矩形  [0,0 343x40] fills=#09C382 stroke=#979797/1 radius=22
+      - 提交  [157,10 28x20]  TEXT="提交" size=14 font=PingFangSC-Medium color=#FFFFFF align=1
+    - 矩形  [0,0 375x336] fills=#FFFFFF stroke=#979797/1 radius=8
+    - 矩形  [117,66 143x143] fills=#FFEFE5 stroke=#979797/1 radius=10
+    - 长按识别二维码，获取1对1解读与《家庭育  [39,221 298x17]  TEXT="长按识别二维码，获取1对1解读与《家庭育儿改善清单》" size=12 font=PingFangSC-Regular color=#444C45 align=2
+    - 添加导师微信，帮您把分数变成方向  [60,32 256x22]  TEXT="添加导师微信，帮您把分数变成方向" size=16 font=PingFangSC-Medium color=#444C45 align=1
+  - 矩形  [32,741 311x40] fills=#FF9600 stroke=#979797/1 radius=20
+  - 确认  [172,750 32x22]  TEXT="确认" size=16 font=PingFangSC-Medium color=#FFFFFF align=0
+
+### ARTBOARD: 测评答题页-维度类测评结果页（维度雷达）  [224,-823 375x2123]  class=artboard
+  - 编组 4  [-30,-44 471x332]
+    - 矩形  [30,44 375x288] fills=#D8D8D8 stroke=#979797/1
+    - 维度结果页底图  [0,0 238x136] fills=#FFDAEA stroke=#979797/1
+    - 维度结果页底图  [233,120 238x136] fills=#FFB6D6 stroke=#979797/1
+    - 72fbb669cc48ee95bfa0e391afcf36ba  [217,72 212x170]
+    - 矩形  [30,44 375x288]
+  - 编组 13  [16,89 87x20]
+    - 编组备份  [0,0 87x20]
+      - 编组  [0,0 20x20]
+        - Fill 1  [0,0 20x20] fills=#000000 stroke=#FFFFFF/2.4
+          - 路径  [15,0 4x20]
+          - 路径  [14,2 2x13]
+          - 路径  [5,4 9x15]
+          - 路径  [1,0 12x14]
+          - 路径  [0,11 5x8]
+          - 路径  [0,5 5x5]
+      - Fill 3  [23,0 20x20] fills=#000000 stroke=#FFFFFF/2.4
+        - 路径  [15,4 5x6]
+        - 路径  [7,4 5x6]
+        - 路径  [6,1 14x19]
+        - 路径  [1,0 5x5]
+        - 路径  [0,6 8x13]
+      - 编组  [45,0 20x20]
+        - Fill 5  [0,0 20x20] fills=#000000 stroke=#FFFFFF/2.4
+          - 路径  [8,0 12x20]
+          - 路径  [0,0 8x20]
+      - Fill 7  [68,0 19x20] fills=#000000 stroke=#FFFFFF/2.4
+        - 路径  [5,14 10x3]
+        - 路径  [2,11 16x9]
+        - 路径  [0,0 19x10]
+    - 编组  [0,0 87x20]
+      - 编组  [0,0 20x20]
+        - Clip 2  [0,0 20x20]
+        - Fill 1  [0,0 20x20] fills=#000000
+          - 路径  [15,0 4x20]
+          - 路径  [14,2 2x13]
+          - 路径  [5,4 9x15]
+          - 路径  [1,0 12x14]
+          - 路径  [0,11 5x8]
+          - 路径  [0,5 5x5]
+      - Fill 3  [23,0 20x20] fills=#000000
+        - 路径  [15,4 5x6]
+        - 路径  [7,4 5x6]
+        - 路径  [6,1 14x19]
+        - 路径  [1,0 5x5]
+        - 路径  [0,6 8x13]
+      - 编组  [45,0 20x20]
+        - Clip 6  [0,0 20x20]
+        - Fill 5  [0,0 20x20] fills=#000000
+          - 路径  [8,0 12x20]
+          - 路径  [0,0 8x20]
+      - Clip 8  [0,0 87x20]
+      - Fill 7  [68,0 19x20] fills=#000000
+        - 路径  [5,14 10x3]
+        - 路径  [2,11 16x9]
+        - 路径  [0,0 19x10]
+  - iPhone X/Status Bars/Status Bar (Black)备份 4  [0,0 375x44]
+  - 首页/导航栏  [16,55 204x22]
+    - 测评报告  [138,0 66x22]  TEXT="测评报告" size=16 font=PingFangSC-Medium color=#392D2B align=2
+    - 返回  [0,5 13x13]
+      - 矩形  [0,0 13x13] fills=#000000
+      - 路径  [3,1 6x11]
+      - 返回  [0,0 13x13]
+  - 转发  [343,56 20x20]
+    - 矩形  [0,0 20x20] fills=#555152
+    - 路径  [4,4 13x13]
+    - 形状  [3,4 13x13] fills=#592B0C
+      - 路径  [0,0 13x13]
+      - 路径  [0,0 12x12]
+      - 路径  [9,0 4x4]
+    - 形状  [12,4 5x5] fills=#592B0C
+      - 路径  [0,0 5x5]
+      - 路径  [0,0 4x4]
+    - 路径  [9,4 7x7]
+    - 形状  [9,4 7x7] fills=#592B0C
+      - 路径  [0,0 7x7]
+      - 路径  [0,0 7x7]
+    - 全局/转发  [0,0 20x20]
+  - 矩形  [12,145 351x455] fills=#FFFFFF stroke=#979797/1 radius=12
+  - 亲爱的，你的测评结果显示：  [27,476 186x20]  TEXT="亲爱的，你的测评结果显示：" size=14 font=PingFangSC-Regular color=#221F20 align=2
+  - 你已经超越 95% 的家长。 亲爱的，你  [28,500 319x80]  TEXT="你已经超越 95% 的家长。\n亲爱的，你的测评结果显示:你已经超过了 95%的家长。\n你能稳稳接住情绪，也愿意把选择权还给孩子。" size=14 font=PingFangSC-Regular color=#221F20 align=0
+  - 编组 3  [112,250 151x144]
+    - Fill 1  [0,0 151x144]
+    - Fill 1备份  [57,54 38x36]
+    - Fill 1备份 2  [38,36 76x72]
+    - Fill 1备份 4  [19,18 114x108]
+    - 直线 5备份  [0,55 76x88]
+    - 路径 3  [76,55 76x89]
+    - 路径 4  [75,0 1x72]
+  - Stroke 2  [147,278 79x108]
+  - 椭圆形  [143,381 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 2  [146,309 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 3  [213,365 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 4  [222,309 8x8] fills=#FF577D stroke=#979797/1
+  - 椭圆形备份 5  [184,274 8x8] fills=#FF577D stroke=#979797/1
+  - 测评结果  [27,158 66x22]  TEXT="测评结果" size=16 font=PingFangSC-Regular color=#57484C align=2
+  - 总分：56分  [103,158 86x22]  TEXT="总分：56分" size=16 font=PingFangSC-Medium color=#57484C align=2
+  - 椭圆形  [-49,775 133x133] fills=#FFDBE1 stroke=#979797/1
+  - 矩形备份  [12,612 351x184] fills=#FFFFFF stroke=#979797/1 radius=8
+  - 编组  [28,628 132x21]
+    - 编组  [0,0 21x20]
+      - Clip 2  [0,0 21x20]
+      - Fill 1  [0,0 21x20] fills=#000000
+        - 路径  [15,13 6x7]
+        - 路径  [15,6 5x6]
+        - 路径  [10,5 4x8]
+        - 路径  [9,13 4x5]
+        - 路径  [6,0 14x7]
+        - 路径  [5,6 5x6]
+        - 路径  [5,13 10x7]
+        - 路径  [0,0 5x12]
+        - 路径  [0,13 5x6]
+    - 编组  [23,0 19x21]
+      - Clip 4  [0,0 19x21]
+      - Fill 3  [0,0 19x21] fills=#000000
+        - 路径  [10,8 6x7]
+        - 路径  [9,0 10x20]
+        - 路径  [3,13 3x4]
+        - 路径  [3,6 3x4]
+        - 路径  [0,0 9x20]
+    - Fill 5  [44,0 21x21] fills=#000000
+      - 路径  [8,11 13x10]
+      - 路径  [8,0 13x16]
+      - 路径  [1,1 8x20]
+      - 路径  [0,8 3x10]
+    - Fill 7  [66,1 21x19] fills=#000000
+      - 路径  [15,6 6x9]
+      - 路径  [9,0 6x8]
+      - 路径  [6,4 11x15]
+      - 路径  [0,6 5x10]
+    - Fill 9  [90,1 20x20] fills=#000000
+      - 路径  [11,11 7x7]
+      - 路径  [0,0 20x20]
+    - Fill 11  [111,1 21x20] fills=#000000
+      - 路径  [15,14 5x6]
+      - 路径  [11,15 4x5]
+      - 路径  [6,15 4x5]
+      - 路径  [5,8 10x3]
+      - 路径  [2,0 17x14]
+      - 路径  [0,14 5x6]
+  - 心画映射测试是一种通过绘画来了解个体内心  [28,657 319x120]  TEXT="心画映射测试是一种通过绘画来了解个体内心世界的心理测试方法。它要求受测者按照指定的主题或自由创作一幅画，通过绘画过程来展现受测者潜意识中的情感、冲突和性格特点。它要求受测者按照指定的主题或自由创作一幅画，通过绘画过程来展现受测者潜意识中的情感、冲突和性格特点。" size=14 font=PingFangSC-Regular color=#FFFFFF align=0
+  - 矩形  [0,2001 375x122] fills=#FFFFFF stroke=#979797/1
+  - 矩形备份  [12,1708 351x281] fills=#FFFFFF stroke=#979797/1 radius=4
+  - 编组  [24,1722 188x54]
+    - 请为这份量表准确度评分：  [0,0 168x20]  TEXT="请为这份量表准确度评分：" size=14 font=PingFangSC-Medium color=#333333 align=0
+    - 星星 (1)  [0,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#FF709C
+        - 路径  [0,0 23x22]
+    - 星星 (1)备份  [30,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#FF709C
+        - 路径  [0,0 23x22]
+      - 选中评分  [0,0 26x26]
+    - 星星 (1)备份 2  [60,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#272636
+        - 路径  [0,0 23x22]
+        - 路径  [1,1 20x19]
+      - 未选中评分  [0,0 26x26]
+    - 星星 (1)备份 3  [90,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#272636
+        - 路径  [0,0 23x22]
+        - 路径  [1,1 20x19]
+    - 星星 (1)备份 4  [120,28 26x26]
+      - 矩形  [0,0 26x26] fills=#000000
+      - 形状  [2,2 23x22] fills=#272636
+        - 路径  [0,0 23x22]
+        - 路径  [1,1 20x19]
+    - 2分  [162,30 26x22]  TEXT="2分" size=16 font=PingFangSC-Medium color=#FF437D align=2
+  - 反馈内容  [24,1796 56x20]  TEXT="反馈内容" size=14 font=PingFangSC-Medium color=#333333 align=0
+  - 矩形  [24,1828 327x93] fills=#F8F8F8 stroke=#979797/1 radius=4
+  - 输入您对于该量表的反馈内容  [36,1840 182x20]  TEXT="输入您对于该量表的反馈内容" size=14 font=PingFangSC-Regular color=#999999 align=0
+  - 0/500  [298,1889 41x20]  TEXT="0/500" size=14 font=PingFangSC-Regular color=#999999 align=0
+  - 编组  [24,2013 327x40]
+    - 矩形  [0,0 327x40] fills=#FF9E4D stroke=#979797/1 radius=22
+    - 预约导师1v1解读  [96,10 114x21]  TEXT="预约导师1v1解读" size=15 font=PingFangSC-Medium color=#FFFFFF align=0
+  - 矩形  [24,2064 153x40] fills=#8393C9 stroke=#979797/1 radius=22
+  - 矩形备份 2  [198,2064 153x40] fills=#EE5896 stroke=#979797/1 radius=22
+  - 查看历史测试记录  [43,2074 114x20]  TEXT="查看历史测试记录" size=14 font=PingFangSC-Medium color=#FFFFFF align=2
+  - 再答一次  [246,2074 58x20]  TEXT="再答一次" size=14 font=PingFangSC-Medium color=#FFFFFF align=2
+  - 编组备份 2  [24,1933 327x40]
+    - 矩形  [0,0 327x40] fills=#E54175 stroke=#979797/1 radius=22
+    - 提交反馈  [132,9 62x21]  TEXT="提交反馈" size=15 font=PingFangSC-Medium color=#FFFFFF align=2
+  - iPhone X/Home Indicator/Home Indicator - On Light  [0,2098 375x25]
+  - 测评日期：2026-12-20 20:0  [16,113 218x20]  TEXT="测评日期：2026-12-20 20:09:10" size=14 font=PingFangSC-Regular color=#656262 align=2
+  - 情感链接力  [152,198 72x20]  TEXT="情感链接力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 自我觉察力  [28,284 72x20]  TEXT="自我觉察力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 赋能托底力  [82,406 72x20]  TEXT="赋能托底力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 边界松弛力  [221,406 72x20]  TEXT="边界松弛力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - 走心沟通力  [275,284 72x20]  TEXT="走心沟通力" size=14 font=PingFangSC-Medium color=#221F20 align=2
+  - （12分）  [159,218 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - 矩形备份 6  [12,815 351x107] fills=#FFFFFF stroke=#979797/1 radius=8
+  - 矩形备份 8  [12,934 351x292] fills=#FFFFFF stroke=#979797/1 radius=8
+  - 除了要练的那一块，你身上也有已经长出来的  [28,978 276x17]  TEXT="除了要练的那一块，你身上也有已经长出来的力量。" size=12 font=PingFangSC-Regular color=#221F20 align=2
+  - 编组 2  [23,945 170x25]
+    - 矩形备份 3  [0,14 162x11] fills=#D8D8D8 stroke=#979797/1 radius=6
+    - 编组  [5,5 145x18]
+      - Fill 1  [0,0 17x17] fills=#000000
+        - 路径  [9,5 4x6]
+        - 路径  [6,0 11x14]
+        - 路径  [1,1 4x5]
+        - 路径  [0,6 17x11]
+      - Fill 3  [19,1 16x16] fills=#000000
+        - 路径  [9,0 7x10]
+        - 路径  [2,10 12x2]
+        - 路径  [0,14 16x2]
+        - 路径  [0,0 9x10]
+      - Fill 5  [37,1 15x17]
+      - Fill 7  [58,13 4x5]
+      - Clip 10  [0,0 145x18]
+      - Fill 9  [74,0 17x16] fills=#000000
+        - 路径  [8,13 5x1]
+        - 路径  [8,11 5x1]
+        - 路径  [8,8 5x1]
+        - 路径  [8,6 5x1]
+        - 路径  [4,0 12x16]
+        - 路径  [0,0 4x16]
+      - Fill 11  [92,0 17x17] fills=#000000
+        - 路径  [8,5 5x1]
+        - 路径  [8,2 5x1]
+        - 路径  [6,0 10x8]
+        - 路径  [5,8 12x9]
+        - 路径  [0,0 5x16]
+      - Fill 12  [111,1 17x16] fills=#000000
+        - 路径  [8,0 9x8]
+        - 路径  [7,5 9x11]
+        - 路径  [0,0 8x16]
+      - Fill 13  [129,0 16x17] fills=#000000
+        - 路径  [5,7 7x1]
+        - 路径  [3,5 11x5]
+        - 路径  [2,9 12x5]
+        - 路径  [0,12 15x5]
+        - 路径  [0,0 16x6]
+    - 路径 2  [159,0 7x12]
+    - 路径 2备份  [166,12 4x7]
+    - 欣赏-标题  [0,0 170x25]
+  - 矩形备份 7  [12,1238 351x458] fills=#FFFFFF stroke=#979797/1 radius=8
+  - 编组 10  [28,1422 319x254]
+    - 直线备份  [0,78 319x1]
+    - 直线备份 2  [0,175 319x1]
+    - 9961678872232_.pic  [0,0 112x63]
+      - 蒙版  [0,0 112x63] fills=#D8D8D8 stroke=#979797/1 radius=4
+      - 9961678872232_.pic  [-1,0 113x63]
+    - 9951678872231_.pic  [0,97 112x63]
+      - 蒙版  [0,0 112x63] fills=#D8D8D8 stroke=#979797/1 radius=4
+      - 9951678872231_.pic  [0,0 112x63]
+    - 9951678872231_.pic备份  [0,191 112x63]
+      - 蒙版  [0,0 112x63] fills=#D8D8D8 stroke=#979797/1 radius=4
+      - 9951678872231_.pic  [0,0 112x63]
+    - 编组 5  [128,0 185x63]
+      - 助力孩子学习内在动力  [0,0 160x22]  TEXT="助力孩子学习内在动力" size=16 font=PingFangSC-Medium color=#464142 align=0
+      - ¥2580.0  [0,41 62x22]  TEXT="¥2580.0" size=16 font=PingFangSC-Medium color=#FF437D align=0
+      - 204人已学习  [115,46 70x17]  TEXT="204人已学习" size=12 font=PingFangSC-Regular color=#666666 align=0
+    - 编组 5备份  [128,97 185x63]
+      - 摆脱情绪内耗 做智慧父母  [0,0 182x22]  TEXT="摆脱情绪内耗 做智慧父母" size=16 font=PingFangSC-Medium color=#464142 align=0
+      - ¥2580.0  [0,41 62x22]  TEXT="¥2580.0" size=16 font=PingFangSC-Medium color=#FF437D align=0
+      - 204人已学习  [115,46 70x17]  TEXT="204人已学习" size=12 font=PingFangSC-Regular color=#666666 align=0
+    - 编组 5备份 2  [128,191 185x63]
+      - 摆脱情绪内耗 做智慧父母  [0,0 182x22]  TEXT="摆脱情绪内耗 做智慧父母" size=16 font=PingFangSC-Medium color=#464142 align=0
+      - ¥2580.0  [0,41 62x22]  TEXT="¥2580.0" size=16 font=PingFangSC-Medium color=#FF437D align=0
+      - 204人已学习  [115,46 70x17]  TEXT="204人已学习" size=12 font=PingFangSC-Regular color=#666666 align=0
+  - 直线  [28,1406 319x1]
+  - 添加导师微信，帮您把分数变成方向  [28,1370 228x20]  TEXT="添加导师微信，帮您把分数变成方向" size=14 font=PingFangSC-Regular color=#9E9698 align=0
+  - 想知道这个育儿卡点是如何形成的?为什么“  [28,1282 319x80]  TEXT="想知道这个育儿卡点是如何形成的?为什么“道理都懂，面对孩子还是忍不住火大"?1对1测评深度解读，帮您把测评结果转化为一份可落地的《家庭育儿改善清单》。" size=14 font=PingFangSC-Regular color=#221F20 align=0
+  - 编组 6  [23,1250 165x20]
+    - 矩形  [0,9 162x11] fills=#D8D8D8 stroke=#979797/1 radius=6
+    - 编组  [5,0 154x18]
+      - Clip 2  [0,0 154x18]
+      - Fill 1  [0,1 17x17] fills=#000000
+        - 路径  [11,4 3x10]
+        - 路径  [9,1 8x16]
+        - 路径  [3,5 2x8]
+        - 路径  [0,0 8x17]
+      - Fill 3  [19,1 18x17] fills=#000000
+        - 路径  [12,12 6x4]
+        - 路径  [10,5 4x1]
+        - 路径  [10,3 4x1]
+        - 路径  [4,5 4x1]
+        - 路径  [4,3 4x1]
+        - 路径  [1,0 16x17]
+        - 路径  [0,12 6x4]
+      - Fill 4  [39,1 18x17] fills=#000000
+        - 路径  [13,11 5x6]
+        - 路径  [13,5 4x5]
+        - 路径  [9,4 4x7]
+        - 路径  [8,11 4x4]
+        - 路径  [5,0 12x6]
+        - 路径  [5,5 4x5]
+        - 路径  [5,11 9x6]
+        - 路径  [0,0 4x10]
+        - 路径  [0,11 4x5]
+      - Fill 5  [58,1 18x17] fills=#000000
+        - 路径  [10,8 4x1]
+        - 路径  [10,5 4x1]
+        - 路径  [10,2 4x1]
+        - 路径  [4,11 9x6]
+        - 路径  [1,0 17x16]
+        - 路径  [0,5 2x6]
+        - 路径  [0,11 4x5]
+      - Fill 6  [78,1 17x17] fills=#000000
+        - 路径  [14,11 4x6]
+        - 路径  [12,3 5x4]
+        - 路径  [5,6 12x10]
+        - 路径  [5,3 5x4]
+        - 路径  [5,11 4x6]
+        - 路径  [1,0 17x4]
+        - 路径  [0,10 4x7]
+        - 路径  [0,4 5x5]
+      - Fill 7  [97,0 17x18] fills=#000000
+        - 路径  [8,7 4x1]
+        - 路径  [4,11 14x7]
+        - 路径  [0,0 17x18]
+      - Fill 8  [118,2 16x16]
+      - Fill 9  [136,1 18x17] fills=#000000
+        - 路径  [9,1 9x16]
+        - 路径  [6,13 1x2]
+        - 路径  [6,9 1x1]
+        - 路径  [6,6 1x1]
+        - 路径  [3,9 1x1]
+        - 路径  [3,6 1x1]
+        - 路径  [3,3 2x1]
+        - 路径  [0,0 9x17]
+    - 深度了解标题  [0,0 165x20]
+  - 您和孩子正在严重消耗中，如果不做调整，3  [28,862 319x40]  TEXT="您和孩子正在严重消耗中，如果不做调整，3-6个月内可以能出现沟通关闭、孩子不愿说话。" size=14 font=PingFangSC-Regular color=#221F20 align=0
+  - （12分）备份  [35,302 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - （12分）备份 3  [89,424 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - （12分）备份 4  [228,424 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - （12分）备份 2  [282,302 58x20]  TEXT="（12分）" size=14 font=PingFangSC-Regular color=#868082 align=2
+  - 编组 12  [12,808 242x42]
+    - 矩形  [0,0 242x42] fills=#F44E7E stroke=#979797/1 radius=4
+    - 编组  [16,13 190x17]
+      - 编组  [0,0 17x17]
+        - Clip 2  [0,0 17x17]
+        - Fill 1  [0,0 17x17] fills=#000000
+          - 路径  [12,10 4x5]
+          - 路径  [12,5 4x5]
+          - 路径  [8,4 3x7]
+          - 路径  [7,10 3x4]
+          - 路径  [5,0 11x5]
+          - 路径  [4,5 4x5]
+          - 路径  [4,11 8x6]
+          - 路径  [0,0 4x10]
+          - 路径  [0,11 4x5]
+      - 编组  [18,0 15x17]
+        - Clip 4  [0,0 15x17]
+        - Fill 3  [0,0 15x17] fills=#000000
+          - 路径  [8,7 5x6]
+          - 路径  [7,0 8x17]
+          - 路径  [2,10 3x4]
+          - 路径  [2,5 3x3]
+          - 路径  [0,0 7x17]
+      - Fill 5  [36,0 16x17] fills=#000000
+        - 路径  [6,9 10x8]
+        - 路径  [6,0 10x13]
+        - 路径  [0,1 7x15]
+      - Fill 7  [54,1 16x16]
+      - Fill 9  [72,1 16x15]
+      - Fill 11  [90,0 16x16] fills=#000000
+        - 路径  [5,5 11x11]
+        - 路径  [0,0 16x16]
+      - Fill 13  [107,0 17x16] fills=#000000
+        - 路径  [6,1 11x15]
+        - 路径  [0,0 7x12]
+        - 路径  [0,13 6x3]
+      - Fill 15  [125,0 16x17] fills=#000000
+        - 路径  [4,3 12x13]
+        - 路径  [0,0 16x16]
+      - Fill 17  [144,0 16x16] fills=#000000
+        - 路径  [5,0 11x16]
+        - 路径  [0,0 4x16]
+      - Fill 19  [162,0 16x16] fills=#000000
+        - 路径  [11,9 4x8]
+        - 路径  [0,1 12x15]
+        - 路径  [0,0 6x10]
+      - Fill 21  [181,1 9x14] fills=#000000
+        - 路径  [2,11 3x3]
+        - 路径  [0,0 9x10]
+    - 建议底图  [0,0 242x42]
+  - 收起箭头小  [239,2026 15x15]
+    - 矩形  [0,0 15x15] fills=#000000
+    - 路径  [1,4 13x7]
+    - 箭头  [0,0 15x15]
+  - 矩形  [28,1011 319x199] fills=#FFF0F1 stroke=#979797/1 radius=12
+  - 小建议:倾听之余，偶尔也跟孩子分享一件你  [40,1143 295x51]  TEXT="小建议:倾听之余，偶尔也跟孩子分享一件你自己的小糗事，单向倾听变成双向交换，孩子的“秘密通道"会一直为你开着。" size=12 font=PingFangSC-Regular color=#8D5A6B align=0
+  - 欣赏你听得懂孩子没说出口的心声。一天里你  [40,1051 295x80]  TEXT="欣赏你听得懂孩子没说出口的心声。一天里你说的不只有“快点“和“作业”，还有“我在听，然后呢”--愿意放下手里的事，看着他的眼睛把话听完。被这样倾听着长大的孩子，内心是敞亮的。" size=14 font=PingFangSC-Regular color=#221F20 align=0
+  - 【走心沟通力】(8分)  [56,1023 130x20]  TEXT="【走心沟通力】(8分)" size=14 font=PingFangSC-Medium color=#DA1E5C align=2
+  - hearts-fill  [40,1025 16x16]
+    - 矩形  [0,0 16x16] fills=#000000
+    - 形状  [1,2 15x12] fills=#DA1E5C
+      - 路径  [6,5 9x8]
+      - 路径  [0,0 13x12]
+    - 欣赏力装饰1  [0,0 16x16]
+
+### ARTBOARD: Fill 1  [224,-906 144x40]  class=group
+  - 蒙版  [0,0 144x40] fills=#FFEFE1 stroke=#979797/1 radius=8
+  - 椭圆形  [-3,-23 48x48] fills=#FFE1C6 stroke=#979797/1
+  - 椭圆形备份 6  [97,1 50x50] fills=#FFE8D6 stroke=#979797/1
+  - Fill 1  [103,10 46x40]
+  - Fill 1备份  [110,15 32x28]
+  - 直线  [125,7 1x34]
+  - 直线备份  [105,18 21x12]
+  - 直线备份 3  [125,18 21x12]
+  - 直线备份 2  [105,29 21x13]
+  - 直线备份 4  [125,29 21x13]
+  - 维度雷达标签底图  [0,0 144x40]
+
+### ARTBOARD: 矩形 + 矩形备份 3 + 矩形备份 2 + 矩形备份 4 + 矩形备份 5蒙版  [391,-906 144x40]  class=group
+  - 蒙版  [0,0 144x40] fills=#F4F2F3 stroke=#979797/1 radius=8
+  - 矩形  [94,29 10x13] fills=#E5DFE2 stroke=#979797/1 radius=1
+  - 矩形备份 3  [114,16 10x26] fills=#E5DFE2 stroke=#979797/1 radius=1
+  - 矩形备份 2  [104,20 10x22] fills=#E5DFE2 stroke=#979797/1 radius=1
+  - 矩形备份 4  [124,5 10x37] fills=#E5DFE2 stroke=#979797/1 radius=1
+  - 矩形备份 5  [134,29 10x13] fills=#E5DFE2 stroke=#979797/1 radius=1
+  - 正态分布（未选中）  [0,0 144x40]
+
+### ARTBOARD: 正态分布图  [407,-896 72x20]  class=text
+
+### ARTBOARD: 维度雷达图  [230,-896 72x20]  class=text
+
+### ARTBOARD: 编组 3  [707,-774 242x188]  class=group
+  - 维度  [30,0 29x20]  TEXT="维度" size=14 font=PingFangSC-Regular color=#847C7E align=2
+  - 维度备份 4  [30,168 29x20]  TEXT="维度" size=14 font=PingFangSC-Regular color=#847C7E align=2
+  - 维度备份 5  [184,168 29x20]  TEXT="维度" size=14 font=PingFangSC-Regular color=#847C7E align=2
+  - 维度备份  [184,0 29x20]  TEXT="维度" size=14 font=PingFangSC-Regular color=#847C7E align=2
+  - 维度备份 2  [213,84 29x20]  TEXT="维度" size=14 font=PingFangSC-Regular color=#847C7E align=2
+  - 维度备份 3  [0,84 29x20]  TEXT="维度" size=14 font=PingFangSC-Regular color=#847C7E align=2
+  - 编组 22  [44,27 154x133]
+    - Fill 1  [0,0 154x133]
+    - Fill 1备份 3  [48,41 58x50]
+    - 直线 5  [76,66 39x66]
+    - 直线 5备份 2  [76,66 78x1]
+    - 直线 5备份 3  [0,66 78x1]
+    - 直线 5备份 4  [39,1 38x66]
+    - 直线 5备份 5  [76,1 38x66]
+    - 直线 5备份  [39,66 38x66]
+    - Stroke 2  [19,30 83x80]
+    - 椭圆形  [51,98 8x8] fills=#FF577D stroke=#979797/1
+    - 椭圆形备份  [98,106 8x8] fills=#FF577D stroke=#979797/1
+    - 椭圆形备份 2  [15,62 8x8] fills=#FF577D stroke=#979797/1
+    - 椭圆形备份 3  [98,63 8x8] fills=#FF577D stroke=#979797/1
+    - 椭圆形备份 4  [90,33 8x8] fills=#FF577D stroke=#979797/1
+    - 椭圆形备份 5  [51,25 8x8] fills=#FF577D stroke=#979797/1
+==================== PAGE: 控件 (5600D450-1BE9-4C6D-AB97-2656C4DA9CAF.json) ====================
+
+### ARTBOARD: iPhone X/Home Indicator/Home Indicator - On Light  [100,0 375x34]  class=symbolMaster
+  - Rectangle 24  [121,20 134x5] fills=#000000 radius=100

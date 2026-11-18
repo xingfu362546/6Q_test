@@ -537,6 +537,44 @@
       .trim();
   }
 
+  /* 雷达：151×144 五边形，同心环 + 五个维度标注（按设计稿布局）
+     环：外圈 #FFF0F1，内圈 #FFDCE0，描边 #EDCCDE，轴线 #D8D8D8
+     数据多边形：rgba(255,173,187,.45) + #FF577D 描边，节点 8px #FF577D */
+  function radarBlock(dims, values, maxScore) {
+    var W = 151, H = 144, cx = 75.5, cy = 72, r = 62;
+    var n = dims.length || 5;
+    function pt(i, pct) {
+      var a = -Math.PI / 2 + i * 2 * Math.PI / n;
+      return [cx + Math.cos(a) * r * pct / 100, cy + Math.sin(a) * r * pct / 100];
+    }
+    function poly(level) {
+      return dims.map(function (_, i) { return pt(i, level).join(","); }).join(" ");
+    }
+    var rings = "";
+    rings += '<polygon points="' + poly(100) + '" fill="#FFF0F1" stroke="#EDCCDE" stroke-width="1" />';
+    [75, 50, 25].forEach(function (lv) {
+      rings += '<polygon points="' + poly(lv) + '" fill="#FFDCE0" stroke="#EDCCDE" stroke-width="1" />';
+    });
+    var axes = dims.map(function (_, i) {
+      var p = pt(i, 100);
+      return '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0].toFixed(1) + '" y2="' + p[1].toFixed(1) + '" stroke="#D8D8D8" stroke-width="1" />';
+    }).join("");
+    var dataPts = values.map(function (v, i) { return pt(i, Math.max(8, v / maxScore * 100)).join(","); }).join(" ");
+    var data = '<polygon points="' + dataPts + '" fill="rgba(255,173,187,.45)" stroke="#FF577D" stroke-width="2" stroke-linejoin="round" />';
+    var dots = values.map(function (v, i) {
+      var p = pt(i, Math.max(8, v / maxScore * 100));
+      return '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="4" fill="#FF577D" />';
+    }).join("");
+    var svg = '<svg class="rb-radar" viewBox="0 0 ' + W + ' ' + H + '" aria-label="五维雷达图">' + rings + axes + data + dots + "</svg>";
+
+    var pos = ["top", "rt", "rb", "lb", "lt"];
+    var labels = dims.map(function (d, i) {
+      return '<div class="rb-radar-label rb-radar-label--' + pos[i] + '">' +
+        "<b>" + esc(d.name) + "</b><i>（" + Math.round(values[i]) + "分）</i></div>";
+    }).join("");
+    return '<div class="rb-radar-wrap">' + svg + labels + "</div>";
+  }
+
   function powerRadarSvg(dims, values, maxScore, size, theme) {
     var gold = theme === "gold";
     var lineColor = gold ? "rgba(201,162,39,.42)" : "#F7D3D6";
@@ -626,21 +664,20 @@
     }
 
     var recommend = [
-      { name: "高EQ父母 · 亲子沟通课", price: 199 },
-      { name: "青少年 6Q 领袖营", price: 5800 },
-      { name: "6Q 心画解读手册", price: 99 }
+      { name: "助力孩子学习内在动力", price: 2580, image: "../assets/covers/v3/parent-wide.svg", count: 204 },
+      { name: "摆脱情绪内耗 做智慧父母", price: 2580, image: "../assets/covers/v3/eq-wide.svg", count: 204 },
+      { name: "6Q 心画解读手册", price: 2580, image: "../assets/covers/v3/6q-wide.svg", count: 204 }
     ];
 
     root.innerHTML = '<div class="result-page rb-page">' +
-      '<div class="rb-header"><div class="src-back" data-back></div><div class="rb-header-title">测评报告</div>' +
+      '<div class="rb-header"><div class="src-back" data-back></div><div class="rb-header-title">测评报告' + dot("rb-design") + '</div>' +
       '<div class="rb-header-right"><span class="rb-header-share" id="rb-share"></span>' + dot("rb-poster") + dot("rb-poster-data") + '</div></div>' +
-      '<div class="rb-hero"><div class="rb-hero-title">测评报告' + dot("rb-head") + '</div>' +
-      '<div class="rb-hero-date">测评日期：' + esc(record.createTime || E.now()) + '</div></div>' +
+      '<div class="rb-hero"><div class="rb-hero-date">测评日期：' + esc(record.createTime || E.now()) + dot("rb-head") + '</div></div>' +
 
       '<div class="rb-card rb-result">' +
-      '<div class="rb-card-title">测评结果' + dot("rb-band") + '</div>' +
-      (g.showTotalScore ? '<div class="rb-total">总分：<b>' + record.score + '</b>分</div>' : "") +
-      '<div class="rb-radar-wrap">' + powerRadarSvg(dims, rawScores, maxPer, 320) + '</div>' +
+      '<div class="rb-result-head"><span class="rb-card-title rb-card-title--plain">测评结果' + dot("rb-band") + '</span>' +
+      (g.showTotalScore ? '<span class="rb-total">总分：' + record.score + '分</span>' : "") + '</div>' +
+      radarBlock(dims, rawScores, maxPer) +
       '<div class="rb-conclusion">亲爱的，你的测评结果显示：</div>' +
       '<div class="rb-conclusion-line">你已经' + esc(stripPctPrefix(range.percentile || "超越 45% 的家长")) + '。</div>' +
       (conclusionBase ? '<div class="rb-conclusion-line">' + esc(conclusionBase) + '</div>' : "") +
@@ -650,10 +687,10 @@
         '<div class="rb-pain-line">' + esc(pain.tip) + '</div>' +
         '<div class="rb-pain-line">' + esc(pain.text) + '</div></div>' : "") +
 
-      (riskText ? '<div class="rb-card rb-risk"><div class="rb-card-title">您的孩子正在经历什么？' + dot("rb-risk") + '</div>' +
+      (riskText ? '<div class="rb-card rb-risk"><div class="rb-chip">您的孩子正在经历什么？' + dot("rb-risk") + '</div>' +
         '<div class="rb-risk-text">' + esc(riskText) + '</div></div>' : "") +
 
-      (appreciate ? '<div class="rb-card rb-appreciate"><div class="rb-card-title">这些力，值得欣赏 🌟' + dot("rb-appreciate") + '</div>' +
+      (appreciate ? '<div class="rb-card rb-appreciate"><div class="rb-card-title">这些力，值得欣赏' + dot("rb-appreciate") + '</div>' +
         '<div class="rb-appreciate-sub">' + (useFallback ? "这一次先看看你已经走在前面的一点。" : "除了要练的那一块，你身上也有已经长出来的力量。") + '</div>' +
         '<div class="rb-app-item">' +
         '<div class="rb-app-head">【' + esc(appreciate.name) + '】（' + appreciate.score + '分）</div>' +
@@ -664,22 +701,25 @@
         '<div class="rb-deep-text">' + esc(g.ctaText) + '</div>' +
         '<div class="rb-deep-sub">' + esc(g.ctaSubText || "如有疑问，请咨询您的书童老师或导师老师~") + '</div>' +
         '<div class="rb-goods">' + recommend.map(function (x) {
-          return '<div class="rb-goods-row"><span>' + esc(x.name) + '</span><b>￥' + x.price + '</b></div>';
+          return '<div class="rb-goods-row">' +
+            '<div class="rb-goods-img" style="background-image:url(' + esc(x.image) + ')"></div>' +
+            '<div class="rb-goods-info"><div class="rb-goods-name">' + esc(x.name) + '</div>' +
+            '<div class="rb-goods-meta"><span class="rb-goods-price">￥' + x.price + '</span>' +
+            '<span class="rb-goods-count">' + x.count + '人已学习</span></div></div></div>';
         }).join("") + '</div></div>' : "") +
 
-      '<div class="rb-card rb-feedback"><div class="rb-card-title">请为这份量表准确度评分</div>' +
+      '<div class="rb-card rb-feedback"><div class="rb-card-title">请为这份量表准确度评分：</div>' +
       '<div class="rb-stars" id="rb-stars">' + [1, 2, 3, 4, 5].map(function (i) {
         return '<button type="button" data-rbstar="' + i + '">★</button>';
       }).join("") + '<span class="rb-star-score" id="rb-star-score">0分</span></div>' +
-      '<textarea class="rb-feedback-text" id="rb-feedback-text" maxlength="500" placeholder="输入您对于该量表的反馈内容"></textarea>' +
-      '<div class="rb-feedback-btn" id="rb-feedback-btn">提交反馈</div></div>' +
+      '<div class="rb-card-title">反馈内容</div>' +
+      '<div class="rb-feedback-wrap"><textarea class="rb-feedback-text" id="rb-feedback-text" maxlength="500" placeholder="输入您对于该量表的反馈内容"></textarea>' +
+      '<div class="rb-feedback-count" id="rb-feedback-count">0/500</div></div>' +
+      '<div class="rb-feedback-btn" id="rb-feedback-btn">提交反馈</div></div></div>' +
 
-      '<div class="rb-end">到底咯~</div></div>' +
-
-      /* 底部三层：呼吸 CTA + 双按钮 */
+      /* 底部：橙色 CTA + 双药丸 */
       '<div class="rb-bottom">' +
-      '<button type="button" class="rb-cta" id="rb-cta"><span class="rb-cta-glow"></span>' +
-      '<span class="rb-cta-text">预约导师 1v1 解读</span><span class="rb-cta-arrow">›</span></button>' +
+      '<button type="button" class="rb-cta" id="rb-cta"><span class="rb-cta-text">预约导师1v1解读</span></button>' +
       '<div class="rb-bottom-row">' +
       '<button type="button" class="rb-btn rb-btn--history" id="rb-history">查看历史测试记录</button>' +
       '<button type="button" class="rb-btn rb-btn--again" id="rb-again">再答一次</button>' +
@@ -687,9 +727,9 @@
 
       /* 导师二维码抽屉 */
       '<div class="rb-qr-mask" id="rb-qr-mask"><div class="rb-qr">' +
-      '<div class="rb-qr-title">' + esc(g.ctaSubText || "添加导师微信") + '</div>' +
+      '<div class="rb-qr-title">' + esc(g.ctaSubText || "添加导师微信，帮您把分数变成方向") + '</div>' +
       '<div class="rb-qr-img"><img src="' + esc(g.ctaQrCode || "../assets/covers/v3/qr.svg") + '" alt="导师二维码" /></div>' +
-      '<div class="rb-qr-note">长按识别二维码，获取 1 对 1 解读与《家庭育儿改善清单》</div>' +
+      '<div class="rb-qr-note">长按识别二维码，获取1对1解读与《家庭育儿改善清单》</div>' +
       '<button type="button" class="rb-qr-close" id="rb-qr-close">关闭</button>' +
       '</div></div>';
 
@@ -705,6 +745,12 @@
       btn.classList.toggle("is-on", n > 0);
     }
     paintStars(starNum);
+    var countEl = document.getElementById("rb-feedback-count");
+    function paintCount() {
+      if (countEl) countEl.textContent = txt.value.length + "/500";
+    }
+    paintCount();
+    txt.addEventListener("input", paintCount);
     starEl.addEventListener("click", function (e) {
       var b = e.target.closest("[data-rbstar]");
       if (!b || existingFeedback) return;
@@ -1017,19 +1063,19 @@
     var values = posterRawValues(dims, record);
     return '<div class="src-poster-card"><div class="src-poster-img v2" id="src-poster-img">' +
       '<div class="v2p">' +
-      '<div class="v2p-brand">6Q 智蕙父母 · 育儿觉醒实验室</div>' +
       '<div class="v2p-avatar">' + esc(String(user.avatar || user.name || "6").slice(0, 1)) + '</div>' +
-      '<div class="v2p-name">' + esc(user.name || "6Q 家长") + ' · 完成了她的育儿觉醒体检</div>' +
+      '<div class="v2p-name">' + esc(user.name || "6Q 家长") + '·完成了他的育儿觉醒体验</div>' +
       (band ? '<div class="v2p-badge">' + esc(band.badge) + '</div>' +
         '<div class="v2p-quote">' + esc(band.quote) + '</div>' : '<div class="v2p-badge">' + esc(g.title) + '</div>') +
-      '<div class="v2p-radar">' + powerRadarSvg(dims, values, maxPer, 300, "gold") + '</div>' +
+      '<div class="v2p-radar">' + radarBlock(dims, values, maxPer) + '</div>' +
       (band ? '<div class="v2p-percent">' + esc(band.percentile) + '</div>' : "") +
-      '<div class="v2p-credit">🔥 已有 ' + (g.testerCount || 0).toLocaleString("en-US") + ' 位父母完成测评，依托 6Q 20 年专业沉淀</div>' +
+      '<div class="v2p-credit">已有 ' + (g.testerCount || 0).toLocaleString("en-US") + ' 位父母完成测评，依托 6Q 20 年专业沉淀</div>' +
       '<div class="v2p-foot"><img class="v2p-qr" src="../assets/covers/v3/qr.svg" alt="二维码" />' +
-      '<div class="v2p-foot-text">长按识别二维码，免费测你的亲子觉醒指数<br/>测评结果仅供参考，不作为诊断依据</div></div>' +
+      '<div class="v2p-foot-text">长按解锁你的亲子觉醒指数<br/><span style="opacity:.75">测评结果仅供参考，不作为诊断依据</span></div></div>' +
+      '<div class="v2p-save" id="poster-save">保存至相册</div>' +
       "</div></div>" +
       '<a class="src-poster-scan" id="poster-scan" href="' + esc(posterScanUrl(g)) + '">模拟扫码进入 ›</a>' +
-      '<div class="src-poster-save" id="poster-save">点击保存至相册</div><div class="src-poster-close" id="poster-close">关闭</div></div>';
+      '<div class="src-poster-close" id="poster-close">关闭</div></div>';
   }
 
   function downloadPoster(kind, g, record) {
@@ -1088,25 +1134,17 @@
     var sans = "-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif";
 
     ctx.textAlign = "center";
-    ctx.fillStyle = "rgba(234,223,182,.72)";
-    ctx.font = "22px " + sans;
-    ctx.fillText("6Q 智蕙父母 · 育儿觉醒实验室", w / 2, 96);
-
-    // 头像圆环
-    ctx.beginPath();
-    ctx.arc(w / 2, 196, 46, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(216,182,90,.8)"; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = "#1D3A32"; ctx.fill();
-    ctx.fillStyle = "#EADFB6"; ctx.font = "bold 40px " + sans;
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#FFFABF"; ctx.font = "bold 40px " + sans;
     ctx.fillText(String(user.avatar || user.name || "6").slice(0, 1), w / 2, 212);
 
-    ctx.fillStyle = "#F3EEDF"; ctx.font = "26px " + sans;
-    ctx.fillText(esc(user.name || "6Q 家长") + " · 完成了她的育儿觉醒体检", w / 2, 292);
-    ctx.fillStyle = "rgba(234,223,182,.55)"; ctx.font = "20px " + sans;
+    ctx.fillStyle = "#FFFFFF"; ctx.font = "26px " + sans;
+    ctx.fillText(esc(user.name || "6Q 家长") + "·完成了他的育儿觉醒体验", w / 2, 292);
+    ctx.fillStyle = "rgba(255,255,255,.72)"; ctx.font = "20px " + sans;
     ctx.fillText("测评完成 · 专属称号已生成", w / 2, 330);
 
     // 勋章
-    ctx.fillStyle = "#EADFB6";
+    ctx.fillStyle = "#FFFABF";
     ctx.font = "bold 48px " + sans;
     wrapCenteredText(ctx, band ? band.badge : g.title, w / 2, 402, w - 120, 58);
 
@@ -1188,11 +1226,11 @@
       var p = pt(i, 100);
       ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(p[0], p[1]); ctx.stroke();
       var lp = pt(i, 132);
-      ctx.fillStyle = "#EADFB6";
+      ctx.fillStyle = "#FFE8BE";
       ctx.font = "22px -apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif";
       ctx.textAlign = "center";
       ctx.fillText(d.name, lp[0], lp[1]);
-      ctx.fillStyle = "rgba(234,223,182,.7)";
+      ctx.fillStyle = "rgba(255,255,255,.9)";
       ctx.font = "20px -apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif";
       ctx.fillText("(" + Math.round(values[i]) + "分)", lp[0], lp[1] + 26);
     });

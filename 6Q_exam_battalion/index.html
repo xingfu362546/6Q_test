@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>测评管理 · v2.2 功能清单</title>  <style>
+  <title>测评管理 · v2.3 功能清单</title>  <style>
     :root {
       --ink: #0f172a; --ink2: #334155; --muted: #64748b; --line: rgba(15,23,42,.08);
       --blue: #1677ff; --deep: #0b2b5c; --bg: #f1f5f9; --red: #cf1322; --amber: #d48806; --green: #389e0d;
@@ -60,10 +60,10 @@
 <body>
   <div class="nav-page">
     <header class="nav-hero">
-      <p class="nav-hero__eye">EXAM · v2.2.1 · 本期需求清单</p>
+      <p class="nav-hero__eye">EXAM · v2.3 · 本期需求清单</p>
       <h1>测评管理 · 亲子养育报告改版</h1>
       <p>
-        本清单只列 v2.1.0 / v2.2 补丁本期需求，共 15 条：后台 4 条（EX-051 ~ EX-054）、H5 报告与分享链路 11 条（EX-201 ~ EX-211）。
+        本清单只列 v2.1.0 ~ v2.3 本期需求，共 16 条：后台 4 条（EX-051 ~ EX-054）、H5 报告与分享链路 12 条（EX-201 ~ EX-212）。
         v2.0.0 基线功能不在本页展示，作为改动依据写在各条「逻辑说明」里。
         每条需求都标了是否需要 UI 出稿；点序号或原型链接直接打开对应页面并展开该条注释。
         结果报告页的每条需求都配了固定模拟数据（见「三、固定模拟数据」），打开即复现同一份报告。
@@ -76,7 +76,7 @@
     </header>
 
     <div class="meta">
-      <span>本期 15 条需求</span><span>后台 4 条</span><span>H5 11 条</span><span>需 UI 出稿 15 条</span><span>固定模拟数据 3 档</span>
+      <span>本期 16 条需求</span><span>后台 4 条</span><span>H5 12 条</span><span>需 UI 出稿 16 条</span><span>固定模拟数据 3 档</span>
     </div>
 
     <div class="legend">
@@ -502,7 +502,7 @@
           <tr id="req-EX-211">
             <td class="no"><a href="../6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent&note=EX-211">EX-211</a></td>
             <td class="scope">要做</td>
-            <td class="ui ui--yes">需 UI<span class="ui-note">暖金欣赏卡片 + 绿色小建议行</span></td>
+            <td class="ui ui--yes">需 UI<span class="ui-note">欣赏卡：#FFF0F1 内块 + 心形标题</span></td>
             <td class="st">设计已实现</td>
             <td class="team">测评项目组</td>
             <td class="who">需求方</td>
@@ -527,6 +527,37 @@
               <a href="../6Q_exam_h5/result.html?record=demo-low&goodsId=g-parent&note=EX-211"><span class="tag">低档 16 分</span>相对优势版兜底</a>
               <a href="../6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent&note=EX-211"><span class="tag">中档 40 分</span>单条欣赏</a>
               <a href="../6Q_exam_h5/result.html?record=demo-high&goodsId=g-parent&note=EX-211"><span class="tag">高档 56 分</span>卡点维度被排除</a>
+            </td>
+          </tr>
+          <tr id="req-EX-212">
+            <td class="no"><a href="../6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent&note=EX-212">EX-212</a></td>
+            <td class="scope">要做</td>
+            <td class="ui ui--yes">需 UI<span class="ui-note">整页视觉还原，375 基准</span></td>
+            <td class="st">设计已实现</td>
+            <td class="team">测评项目组</td>
+            <td class="who">设计</td>
+            <td class="mod">结果报告</td>
+            <td class="text">按《测评3.0.sketch》还原报告结果页、分享海报与导师二维码弹窗的视觉与排版。</td>
+            <td class="logic">
+              设计基准：375 宽、内容区 351、卡片间距 12。<br />
+              1、导航「测评报告」16px Medium #392D2B，日期 14px #656262 居中。<br />
+              2、总分与标题同排；雷达改 <b>151×144 五边形</b>（外环 #FFF0F1 / 内环 #FFDCE0 / 描边 #EDCCDE / 轴线 #D8D8D8 / 数据 #FF577D）。<br />
+              3、五个维度标注环绕布局（上 / 左上 / 右上 / 左下 / 右下），名称 14px Medium #221F20、分数 14px #868082。<br />
+              4、风险卡改 #F44E7E 标题条（242×42，圆角 4）贴左上；欣赏卡改白卡 + #FFF0F1 内块 + #DA1E5C 标题。<br />
+              5、深度了解改三行课程（112×63 封面 / 16px 标题 / 16px #FF437D 价格 / 12px 人数）。<br />
+              6、反馈卡：星星 26px（#FF709C / #272636）、输入框 #F8F8F8 带 0/500 计数、提交 #E54175。<br />
+              7、底部：#FF9E4D 主 CTA + #8393C9 / #EE5896 双按钮。<br />
+              8、海报 303×528（勋章 #FFFABF、雷达标签 #FFE8BE、保存按钮 #E54175）；二维码抽屉 143×143 + #09C382 按钮。<br />
+              9、保留的设计稿差异：正文重复的「超越 X%」只留一次、欣赏不展示小建议、移除「到底咯~」。
+            </td>
+            <td class="api">
+              <span class="keep">无接口改动（纯视觉与布局）</span><br />
+              设计基准与色板见 <code>docs/design/README.md</code><br />
+              图层清单见 <code>docs/design/sketch-3.0-layout.txt</code>
+            </td>
+            <td class="proto">
+              <a href="../6Q_exam_h5/result.html?record=demo-mid&goodsId=g-parent&note=EX-212"><span class="tag">中档 40 分</span>报告页</a>
+              <a href="../6Q_exam_h5/result.html?record=demo-high&goodsId=g-parent&note=EX-212"><span class="tag">海报</span>点右上分享</a>
             </td>
           </tr>
         </tbody>
